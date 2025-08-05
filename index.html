@@ -1,296 +1,381 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nunta Dianei și a lui Geo – Află masa ta</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body { background: linear-gradient(135deg, #fff3e6 0%, #f7e7fa 100%); font-family: 'Montserrat', Arial, sans-serif; margin: 0; padding: 0; min-height: 100vh; }
-        .container { max-width: 560px; background: rgba(255,255,255,0.95); margin: 48px auto 40px; padding: 32px 28px 36px; border-radius: 2rem; box-shadow: 0 8px 32px rgba(76, 18, 119, 0.15); }
-        .logo { display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px; box-shadow: 0 4px 16px rgba(76, 18, 119, 0.12); }
-        .festive-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ad6d9e; margin-bottom: 0.25em; text-align: center; letter-spacing: 2px; }
-        .subtitle { font-size: 1.1rem; color: #6d346d; text-align: center; margin-bottom: 16px; font-weight: 500; }
-        .note { color: #795b5b; font-size: 0.95rem; text-align: center; margin-bottom: 18px; background: #f6f0f8; border-radius: 8px; padding: 8px 12px; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nunta Dianei și a lui Geo – Află masa ta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --card: #0f0f0f;
+      --gold: #d4af37;
+      --gold-2: #b8860b;
+      --text: #ece7d9;
+      --muted: #c8b892;
+      --line: #2a2210;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background:
+        radial-gradient(1200px 600px at 50% -10%, #1a1a1a 0%, #000 60%),
+        linear-gradient(135deg, #0b0b0b 0%, #000 100%);
+      color: var(--text);
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin: 0; padding: 0; min-height: 100vh;
+    }
+    .container {
+      max-width: 600px; background: var(--card);
+      margin: 48px auto 40px; padding: 32px 28px 36px;
+      border-radius: 2rem;
+      border: 1px solid rgba(212,175,55,.35);
+      box-shadow: inset 0 0 0 1px rgba(212,175,55,.12), 0 12px 50px rgba(0,0,0,.55);
+      position: relative;
+    }
+    .logo {
+      display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px;
+      box-shadow: 0 0 0 3px rgba(212,175,55,.12), 0 10px 30px rgba(0,0,0,.4);
+    }
+    .festive-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: var(--gold); margin-bottom: .25em; text-align: center; letter-spacing: 2px; text-shadow: 0 0 12px rgba(212,175,55,.15); }
+    .festive-title::after {
+      content: ""; display:block; height:20px; margin:6px auto 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 20"><path d="M5 10c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="100" cy="10" r="2" fill="%23d4af37"/></svg>');
+      background-size: 180px 20px; background-repeat:no-repeat; background-position:center; opacity:.95;
+    }
+    .subtitle { font-size: 1.1rem; color: var(--muted); text-align: center; margin-bottom: 16px; font-weight: 500; }
+    .note { color: #d9c9a3; font-size: .95rem; text-align: center; margin-bottom: 18px; background: #111; border-radius: 8px; padding: 8px 12px; border:1px solid var(--line); }
 
-        /* Actions */
-        .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 18px; }
-        @media (min-width: 560px) { .actions { grid-template-columns: 1fr 1fr; } }
-        .action-btn { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 14px; background: linear-gradient(90deg, #f7c3d9 0%, #ad6d9e 100%); color: #fff; font-weight: 700; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 8px 20px rgba(172, 46, 117, 0.12); transition: transform .15s, opacity .2s; }
-        .action-btn:hover { transform: translateY(-1px); }
-        .action-btn.outline { background: #fff; color: #ad6d9e; border: 2px solid #dcb9d6; }
-        .reveal-box { margin-top: 6px; padding: 10px 12px; background: #faf2ff; border: 1px solid #ead6f3; color: #4b2a57; border-radius: 12px; font-size: .98rem; }
+    .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 18px; }
+    @media (min-width: 560px) { .actions { grid-template-columns: 1fr 1fr; } }
+    .action-btn { display:inline-block; text-align:center; padding:12px 16px; border-radius:14px; background:linear-gradient(90deg, var(--gold) 0%, var(--gold-2) 100%); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); transition:transform .15s, filter .2s; }
+    .action-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+    .action-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
+    .reveal-box { margin-top:6px; padding:10px 12px; background:#12100a; border:1px solid rgba(212,175,55,.35); color: var(--text); border-radius:12px; font-size:.98rem; }
 
-        input[type="text"] { width: 100%; padding: 12px; border-radius: 1rem; border: 1px solid #c6b0d6; font-size: 1.1rem; margin: 8px 0 12px; outline: none; box-sizing: border-box; transition: border-color .2s; }
-        input[type="text"]:focus { border-color: #ad6d9e; }
-        .results { margin-top: 10px; }
-        .result-row { padding: 10px 14px; margin: 7px 0; background: #f2e7fa; border-radius: 12px; box-shadow: 0 2px 8px rgba(76, 18, 119, 0.06); display: flex; justify-content: space-between; align-items: center; font-size: 1.08rem; }
-        .guest-name { color: #442c4c; font-weight: 600; }
-        .guest-table { color: #ad6d9e; font-size: 1.13rem; font-weight: 700; }
-        .no-result { text-align: center; color: #b67272; background: #fae7e7; border-radius: 9px; padding: 9px; margin-top: 14px; }
-        .count { text-align: right; font-size: .9rem; color: #7b6281; margin-top: 6px; }
+    input[type="text"] { width:100%; padding:12px; border-radius:1rem; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1.08rem; margin:8px 0 12px; outline:none; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; }
+    input[type="text"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); }
+    input[type="text"]::placeholder { color:#9b8a5a; }
 
-        /* Admin box */
-        details.admin { margin-top: 18px; background: #fff; border: 1px dashed #dcb9d6; border-radius: 14px; padding: 10px 12px; }
-        details.admin summary { cursor: pointer; font-weight: 700; color: #6d346d; }
-        .admin-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
-        @media (min-width: 560px) { .admin-row { grid-template-columns: 1fr 140px; } }
-        .hint { font-size: .85rem; color: #7b6281; margin-top: 6px; }
-        input[type="file"] { padding: 8px; border-radius: 10px; border: 1px solid #c6b0d6; background: #fff; }
-        .small-btn { padding: 10px 12px; border-radius: 12px; border: none; background: #ad6d9e; color: #fff; font-weight: 700; cursor: pointer; }
-        .small-btn.outline { background: #fff; color: #ad6d9e; border: 2px solid #dcb9d6; }
-    </style>
+    .results { margin-top:10px; }
+    .result-row { padding:10px 14px; margin:7px 0; background:#101010; border:1px solid rgba(212,175,55,.30); border-radius:12px; box-shadow: 0 2px 8px rgba(0,0,0,.25); display:flex; justify-content:space-between; align-items:center; font-size:1.08rem; }
+    .guest-name { color:#f0ead6; font-weight:600; }
+    .guest-table { color:var(--gold); font-size:1.13rem; font-weight:700; }
+    .no-result { text-align:center; color:var(--gold); background:#15110a; border:1px solid rgba(212,175,55,.30); border-radius:9px; padding:9px; margin-top:14px; }
+    .count { text-align:right; font-size:.9rem; color:#a89260; margin-top:6px; }
+
+    /* Admin */
+    details.admin { margin-top:18px; background:#0d0d0d; border:1px dashed rgba(212,175,55,.6); border-radius:14px; padding:10px 12px; }
+    details.admin summary { cursor:pointer; font-weight:700; color:var(--gold); }
+    .admin-guard { display:grid; grid-template-columns:1fr auto; gap:10px; margin-top:10px; }
+    .admin-guard input[type="password"] { padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); }
+    .small-btn { padding:10px 12px; border-radius:12px; border:none; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.35); }
+    .small-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
+    .editor { margin-top:14px; }
+    .editor table { width:100%; border-collapse:separate; border-spacing:0 8px; }
+    .editor th { text-align:left; font-size:.9rem; color:var(--muted); }
+    .editor td { background:#0f0d08; padding:8px; border-radius:10px; }
+    .editor input[type="text"], .editor input[type="number"] { width:100%; padding:8px; border:1px solid rgba(212,175,55,.35); border-radius:10px; background:#0b0b0b; color:var(--text); box-sizing:border-box; }
+    .row-actions { display:flex; gap:6px; justify-content:flex-end; }
+    .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    .hint { font-size:.85rem; color:#a89260; margin-top:6px; }
+  </style>
 </head>
 <body>
-<div class="container">
-    <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'">
+  <div class="container">
+    <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
     <div class="subtitle">Folosiți această aplicație pentru a afla rapid numărul mesei la care veți sta.</div>
     <div class="note">Formularul de mesaje permite și <strong>încărcarea opțională de fotografii</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
 
     <div class="actions">
-        <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă poze (Google Form)</a>
-        <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa</button>
-        <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
+      <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă poze (Google Form)</a>
+      <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa</button>
+      <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
     </div>
-    <div id="addressBox" class="reveal-box" hidden>Strada Ovid Densușeanu 78/A, Oradea 410237</div>
+    <div id="addressBox" class="reveal-box" hidden><strong>Emerald, Salon Cristal (sala mică)</strong><br>Strada Ovid Densușeanu 78/A, Oradea 410237</div>
     <div id="contactBox" class="reveal-box" hidden>Georgian: 0754706716 &nbsp;&bull;&nbsp; Diana: 0748436309</div>
 
-    <input type="text" id="search" placeholder="Căutați după orice parte din nume..." autofocus autocomplete="off">
+    <input type="text" id="search" placeholder="Căutați după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
 
     <details class="admin">
-        <summary>Admin – încarcă CSV & setări</summary>
-        <div class="hint">CSV cu coloane <strong>Nume</strong> și <strong>Masa</strong> (delimitat cu virgulă sau punct și virgulă). Exemplu: <code>Nume,Masa</code> / <code>Popescu Ana,2</code>. După upload, lista se actualizează imediat.</div>
-        <div class="admin-row" style="margin-top:10px;">
-            <input type="file" id="csvInput" accept=".csv">
-            <button id="resetBtn" class="small-btn outline" type="button">Revino la lista inițială</button>
+      <summary>Admin – editare invitați (PIN)</summary>
+      <div class="hint">Schimbările făcute aici se salvează <strong>doar local</strong> în browserul tău. Pentru ca toți invitații să le vadă, descarcă <em>index.html</em> actualizat și încarcă-l în GitHub (vezi butonul din bară).</div>
+      <div class="admin-guard">
+        <input id="pinInput" type="password" placeholder="Introdu PIN admin (implicit: geo2025)" />
+        <button id="unlockBtn" class="small-btn" type="button">Deschide Admin</button>
+      </div>
+      <div id="editor" class="editor" hidden>
+        <div class="toolbar">
+          <button id="addRow" class="small-btn" type="button">Adaugă rând</button>
+          <button id="saveLocal" class="small-btn" type="button">Salvează local</button>
+          <button id="resetDefault" class="small-btn outline" type="button">Resetează la lista implicită</button>
+          <button id="downloadCSV" class="small-btn outline" type="button">Descarcă guests.csv</button>
+          <button id="downloadHTML" class="small-btn" type="button">Descarcă index.html actualizat</button>
         </div>
-        <div class="hint">Opțional: dacă adaugi în repository un fișier <code>guests.csv</code>, pagina îl va încărca automat pentru toți vizitatorii.</div>
+        <div class="hint">Format: <strong>Nume</strong> (text), <strong>Masa</strong> (număr 1–11). Poți șterge rânduri cu „✕”.</div>
+        <table>
+          <thead>
+            <tr><th>Nume</th><th style="width:110px;">Masa</th><th style="width:90px; text-align:right;">&nbsp;</th></tr>
+          </thead>
+          <tbody id="editBody"></tbody>
+        </table>
+      </div>
     </details>
-</div>
-<script>
-// === Helpers: CSV parsing ===
-function parseCSV(text) {
-    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
-    if (!lines.length) return [];
-    const firstLine = lines[0];
-    const comma = (firstLine.match(/,/g) || []).length;
-    const semi = (firstLine.match(/;/g) || []).length;
-    const delim = semi > comma ? ';' : ',';
+  </div>
 
-    let headers = lines[0].split(delim).map(h => h.trim().toLowerCase());
-    let nameIdx = headers.findIndex(h => ['nume','name','nume complet'].includes(h));
-    let tableIdx = headers.findIndex(h => ['masa','numar masa','nr masa','table'].includes(h));
-    let start = 1;
-    if (nameIdx === -1 || tableIdx === -1) { nameIdx = 0; tableIdx = 1; start = 0; }
+  <script>
+    // ===== Config =====
+    const ADMIN_PIN = 'geo2025'; // Schimbă PIN-ul dacă vrei (opțional)
 
-    const out = [];
-    for (let i = start; i < lines.length; i++) {
-        const cols = lines[i].split(delim);
-        const name = (cols[nameIdx] || '').trim();
-        const masaRaw = (cols[tableIdx] || '').toString().trim().replace(',', '.');
-        const masaNum = parseInt(masaRaw, 10);
-        if (!name || !Number.isFinite(masaNum)) continue;
-        const lname = name.toLowerCase();
-        if (lname.includes('meniu') || lname.includes('copil')) continue;
-        out.push({ Nume: name, Masa: masaNum });
-    }
-    // dedup & sort
-    const seen = new Set();
-    const dedup = [];
-    for (const g of out) {
-        const k = g.Nume.toLowerCase() + '#' + g.Masa;
-        if (!seen.has(k)) { seen.add(k); dedup.push(g); }
-    }
-    dedup.sort((a,b) => (a.Masa - b.Masa) || a.Nume.localeCompare(b.Nume));
-    return dedup;
-}
+    // ===== Default guest list (baked-in) =====
+    const defaultGuests = [ /*BEGIN_GUESTS*/
+      // MASA 1
+      {"Nume": "Cristi Ioan", "Masa": 1},
+      {"Nume": "Dan", "Masa": 1},
+      {"Nume": "Serban", "Masa": 1},
+      {"Nume": "Iuga", "Masa": 1},
+      {"Nume": "Ilisoi", "Masa": 1},
+      {"Nume": "Adriadna", "Masa": 1},
+      {"Nume": "Rusu Cosmin", "Masa": 1},
 
-// === Default guest list (fallback) ===
-const defaultGuests = [
-// MASA 1
-{"Nume": "Cristi Ioan", "Masa": 1},
-{"Nume": "Dan", "Masa": 1},
-{"Nume": "Serban", "Masa": 1},
-{"Nume": "Iuga", "Masa": 1},
-{"Nume": "Ilisoi", "Masa": 1},
-{"Nume": "Adriadna", "Masa": 1},
-{"Nume": "Rusu Cosmin", "Masa": 1},
+      // MASA 2
+      {"Nume": "Adi Pasca", "Masa": 2},
+      {"Nume": "Matache", "Masa": 2},
+      {"Nume": "Dragan Patricia", "Masa": 2},
+      {"Nume": "Andrei Negrau", "Masa": 2},
+      {"Nume": "Berche", "Masa": 2},
 
-// MASA 2
-{"Nume": "Adi Pasca", "Masa": 2},
-{"Nume": "Matache", "Masa": 2},
-{"Nume": "Dragan Patricia", "Masa": 2},
-{"Nume": "Andrei Negrau", "Masa": 2},
-{"Nume": "Berche", "Masa": 2},
+      // MASA 3
+      {"Nume": "Andreea Godja", "Masa": 3},
+      {"Nume": "Crina", "Masa": 3},
+      {"Nume": "Andrei Godja", "Masa": 3},
+      {"Nume": "Ana Opris", "Masa": 3},
+      {"Nume": "Denisa Ulici", "Masa": 3},
+      {"Nume": "Alina Petrovan", "Masa": 3},
 
-// MASA 3
-{"Nume": "Andreea Godja", "Masa": 3},
-{"Nume": "Crina", "Masa": 3},
-{"Nume": "Andrei Godja", "Masa": 3},
-{"Nume": "Ana Opris", "Masa": 3},
-{"Nume": "Denisa Ulici", "Masa": 3},
-{"Nume": "Alina Petrovan", "Masa": 3},
+      // MASA 4
+      {"Nume": "fam. Ciavoi", "Masa": 4},
+      {"Nume": "Hercut", "Masa": 4},
+      {"Nume": "Dana Petrus", "Masa": 4},
+      {"Nume": "Firuta", "Masa": 4},
+      {"Nume": "Florica", "Masa": 4},
 
-// MASA 4
-{"Nume": "fam. Ciavoi", "Masa": 4},
-{"Nume": "Hercut", "Masa": 4},
-{"Nume": "Dana Petrus", "Masa": 4},
-{"Nume": "Firuta", "Masa": 4},
-{"Nume": "Florica", "Masa": 4},
+      // MASA 5
+      {"Nume": "Dorin", "Masa": 5},
+      {"Nume": "Mariana", "Masa": 5},
+      {"Nume": "Mihai", "Masa": 5},
+      {"Nume": "Mia Anglia", "Masa": 5},
 
-// MASA 5
-{"Nume": "Dorin", "Masa": 5},
-{"Nume": "Mariana", "Masa": 5},
-{"Nume": "Mihai", "Masa": 5},
-{"Nume": "Mia Anglia", "Masa": 5},
+      // MASA 6
+      {"Nume": "Ghita Mirza", "Masa": 6},
+      {"Nume": "Oana", "Masa": 6},
+      {"Nume": "Denisa Mirza", "Masa": 6},
+      {"Nume": "Alin Tati", "Masa": 6},
+      {"Nume": "Ioan Marchis", "Masa": 6},
+      {"Nume": "Parinti Diana", "Masa": 6},
 
-// MASA 6
-{"Nume": "Ghita Mirza", "Masa": 6},
-{"Nume": "Oana", "Masa": 6},
-{"Nume": "Denisa Mirza", "Masa": 6},
-{"Nume": "Alin Tati", "Masa": 6},
-{"Nume": "Ioan Marchis", "Masa": 6},
-{"Nume": "Parinti Diana", "Masa": 6},
+      // MASA 7
+      {"Nume": "Tivadar Ionita", "Masa": 7},
+      {"Nume": "Irina si Viorel", "Masa": 7},
+      {"Nume": "Ileana si Nutu", "Masa": 7},
+      {"Nume": "Lica Tomsa", "Masa": 7},
+      {"Nume": "Andreica Mihai", "Masa": 7},
+      {"Nume": "Craciun Ioan", "Masa": 7},
 
-// MASA 7
-{"Nume": "Tivadar Ionita", "Masa": 7},
-{"Nume": "Irina si Viorel", "Masa": 7},
-{"Nume": "Ileana si Nutu", "Masa": 7},
-{"Nume": "Lica Tomsa", "Masa": 7},
-{"Nume": "Andreica Mihai", "Masa": 7},
-{"Nume": "Craciun Ioan", "Masa": 7},
+      // MASA 8
+      {"Nume": "Gartian Tisalita", "Masa": 8},
+      {"Nume": "Maria Sustic", "Masa": 8},
+      {"Nume": "Ileana Rosca", "Masa": 8},
+      {"Nume": "Iustina", "Masa": 8},
+      {"Nume": "Andreea Rosca", "Masa": 8},
 
-// MASA 8
-{"Nume": "Gartian Tisalita", "Masa": 8},
-{"Nume": "Maria Sustic", "Masa": 8},
-{"Nume": "Ileana Rosca", "Masa": 8},
-{"Nume": "Iustina", "Masa": 8},
-{"Nume": "Andreea Rosca", "Masa": 8},
+      // MASA 9
+      {"Nume": "Familia Stevlik", "Masa": 9},
+      {"Nume": "Fam Taut (Lacrimioara si Florin)", "Masa": 9},
+      {"Nume": "Fam Csaki", "Masa": 9},
+      {"Nume": "Fam Dragan", "Masa": 9},
+      {"Nume": "Mircea Ros", "Masa": 9},
 
-// MASA 9
-{"Nume": "Familia Stevlik", "Masa": 9},
-{"Nume": "Fam Taut (Lacrimioara si Florin)", "Masa": 9},
-{"Nume": "Fam Csaki", "Masa": 9},
-{"Nume": "Fam Dragan", "Masa": 9},
-{"Nume": "Mircea Ros", "Masa": 9},
+      // MASA 10
+      {"Nume": "Jiurge Mircea", "Masa": 10},
+      {"Nume": "Jiurge Mihai", "Masa": 10},
+      {"Nume": "Jiurge Maria", "Masa": 10},
+      {"Nume": "Simut Nelu", "Masa": 10},
+      {"Nume": "Petrule Mariana", "Masa": 10},
 
-// MASA 10
-{"Nume": "Jiurge Mircea", "Masa": 10},
-{"Nume": "Jiurge Mihai", "Masa": 10},
-{"Nume": "Jiurge Maria", "Masa": 10},
-{"Nume": "Simut Nelu", "Masa": 10},
-{"Nume": "Petrule Mariana", "Masa": 10},
+      // MASA 11
+      {"Nume": "Fam Flontas", "Masa": 11},
+      {"Nume": "Fam Filip", "Masa": 11},
+      {"Nume": "Petrar Dorina", "Masa": 11},
+      {"Nume": "Parinti Geo", "Masa": 11}
+    /*END_GUESTS*/ ];
 
-// MASA 11
-{"Nume": "Fam Flontas", "Masa": 11},
-{"Nume": "Fam Filip", "Masa": 11},
-{"Nume": "Petrar Dorina", "Masa": 11},
-{"Nume": "Parinti Geo", "Masa": 11}
-];
+    let guests = defaultGuests.slice();
 
-let guests = defaultGuests.slice();
+    // ===== Search UI =====
+    const resultsDiv = document.getElementById('results');
+    const countDiv = document.getElementById('count');
+    const searchInput = document.getElementById('search');
 
-// === UI logic ===
-const resultsDiv = document.getElementById('results');
-const countDiv = document.getElementById('count');
-const searchInput = document.getElementById('search');
-
-function renderResults(list) {
-    resultsDiv.innerHTML = '';
-    if (list.length === 0) {
-        resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>';
-        countDiv.textContent = '';
-        return;
-    }
-    list.forEach(g => {
+    function renderResults(list) {
+      resultsDiv.innerHTML = '';
+      countDiv.textContent = '';
+      if (!Array.isArray(list) || list.length === 0) return;
+      list.forEach(g => {
         const row = document.createElement('div');
         row.className = 'result-row';
         row.innerHTML = `<span class="guest-name">${g.Nume}</span> <span class="guest-table">Masa ${g.Masa}</span>`;
         resultsDiv.appendChild(row);
-    });
-    countDiv.textContent = list.length + ' invitați afișați';
-}
-
-function filterList(term) {
-    term = term.toLowerCase().trim();
-    if (term === '') return guests.slice().sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
-    return guests.filter(g => g.Nume.toLowerCase().includes(term)).sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
-}
-
-// Toggle address & contacts
-const addressBtn = document.getElementById('addressBtn');
-const contactBtn = document.getElementById('contactBtn');
-const addressBox = document.getElementById('addressBox');
-const contactBox = document.getElementById('contactBox');
-addressBtn.addEventListener('click', ()=> { addressBox.hidden = !addressBox.hidden; });
-contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
-
-// Admin: upload CSV
-const csvInput = document.getElementById('csvInput');
-const resetBtn = document.getElementById('resetBtn');
-if (csvInput) {
-    csvInput.addEventListener('change', (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-            try {
-                const text = evt.target.result;
-                const parsed = parseCSV(text);
-                if (!parsed.length) { alert('CSV gol sau invalid. Verifică antetele și delimiterul (, sau ;).'); return; }
-                guests = parsed;
-                localStorage.setItem('weddingGuests', JSON.stringify(guests));
-                renderResults(filterList(searchInput.value));
-                alert('Lista de invitați a fost actualizată din CSV.');
-            } catch (err) {
-                console.error(err);
-                alert('Nu am putut citi CSV-ul.');
-            }
-        };
-        reader.readAsText(file, 'utf-8');
-    });
-}
-resetBtn && resetBtn.addEventListener('click', () => {
-    guests = defaultGuests.slice();
-    localStorage.removeItem('weddingGuests');
-    renderResults(filterList(searchInput.value));
-});
-
-// Persistență: încărcare din localStorage la pornire
-try {
-    const savedGuests = JSON.parse(localStorage.getItem('weddingGuests') || 'null');
-    if (Array.isArray(savedGuests) && savedGuests.length) {
-        guests = savedGuests;
+      });
+      countDiv.textContent = list.length + ' invitați afișați';
     }
-} catch (_) {}
 
-// Încărcare automată guests.csv (dacă există în repository) – pentru toți vizitatorii
-fetch('guests.csv', { cache: 'no-store' })
-  .then(r => r.ok ? r.text() : Promise.reject('no csv'))
-  .then(text => {
-      const parsed = parseCSV(text);
-      if (parsed.length) {
-          guests = parsed;
-          renderResults(filterList(searchInput.value));
+    function filterList(term) {
+      function toKey(s) {
+        return (s || '')
+          .toLowerCase()
+          .normalize('NFD').replace(/[̀-ͯ]/g, '') // elimină diacriticele combinate
+          .replace(/[șş]/g, 's').replace(/[țţ]/g, 't') // variante cu virguliță/cedilă
+          .replace(/[^a-z0-9 ]+/g, ' ') // non-alfanumerice -> spațiu
+          .replace(/  +/g, ' ') // spații multiple -> unul singur
+          .trim();
       }
-  })
-  .catch(() => {/* ignoră dacă nu există */});
+      const key = toKey(term);
+      if (!key) return [];
+      return guests
+        .filter(g => toKey(g.Nume).includes(key))
+        .sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+    }
 
-// Afișează lista completă la încărcare & activează căutarea live
-window.onload = () => {
-    searchInput.focus();
-    renderResults(filterList(''));
-};
+    // Address/contacts toggles
+    const addressBtn = document.getElementById('addressBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    const addressBox = document.getElementById('addressBox');
+    const contactBox = document.getElementById('contactBox');
+    addressBtn.addEventListener('click', ()=> { addressBox.hidden = !addressBox.hidden; });
+    contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
 
-// Căutare la tastare
-searchInput.addEventListener('input', () => {
-    const filtered = filterList(searchInput.value);
-    renderResults(filtered);
-});
-</script>
+    // Init
+    window.onload = () => { searchInput.focus(); resultsDiv.innerHTML = ''; countDiv.textContent = ''; };
+    searchInput.addEventListener('input', () => {
+      const term = searchInput.value;
+      const filtered = filterList(term);
+      if (term.trim() === '') { resultsDiv.innerHTML = ''; countDiv.textContent = ''; return; }
+      if (filtered.length === 0) { resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>'; countDiv.textContent = ''; return; }
+      renderResults(filtered);
+    });
+
+    // ===== Admin editor (local only) =====
+    const pinInput = document.getElementById('pinInput');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const editor = document.getElementById('editor');
+    const editBody = document.getElementById('editBody');
+    const addRowBtn = document.getElementById('addRow');
+    const saveLocalBtn = document.getElementById('saveLocal');
+    const resetDefaultBtn = document.getElementById('resetDefault');
+    const downloadCSVBtn = document.getElementById('downloadCSV');
+    const downloadHTMLBtn = document.getElementById('downloadHTML');
+
+    function loadLocalGuests() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('weddingGuests') || 'null');
+        if (Array.isArray(saved) && saved.length) guests = saved;
+      } catch (_) {}
+    }
+    loadLocalGuests();
+
+    function renderEditorRows() {
+      editBody.innerHTML = '';
+      const sorted = guests.slice().sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+      sorted.forEach((g, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" value="${g.Nume.replace(/"/g,'&quot;')}" /></td>
+          <td><input type="number" min="1" max="99" value="${g.Masa}" /></td>
+          <td class="row-actions"><button class="small-btn outline" type="button">✕</button></td>
+        `;
+        // delete
+        tr.querySelector('button').addEventListener('click', () => {
+          const i = guests.findIndex(x => x.Nume === g.Nume && x.Masa === g.Masa);
+          if (i >= 0) { guests.splice(i,1); renderEditorRows(); }
+        });
+        editBody.appendChild(tr);
+      });
+    }
+
+    function readEditorRows() {
+      const rows = Array.from(editBody.querySelectorAll('tr'));
+      const out = [];
+      for (const r of rows) {
+        const name = r.querySelector('input[type="text"]').value.trim();
+        const masa = parseInt(r.querySelector('input[type="number"]').value, 10);
+        if (!name || !Number.isFinite(masa)) continue;
+        out.push({ Nume: name, Masa: masa });
+      }
+      // dedup + sort
+      const seen = new Set();
+      const dedup = [];
+      for (const g of out) { const k = g.Nume.toLowerCase()+"#"+g.Masa; if (!seen.has(k)) { seen.add(k); dedup.push(g); } }
+      dedup.sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+      return dedup;
+    }
+
+    unlockBtn.addEventListener('click', () => {
+      const pin = pinInput.value.trim();
+      if (pin === ADMIN_PIN) {
+        editor.hidden = false;
+        renderEditorRows();
+      } else {
+        alert('PIN greșit. (Implicit: geo2025)');
+      }
+    });
+
+    addRowBtn.addEventListener('click', () => {
+      guests.push({ Nume: '', Masa: 1 });
+      renderEditorRows();
+    });
+
+    saveLocalBtn.addEventListener('click', () => {
+      const updated = readEditorRows();
+      if (!updated.length) { alert('Lista rezultată este goală.'); return; }
+      guests = updated;
+      localStorage.setItem('weddingGuests', JSON.stringify(guests));
+      alert('Salvat local. (Doar în browserul tău)');
+    });
+
+    resetDefaultBtn.addEventListener('click', () => {
+      if (!confirm('Revii la lista implicită? (schimbările locale vor fi pierdute)')) return;
+      guests = defaultGuests.slice();
+      localStorage.removeItem('weddingGuests');
+      renderEditorRows();
+    });
+
+    function downloadBlob(filename, content, type='text/plain') {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    downloadCSVBtn.addEventListener('click', () => {
+      const updated = readEditorRows();
+      const data = (updated.length ? updated : guests);
+      const lines = ['Nume,Masa', ...data.map(g => `${g.Nume.replaceAll('"','""')},${g.Masa}`)];
+      downloadBlob('guests.csv', lines.join('\n'), 'text/csv');
+    });
+
+    // Produce a fresh index.html with the edited list baked-in, replacing between /*BEGIN_GUESTS*/ and /*END_GUESTS*/
+    downloadHTMLBtn.addEventListener('click', () => {
+      const updated = readEditorRows();
+      const data = (updated.length ? updated : guests);
+      const serialized = data.map(g => `{"Nume": "${g.Nume.replace(/"/g,'\\"')}", "Masa": ${g.Masa}}`).join(',\n      ');
+      let html = document.documentElement.outerHTML;
+      html = html.replace(/\/\*BEGIN_GUESTS\*\/[\s\S]*?\/\*END_GUESTS\*\//, `/*BEGIN_GUESTS*/\n      ${serialized}\n    /*END_GUESTS*/`);
+      downloadBlob('index.html', '<!DOCTYPE html>\n' + html, 'text/html');
+    });
+  </script>
 </body>
 </html>
-
