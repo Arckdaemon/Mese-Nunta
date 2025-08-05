@@ -66,7 +66,7 @@
     /* Admin */
     details.admin { margin-top:18px; background:#0d0d0d; border:1px dashed rgba(212,175,55,.6); border-radius:14px; padding:10px 12px; }
     details.admin summary { cursor:pointer; font-weight:700; color:var(--gold); }
-    .admin-guard { display:grid; grid-template-columns:1fr auto; gap:10px; margin-top:10px; }
+    .admin-guard { display:grid; grid-template-columns:1fr auto auto; gap:10px; margin-top:10px; }
     .admin-guard input[type="password"] { padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); }
     .small-btn { padding:10px 12px; border-radius:12px; border:none; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.35); }
     .small-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
@@ -78,10 +78,24 @@
     .row-actions { display:flex; gap:6px; justify-content:flex-end; }
     .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
     .hint { font-size:.85rem; color:#a89260; margin-top:6px; }
+      /* Floral bottom divider */
+    .floral-divider { height:24px; margin:18px auto 0; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 24"><path d="M5 12c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="110" cy="12" r="2" fill="%23d4af37"/></svg>'); background-size: 200px 24px; background-repeat:no-repeat; background-position:center; opacity:.95; }
+    .floral-divider.bottom { margin-top:22px; }
+
+    /* Corner ornaments */
+    .orn { position:absolute; width:34px; height:34px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 22c6-6 6-12 12-12" stroke="%23d4af37" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M10 10c3 0 4 1 4 4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M6 18c2-2 4-2 6-4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.9; filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
+    .corner-tl { top:-10px; left:-10px; transform: rotate(0deg); }
+    .corner-tr { top:-10px; right:-10px; transform: scaleX(-1); }
+    .corner-bl { bottom:-10px; left:-10px; transform: scaleY(-1); }
+    .corner-br { bottom:-10px; right:-10px; transform: scale(-1, -1); }
   </style>
 </head>
 <body>
   <div class="container">
+    <span class="orn corner-tl"></span>
+    <span class="orn corner-tr"></span>
+    <span class="orn corner-bl"></span>
+    <span class="orn corner-br"></span>
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
     <div class="subtitle">Folosiți această aplicație pentru a afla rapid numărul mesei la care veți sta.</div>
@@ -103,8 +117,9 @@
       <summary>Admin – editare invitați (PIN)</summary>
       <div class="hint">Schimbările făcute aici se salvează <strong>doar local</strong> în browserul tău. Pentru ca toți invitații să le vadă, descarcă <em>index.html</em> actualizat și încarcă-l în GitHub (vezi butonul din bară).</div>
       <div class="admin-guard">
-        <input id="pinInput" type="password" placeholder="Introdu PIN admin (implicit: geo2025)" />
+        <input id="pinInput" type="password" placeholder="Introdu PIN admin" />
         <button id="unlockBtn" class="small-btn" type="button">Deschide Admin</button>
+        <button id="setPinBtn" class="small-btn outline" type="button">Setează PIN local</button>
       </div>
       <div id="editor" class="editor" hidden>
         <div class="toolbar">
@@ -123,11 +138,12 @@
         </table>
       </div>
     </details>
+    <div class="floral-divider bottom"></div>
   </div>
 
   <script>
     // ===== Config =====
-    const ADMIN_PIN = 'geo2025'; // Schimbă PIN-ul dacă vrei (opțional)
+    // PIN-ul admin nu este hardcodat; se stochează local în acest browser (localStorage).
 
     // ===== Default guest list (baked-in) =====
     const defaultGuests = [ /*BEGIN_GUESTS*/
@@ -322,14 +338,24 @@
       return dedup;
     }
 
+    function getAdminPin(){ try{ return localStorage.getItem('adminPIN') || ''; }catch(_){ return ''; } }
+
     unlockBtn.addEventListener('click', () => {
       const pin = pinInput.value.trim();
-      if (pin === ADMIN_PIN) {
-        editor.hidden = false;
-        renderEditorRows();
-      } else {
-        alert('PIN greșit. (Implicit: geo2025)');
-      }
+      const stored = getAdminPin();
+      if (!stored) { alert('Nu este configurat niciun PIN local pe acest dispozitiv. Apasă „Setează PIN local”.'); return; }
+      if (pin === stored) { editor.hidden = false; renderEditorRows(); }
+      else { alert('PIN greșit.'); }
+    });
+
+    const setPinBtn = document.getElementById('setPinBtn');
+    setPinBtn.addEventListener('click', () => {
+      const p1 = prompt('Setează PIN local (minim 4 caractere):','');
+      if (!p1 || p1.trim().length < 4) { alert('PIN prea scurt.'); return; }
+      const p2 = prompt('Confirmă PIN-ul:','');
+      if (p1 !== p2) { alert('PIN-urile nu coincid.'); return; }
+      localStorage.setItem('adminPIN', p1.trim());
+      alert('PIN-ul local a fost setat pe acest dispozitiv.');
     });
 
     addRowBtn.addEventListener('click', () => {
@@ -379,3 +405,4 @@
   </script>
 </body>
 </html>
+
