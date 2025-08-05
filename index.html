@@ -88,6 +88,9 @@
     .corner-tr { top:-10px; right:-10px; transform: scaleX(-1); }
     .corner-bl { bottom:-10px; left:-10px; transform: scaleY(-1); }
     .corner-br { bottom:-10px; right:-10px; transform: scale(-1, -1); }
+  .couple-wrap { margin: 14px 0 18px; }
+    .couple { display:block; width:100%; height:auto; max-height:420px; object-fit:cover; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
+    .couple-caption { text-align:center; color:var(--muted); font-size:.9rem; margin-top:6px; }
   </style>
 </head>
 <body>
@@ -98,7 +101,11 @@
     <span class="orn corner-br"></span>
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
-    <div class="subtitle">Folosiți această aplicație pentru a afla rapid numărul mesei la care veți sta.</div>
+    $1
+    <figure class="couple-wrap">
+      <img id="couplePhoto" class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" onerror="this.onerror=()=>this.closest('figure').style.display='none'; this.src='couple.png';" />
+      <figcaption class="couple-caption">Diana & Geo — la starea civilă</figcaption>
+    </figure>
     <div class="note">Formularul de mesaje permite și <strong>încărcarea opțională de fotografii</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
 
     <div class="actions">
@@ -405,4 +412,3 @@
   </script>
 </body>
 </html>
-
