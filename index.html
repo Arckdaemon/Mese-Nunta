@@ -6,201 +6,291 @@
     <title>Nunta Dianei și a lui Geo – Află masa ta</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #fff3e6 0%, #f7e7fa 100%);
-            font-family: 'Montserrat', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 450px;
-            background: rgba(255,255,255,0.95);
-            margin: 48px auto 0 auto;
-            padding: 32px 28px 36px 28px;
-            border-radius: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(76, 18, 119, 0.15);
-        }
-        .festive-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 2.5rem;
-            color: #ad6d9e;
-            margin-bottom: 0.25em;
-            text-align: center;
-            letter-spacing: 2px;
-        }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #6d346d;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        .note {
-            color: #795b5b;
-            font-size: 0.95rem;
-            text-align: center;
-            margin-bottom: 24px;
-            background: #f6f0f8;
-            border-radius: 8px;
-            padding: 8px 12px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 12px;
-            border-radius: 1rem;
-            border: 1px solid #c6b0d6;
-            font-size: 1.1rem;
-            margin-bottom: 18px;
-            outline: none;
-            box-sizing: border-box;
-            transition: border-color 0.2s;
-        }
-        input[type="text"]:focus {
-            border-color: #ad6d9e;
-        }
-        .results {
-            margin-top: 10px;
-        }
-        .result-row {
-            padding: 10px 14px;
-            margin: 7px 0;
-            background: #f2e7fa;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px 0 rgba(76, 18, 119, 0.06);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.08rem;
-        }
-        .guest-name {
-            color: #442c4c;
-            font-weight: 600;
-        }
-        .guest-table {
-            color: #ad6d9e;
-            font-size: 1.13rem;
-            font-weight: 700;
-        }
-        .no-result {
-            text-align: center;
-            color: #b67272;
-            background: #fae7e7;
-            border-radius: 9px;
-            padding: 9px;
-            margin-top: 14px;
-        }
-        @media (max-width: 600px) {
-            .container {
-                max-width: 99vw;
-                padding: 20px 4vw 24px 4vw;
-            }
-        }
+        body { background: linear-gradient(135deg, #fff3e6 0%, #f7e7fa 100%); font-family: 'Montserrat', Arial, sans-serif; margin: 0; padding: 0; min-height: 100vh; }
+        .container { max-width: 560px; background: rgba(255,255,255,0.95); margin: 48px auto 40px; padding: 32px 28px 36px; border-radius: 2rem; box-shadow: 0 8px 32px rgba(76, 18, 119, 0.15); }
+        .logo { display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px; box-shadow: 0 4px 16px rgba(76, 18, 119, 0.12); }
+        .festive-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ad6d9e; margin-bottom: 0.25em; text-align: center; letter-spacing: 2px; }
+        .subtitle { font-size: 1.1rem; color: #6d346d; text-align: center; margin-bottom: 16px; font-weight: 500; }
+        .note { color: #795b5b; font-size: 0.95rem; text-align: center; margin-bottom: 18px; background: #f6f0f8; border-radius: 8px; padding: 8px 12px; }
+
+        /* Actions */
+        .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 18px; }
+        @media (min-width: 560px) { .actions { grid-template-columns: 1fr 1fr; } }
+        .action-btn { display: inline-block; text-align: center; padding: 12px 16px; border-radius: 14px; background: linear-gradient(90deg, #f7c3d9 0%, #ad6d9e 100%); color: #fff; font-weight: 700; text-decoration: none; border: none; cursor: pointer; box-shadow: 0 8px 20px rgba(172, 46, 117, 0.12); transition: transform .15s, opacity .2s; }
+        .action-btn:hover { transform: translateY(-1px); }
+        .action-btn.outline { background: #fff; color: #ad6d9e; border: 2px solid #dcb9d6; }
+        .reveal-box { margin-top: 6px; padding: 10px 12px; background: #faf2ff; border: 1px solid #ead6f3; color: #4b2a57; border-radius: 12px; font-size: .98rem; }
+
+        input[type="text"] { width: 100%; padding: 12px; border-radius: 1rem; border: 1px solid #c6b0d6; font-size: 1.1rem; margin: 8px 0 12px; outline: none; box-sizing: border-box; transition: border-color .2s; }
+        input[type="text"]:focus { border-color: #ad6d9e; }
+        .results { margin-top: 10px; }
+        .result-row { padding: 10px 14px; margin: 7px 0; background: #f2e7fa; border-radius: 12px; box-shadow: 0 2px 8px rgba(76, 18, 119, 0.06); display: flex; justify-content: space-between; align-items: center; font-size: 1.08rem; }
+        .guest-name { color: #442c4c; font-weight: 600; }
+        .guest-table { color: #ad6d9e; font-size: 1.13rem; font-weight: 700; }
+        .no-result { text-align: center; color: #b67272; background: #fae7e7; border-radius: 9px; padding: 9px; margin-top: 14px; }
+        .count { text-align: right; font-size: .9rem; color: #7b6281; margin-top: 6px; }
+
+        /* Admin box */
+        details.admin { margin-top: 18px; background: #fff; border: 1px dashed #dcb9d6; border-radius: 14px; padding: 10px 12px; }
+        details.admin summary { cursor: pointer; font-weight: 700; color: #6d346d; }
+        .admin-row { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+        @media (min-width: 560px) { .admin-row { grid-template-columns: 1fr 140px; } }
+        .hint { font-size: .85rem; color: #7b6281; margin-top: 6px; }
+        input[type="file"] { padding: 8px; border-radius: 10px; border: 1px solid #c6b0d6; background: #fff; }
+        .small-btn { padding: 10px 12px; border-radius: 12px; border: none; background: #ad6d9e; color: #fff; font-weight: 700; cursor: pointer; }
+        .small-btn.outline { background: #fff; color: #ad6d9e; border: 2px solid #dcb9d6; }
     </style>
 </head>
 <body>
 <div class="container">
+    <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'">
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
     <div class="subtitle">Folosiți această aplicație pentru a afla rapid numărul mesei la care veți sta.</div>
-    <div class="note">Numărul mesei va fi disponibil și fizic, la locație.</div>
+    <div class="note">Formularul de mesaje permite și <strong>încărcarea opțională de fotografii</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
+
+    <div class="actions">
+        <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă poze (Google Form)</a>
+        <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa</button>
+        <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
+    </div>
+    <div id="addressBox" class="reveal-box" hidden>Strada Ovid Densușeanu 78/A, Oradea 410237</div>
+    <div id="contactBox" class="reveal-box" hidden>Georgian: 0754706716 &nbsp;&bull;&nbsp; Diana: 0748436309</div>
+
     <input type="text" id="search" placeholder="Căutați după orice parte din nume..." autofocus autocomplete="off">
+    <div class="count" id="count"></div>
     <div class="results" id="results"></div>
+
+    <details class="admin">
+        <summary>Admin – încarcă CSV & setări</summary>
+        <div class="hint">CSV cu coloane <strong>Nume</strong> și <strong>Masa</strong> (delimitat cu virgulă sau punct și virgulă). Exemplu: <code>Nume,Masa</code> / <code>Popescu Ana,2</code>. După upload, lista se actualizează imediat.</div>
+        <div class="admin-row" style="margin-top:10px;">
+            <input type="file" id="csvInput" accept=".csv">
+            <button id="resetBtn" class="small-btn outline" type="button">Revino la lista inițială</button>
+        </div>
+        <div class="hint">Opțional: dacă adaugi în repository un fișier <code>guests.csv</code>, pagina îl va încărca automat pentru toți vizitatorii.</div>
+    </details>
 </div>
 <script>
-// Lista invitaților cu numele și masa
-const guests = [
-{"Nume": "Crina", "Masa": 1},
+// === Helpers: CSV parsing ===
+function parseCSV(text) {
+    const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+    if (!lines.length) return [];
+    const firstLine = lines[0];
+    const comma = (firstLine.match(/,/g) || []).length;
+    const semi = (firstLine.match(/;/g) || []).length;
+    const delim = semi > comma ? ';' : ',';
+
+    let headers = lines[0].split(delim).map(h => h.trim().toLowerCase());
+    let nameIdx = headers.findIndex(h => ['nume','name','nume complet'].includes(h));
+    let tableIdx = headers.findIndex(h => ['masa','numar masa','nr masa','table'].includes(h));
+    let start = 1;
+    if (nameIdx === -1 || tableIdx === -1) { nameIdx = 0; tableIdx = 1; start = 0; }
+
+    const out = [];
+    for (let i = start; i < lines.length; i++) {
+        const cols = lines[i].split(delim);
+        const name = (cols[nameIdx] || '').trim();
+        const masaRaw = (cols[tableIdx] || '').toString().trim().replace(',', '.');
+        const masaNum = parseInt(masaRaw, 10);
+        if (!name || !Number.isFinite(masaNum)) continue;
+        const lname = name.toLowerCase();
+        if (lname.includes('meniu') || lname.includes('copil')) continue;
+        out.push({ Nume: name, Masa: masaNum });
+    }
+    // dedup & sort
+    const seen = new Set();
+    const dedup = [];
+    for (const g of out) {
+        const k = g.Nume.toLowerCase() + '#' + g.Masa;
+        if (!seen.has(k)) { seen.add(k); dedup.push(g); }
+    }
+    dedup.sort((a,b) => (a.Masa - b.Masa) || a.Nume.localeCompare(b.Nume));
+    return dedup;
+}
+
+// === Default guest list (fallback) ===
+const defaultGuests = [
+// MASA 1
 {"Nume": "Cristi Ioan", "Masa": 1},
 {"Nume": "Dan", "Masa": 1},
-{"Nume": "Ioan Marchis", "Masa": 1},
-{"Nume": "Jiurge Maria", "Masa": 1},
-{"Nume": "Lica Tomsa", "Masa": 1},
-{"Nume": "Maria Sustic", "Masa": 1},
-{"Nume": "Mircea Ros", "Masa": 1},
-{"Nume": "Oana", "Masa": 1},
-{"Nume": "Petrar Dorina", "Masa": 1},
 {"Nume": "Serban", "Masa": 1},
-{"Nume": "Simut Nelu", "Masa": 1},
+{"Nume": "Iuga", "Masa": 1},
+{"Nume": "Ilisoi", "Masa": 1},
+{"Nume": "Adriadna", "Masa": 1},
+{"Nume": "Rusu Cosmin", "Masa": 1},
+
+// MASA 2
 {"Nume": "Adi Pasca", "Masa": 2},
-{"Nume": "Adriadna", "Masa": 2},
-{"Nume": "Alin Tati", "Masa": 2},
-{"Nume": "Alina Petrovan", "Masa": 2},
-{"Nume": "Ana Opris", "Masa": 2},
-{"Nume": "Borsan Florin", "Masa": 2},
-{"Nume": "Costel", "Masa": 2},
-{"Nume": "Cristina Marchis", "Masa": 2},
-{"Nume": "Darius", "Masa": 2},
-{"Nume": "Diana Pasca", "Masa": 2},
-{"Nume": "Iuga", "Masa": 2},
-{"Nume": "Lavinia", "Masa": 2},
-{"Nume": "Magda", "Masa": 2},
-{"Nume": "Marius", "Masa": 2},
-{"Nume": "Marius Petrovan", "Masa": 2},
-{"Nume": "Opris", "Masa": 2},
-{"Nume": "Stana", "Masa": 2},
-{"Nume": "Toma", "Masa": 2},
-{"Nume": "Adrian Gherman", "Masa": 3},
-{"Nume": "Alexandra", "Masa": 3},
-{"Nume": "Anca", "Masa": 3},
-{"Nume": "Buda Adriana", "Masa": 3},
-{"Nume": "Buda Cristi", "Masa": 3},
-{"Nume": "Ionut Ciurba", "Masa": 3},
-{"Nume": "Irina Gherman", "Masa": 3},
-{"Nume": "Irina Oltean", "Masa": 3},
-{"Nume": "Irina Tomsa", "Masa": 3},
-{"Nume": "Izabela", "Masa": 3},
-{"Nume": "Liliana", "Masa": 3},
-{"Nume": "Mihai Gherman", "Masa": 3},
-{"Nume": "Oltean", "Masa": 3},
-{"Nume": "Paul", "Masa": 3},
-{"Nume": "Rebeca", "Masa": 3},
-{"Nume": "Sabina", "Masa": 3},
-{"Nume": "Vali", "Masa": 3},
-{"Nume": "Vasile", "Masa": 3},
-{"Nume": "Viorel", "Masa": 3},
-{"Nume": "Alex", "Masa": 4},
-{"Nume": "Carmen", "Masa": 4},
-{"Nume": "Felicia", "Masa": 4},
-{"Nume": "Gabriel", "Masa": 4},
-{"Nume": "Ilisoi", "Masa": 4},
-{"Nume": "Ioana", "Masa": 4},
-{"Nume": "Marian", "Masa": 4}
+{"Nume": "Matache", "Masa": 2},
+{"Nume": "Dragan Patricia", "Masa": 2},
+{"Nume": "Andrei Negrau", "Masa": 2},
+{"Nume": "Berche", "Masa": 2},
+
+// MASA 3
+{"Nume": "Andreea Godja", "Masa": 3},
+{"Nume": "Crina", "Masa": 3},
+{"Nume": "Andrei Godja", "Masa": 3},
+{"Nume": "Ana Opris", "Masa": 3},
+{"Nume": "Denisa Ulici", "Masa": 3},
+{"Nume": "Alina Petrovan", "Masa": 3},
+
+// MASA 4
+{"Nume": "fam. Ciavoi", "Masa": 4},
+{"Nume": "Hercut", "Masa": 4},
+{"Nume": "Dana Petrus", "Masa": 4},
+{"Nume": "Firuta", "Masa": 4},
+{"Nume": "Florica", "Masa": 4},
+
+// MASA 5
+{"Nume": "Dorin", "Masa": 5},
+{"Nume": "Mariana", "Masa": 5},
+{"Nume": "Mihai", "Masa": 5},
+{"Nume": "Mia Anglia", "Masa": 5},
+
+// MASA 6
+{"Nume": "Ghita Mirza", "Masa": 6},
+{"Nume": "Oana", "Masa": 6},
+{"Nume": "Denisa Mirza", "Masa": 6},
+{"Nume": "Alin Tati", "Masa": 6},
+{"Nume": "Ioan Marchis", "Masa": 6},
+{"Nume": "Parinti Diana", "Masa": 6},
+
+// MASA 7
+{"Nume": "Tivadar Ionita", "Masa": 7},
+{"Nume": "Irina si Viorel", "Masa": 7},
+{"Nume": "Ileana si Nutu", "Masa": 7},
+{"Nume": "Lica Tomsa", "Masa": 7},
+{"Nume": "Andreica Mihai", "Masa": 7},
+{"Nume": "Craciun Ioan", "Masa": 7},
+
+// MASA 8
+{"Nume": "Gartian Tisalita", "Masa": 8},
+{"Nume": "Maria Sustic", "Masa": 8},
+{"Nume": "Ileana Rosca", "Masa": 8},
+{"Nume": "Iustina", "Masa": 8},
+{"Nume": "Andreea Rosca", "Masa": 8},
+
+// MASA 9
+{"Nume": "Familia Stevlik", "Masa": 9},
+{"Nume": "Fam Taut (Lacrimioara si Florin)", "Masa": 9},
+{"Nume": "Fam Csaki", "Masa": 9},
+{"Nume": "Fam Dragan", "Masa": 9},
+{"Nume": "Mircea Ros", "Masa": 9},
+
+// MASA 10
+{"Nume": "Jiurge Mircea", "Masa": 10},
+{"Nume": "Jiurge Mihai", "Masa": 10},
+{"Nume": "Jiurge Maria", "Masa": 10},
+{"Nume": "Simut Nelu", "Masa": 10},
+{"Nume": "Petrule Mariana", "Masa": 10},
+
+// MASA 11
+{"Nume": "Fam Flontas", "Masa": 11},
+{"Nume": "Fam Filip", "Masa": 11},
+{"Nume": "Petrar Dorina", "Masa": 11},
+{"Nume": "Parinti Geo", "Masa": 11}
 ];
 
+let guests = defaultGuests.slice();
+
+// === UI logic ===
 const resultsDiv = document.getElementById('results');
+const countDiv = document.getElementById('count');
 const searchInput = document.getElementById('search');
 
-function renderResults(filtered) {
+function renderResults(list) {
     resultsDiv.innerHTML = '';
-    if (filtered.length === 0) {
+    if (list.length === 0) {
         resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>';
+        countDiv.textContent = '';
         return;
     }
-    filtered.forEach(g => {
+    list.forEach(g => {
         const row = document.createElement('div');
         row.className = 'result-row';
         row.innerHTML = `<span class="guest-name">${g.Nume}</span> <span class="guest-table">Masa ${g.Masa}</span>`;
         resultsDiv.appendChild(row);
     });
+    countDiv.textContent = list.length + ' invitați afișați';
 }
 
 function filterList(term) {
     term = term.toLowerCase().trim();
-    if (term === '') return [];
-    return guests.filter(g => g.Nume.toLowerCase().includes(term));
+    if (term === '') return guests.slice().sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+    return guests.filter(g => g.Nume.toLowerCase().includes(term)).sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
 }
 
-// Caută la fiecare tastare
-searchInput.addEventListener('input', () => {
-    const val = searchInput.value;
-    const filtered = filterList(val);
-    renderResults(filtered);
+// Toggle address & contacts
+const addressBtn = document.getElementById('addressBtn');
+const contactBtn = document.getElementById('contactBtn');
+const addressBox = document.getElementById('addressBox');
+const contactBox = document.getElementById('contactBox');
+addressBtn.addEventListener('click', ()=> { addressBox.hidden = !addressBox.hidden; });
+contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
+
+// Admin: upload CSV
+const csvInput = document.getElementById('csvInput');
+const resetBtn = document.getElementById('resetBtn');
+if (csvInput) {
+    csvInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+            try {
+                const text = evt.target.result;
+                const parsed = parseCSV(text);
+                if (!parsed.length) { alert('CSV gol sau invalid. Verifică antetele și delimiterul (, sau ;).'); return; }
+                guests = parsed;
+                localStorage.setItem('weddingGuests', JSON.stringify(guests));
+                renderResults(filterList(searchInput.value));
+                alert('Lista de invitați a fost actualizată din CSV.');
+            } catch (err) {
+                console.error(err);
+                alert('Nu am putut citi CSV-ul.');
+            }
+        };
+        reader.readAsText(file, 'utf-8');
+    });
+}
+resetBtn && resetBtn.addEventListener('click', () => {
+    guests = defaultGuests.slice();
+    localStorage.removeItem('weddingGuests');
+    renderResults(filterList(searchInput.value));
 });
 
-// Autofocus pe mobil la încărcare
+// Persistență: încărcare din localStorage la pornire
+try {
+    const savedGuests = JSON.parse(localStorage.getItem('weddingGuests') || 'null');
+    if (Array.isArray(savedGuests) && savedGuests.length) {
+        guests = savedGuests;
+    }
+} catch (_) {}
+
+// Încărcare automată guests.csv (dacă există în repository) – pentru toți vizitatorii
+fetch('guests.csv', { cache: 'no-store' })
+  .then(r => r.ok ? r.text() : Promise.reject('no csv'))
+  .then(text => {
+      const parsed = parseCSV(text);
+      if (parsed.length) {
+          guests = parsed;
+          renderResults(filterList(searchInput.value));
+      }
+  })
+  .catch(() => {/* ignoră dacă nu există */});
+
+// Afișează lista completă la încărcare & activează căutarea live
 window.onload = () => {
     searchInput.focus();
-}
+    renderResults(filterList(''));
+};
+
+// Căutare la tastare
+searchInput.addEventListener('input', () => {
+    const filtered = filterList(searchInput.value);
+    renderResults(filtered);
+});
 </script>
 </body>
 </html>
+
