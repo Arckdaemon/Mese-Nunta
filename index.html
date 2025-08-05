@@ -30,7 +30,7 @@
       border-radius: 2rem;
       border: 1px solid rgba(212,175,55,.35);
       box-shadow: inset 0 0 0 1px rgba(212,175,55,.12), 0 12px 50px rgba(0,0,0,.55);
-      position: relative;
+      position: relative; z-index: 1;
     }
     .logo {
       display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px;
@@ -91,9 +91,17 @@
   .couple-wrap { margin: 14px 0 18px; }
     .couple { display:block; width:100%; height:auto; max-height:420px; object-fit:cover; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
     .couple-caption { text-align:center; color:var(--muted); font-size:.9rem; margin-top:6px; }
+  #bg-wrap { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+    #bgImage { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); filter: brightness(0.35) saturate(1.05); }
+    #bg-wrap::after { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+      linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0) 40%);
+      pointer-events: none; }
   </style>
 </head>
 <body>
+  <!-- Background image slot: upload background.jpg (sau background.png) în același folder cu index.html -->
+  <div id="bg-wrap"><img id="bgImage" src="background.jpg" alt="" onerror="if(this.src.includes('background.jpg')){this.src='background.png';}else{this.parentNode.style.display='none';}"></div>
   <div class="container">
     <span class="orn corner-tl"></span>
     <span class="orn corner-tr"></span>
