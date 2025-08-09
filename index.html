@@ -14,6 +14,7 @@
       --text: #ece7d9;
       --muted: #c8b892;
       --line: #2a2210;
+      --danger: #c53030;
     }
     * { box-sizing: border-box; }
     body {
@@ -52,9 +53,9 @@
     .action-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
     .reveal-box { margin-top:6px; padding:10px 12px; background:#12100a; border:1px solid rgba(212,175,55,.35); color: var(--text); border-radius:12px; font-size:.98rem; }
 
-    input[type="text"] { width:100%; padding:12px; border-radius:1rem; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1.08rem; margin:8px 0 12px; outline:none; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; }
-    input[type="text"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); }
-    input[type="text"]::placeholder { color:#9b8a5a; }
+    input[type="text"], input[type="password"], input[type="number"] { width:100%; padding:12px; border-radius:1rem; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1.08rem; margin:8px 0 12px; outline:none; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; }
+    input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); }
+    input::placeholder { color:#9b8a5a; }
 
     .results { margin-top:10px; }
     .result-row { padding:10px 14px; margin:7px 0; background:#101010; border:1px solid rgba(212,175,55,.30); border-radius:12px; box-shadow: 0 2px 8px rgba(0,0,0,.25); display:flex; justify-content:space-between; align-items:center; font-size:1.08rem; }
@@ -63,50 +64,50 @@
     .no-result { text-align:center; color:var(--gold); background:#15110a; border:1px solid rgba(212,175,55,.30); border-radius:9px; padding:9px; margin-top:14px; }
     .count { text-align:right; font-size:.9rem; color:#a89260; margin-top:6px; }
 
-    /* Admin */
-    details.admin { margin-top:18px; background:#0d0d0d; border:1px dashed rgba(212,175,55,.6); border-radius:14px; padding:10px 12px; }
-    details.admin summary { cursor:pointer; font-weight:700; color:var(--gold); }
-    .admin-guard { display:grid; grid-template-columns:1fr auto auto; gap:10px; margin-top:10px; }
-    .admin-guard input[type="password"] { padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); }
-    .small-btn { padding:10px 12px; border-radius:12px; border:none; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.35); }
-    .small-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
-    .editor { margin-top:14px; }
-    .editor table { width:100%; border-collapse:separate; border-spacing:0 8px; }
-    .editor th { text-align:left; font-size:.9rem; color:var(--muted); }
-    .editor td { background:#0f0d08; padding:8px; border-radius:10px; }
-    .editor input[type="text"], .editor input[type="number"] { width:100%; padding:8px; border:1px solid rgba(212,175,55,.35); border-radius:10px; background:#0b0b0b; color:var(--text); box-sizing:border-box; }
-    .row-actions { display:flex; gap:6px; justify-content:flex-end; }
-    .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .hint { font-size:.85rem; color:#a89260; margin-top:6px; }
-      /* Floral bottom divider */
+    /* Admin Panel */
+    .admin-section { margin-top: 24px; background: #0d0d0d; border: 1px dashed rgba(212,175,55,.6); border-radius: 14px; padding: 16px; }
+    .admin-section h3 { margin-top: 0; color: var(--gold); font-family: 'Great Vibes', cursive; font-size: 2rem; text-align: center; }
+    .admin-login { display: flex; gap: 10px; align-items: center; }
+    .admin-login input { flex-grow: 1; margin: 0; }
+    .admin-controls { display: none; } /* Hidden by default */
+    .admin-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; margin-top: 16px; }
+    .admin-table th { text-align: left; font-size: .9rem; color: var(--muted); padding-bottom: 5px; }
+    .admin-table td { background: #0f0d08; padding: 8px; }
+    .admin-table td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+    .admin-table td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; }
+    .admin-table input { width: 100%; padding: 8px; margin: 0; border: 1px solid rgba(212,175,55,.35); border-radius: 8px; background: #0b0b0b; color: var(--text); box-sizing: border-box; font-size: 1rem; }
+    .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
+    .small-btn { padding: 10px 12px; border-radius: 12px; border: none; background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: #0b0b0b; font-weight: 700; cursor: pointer; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+    .small-btn.outline { background: transparent; color: var(--gold); border: 2px solid rgba(212,175,55,.6); }
+    .small-btn.danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .hint { font-size: .85rem; color: #a89260; margin-top: 6px; }
+
     .floral-divider { height:24px; margin:18px auto 0; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 24"><path d="M5 12c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="110" cy="12" r="2" fill="%23d4af37"/></svg>'); background-size: 200px 24px; background-repeat:no-repeat; background-position:center; opacity:.95; }
     .floral-divider.bottom { margin-top:22px; }
 
-    /* Corner ornaments */
     .orn { position:absolute; width:34px; height:34px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 22c6-6 6-12 12-12" stroke="%23d4af37" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M10 10c3 0 4 1 4 4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M6 18c2-2 4-2 6-4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.9; filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
     .corner-tl { top:-10px; left:-10px; transform: rotate(0deg); }
     .corner-tr { top:-10px; right:-10px; transform: scaleX(-1); }
     .corner-bl { bottom:-10px; left:-10px; transform: scaleY(-1); }
     .corner-br { bottom:-10px; right:-10px; transform: scale(-1, -1); }
-  .couple-wrap { margin: 14px 0 18px; }
+    .couple-wrap { margin: 14px 0 18px; }
     .couple { display:block; width:100%; height:auto; max-height:420px; object-fit:cover; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
     .couple-caption { text-align:center; color:var(--muted); font-size:.9rem; margin-top:6px; }
-  #bg-wrap { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
+    #bg-wrap { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
     #bgImage { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); filter: brightness(0.35) saturate(1.05); }
-    #bg-wrap::after { content: ""; position: absolute; inset: 0; background:
-      radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.15), rgba(0,0,0,.55)),
-      linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0) 40%);
-      pointer-events: none; }
+    #bg-wrap::after { content: ""; position: absolute; inset: 0; background: radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.15), rgba(0,0,0,.55)), linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0) 40%); pointer-events: none; }
   </style>
 </head>
 <body>
-  <!-- Background image slot: upload background.jpg (sau background.png) în același folder cu index.html -->
   <div id="bg-wrap"><img id="bgImage" src="background.jpg" alt="" onerror="if(this.src.includes('background.jpg')){this.src='background.png';}else{this.parentNode.style.display='none';}"></div>
+  
   <div class="container">
     <span class="orn corner-tl"></span>
     <span class="orn corner-tr"></span>
     <span class="orn corner-bl"></span>
     <span class="orn corner-br"></span>
+    
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
     
@@ -114,10 +115,11 @@
       <img id="couplePhoto" class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" onerror="this.onerror=()=>this.closest('figure').style.display='none'; this.src='couple.png';" />
       <figcaption class="couple-caption">Diana & Geo — la starea civilă</figcaption>
     </figure>
+    
     <div class="note">Formularul de mesaje permite și <strong>încărcarea opțională de fotografii</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
 
     <div class="actions">
-      <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă poze (Google Form)</a>
+      <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă poze</a>
       <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa</button>
       <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
     </div>
@@ -127,110 +129,208 @@
     <input type="text" id="search" placeholder="Căutați după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
-
     
+    <div class="floral-divider"></div>
+
+    <!-- ===== Admin Panel ===== -->
+    <section class="admin-section">
+      <h3>Panou Admin</h3>
+      <div id="adminLogin" class="admin-login">
+        <input type="password" id="adminPassword" placeholder="Introduceți parola de admin...">
+        <button id="adminLoginBtn" class="small-btn">Login</button>
+      </div>
+      <div id="adminControls" class="admin-controls">
+        <p class="hint">Aici puteți adăuga, modifica sau șterge invitați. Modificările sunt salvate automat și vizibile instant pentru toată lumea.</p>
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nume Invitat</th>
+              <th>Masa</th>
+              <th>Acțiuni</th>
+            </tr>
+          </thead>
+          <tbody id="adminGuestList">
+            <!-- Guest rows will be generated by JavaScript -->
+          </tbody>
+        </table>
+        <div class="toolbar">
+            <input type="text" id="newGuestName" placeholder="Nume invitat nou" style="flex-grow:1; margin:0;">
+            <input type="number" id="newGuestTable" placeholder="Masa" style="width:80px; margin:0;">
+            <button id="addGuestBtn" class="small-btn">Adaugă</button>
+        </div>
+        <button id="adminLogoutBtn" class="small-btn outline" style="margin-top: 16px;">Logout</button>
+      </div>
+    </section>
+
     <div class="floral-divider bottom"></div>
   </div>
 
-  <script>
-    // ===== Config =====
-    // PIN-ul admin nu este hardcodat; se stochează local în acest browser (localStorage).
+  <script type="module">
+    // ===== Import Firebase Modules =====
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // ===== Default guest list (baked-in) =====
-    const defaultGuests = [ /*BEGIN_GUESTS*/
-      // MASA 1
-      {"Nume": "Cristi Ioan", "Masa": 1},
-      {"Nume": "Dan", "Masa": 1},
-      {"Nume": "Serban", "Masa": 1},
-      {"Nume": "Iuga", "Masa": 1},
-      {"Nume": "Ilisoi", "Masa": 1},
-      {"Nume": "Adriadna", "Masa": 1},
-      {"Nume": "Rusu Cosmin", "Masa": 1},
+    // ===== Firebase Configuration =====
+    const firebaseConfig = {
+      apiKey: "AIzaSyB2BmOBNkpNuwUhORcbCV1HPjA49hb8B_c",
+      authDomain: "invitati-nunta.firebaseapp.com",
+      projectId: "invitati-nunta",
+      storageBucket: "invitati-nunta.firebasestorage.app",
+      messagingSenderId: "279470698992",
+      appId: "1:279470698992:web:5171e9c80ac8354402ed35",
+      measurementId: "G-KYVWR17HTB"
+    };
 
-      // MASA 2
-      {"Nume": "Adi Pasca", "Masa": 2},
-      {"Nume": "Matache", "Masa": 2},
-      {"Nume": "Dragan Patricia", "Masa": 2},
-      {"Nume": "Andrei Negrau", "Masa": 2},
-      {"Nume": "Berche", "Masa": 2},
+    // ===== Initialize Firebase =====
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const guestsCollection = collection(db, 'guests');
 
-      // MASA 3
-      {"Nume": "Andreea Godja", "Masa": 3},
-      {"Nume": "Crina", "Masa": 3},
-      {"Nume": "Andrei Godja", "Masa": 3},
-      {"Nume": "Ana Opris", "Masa": 3},
-      {"Nume": "Denisa Ulici", "Masa": 3},
-      {"Nume": "Alina Petrovan", "Masa": 3},
-
-      // MASA 4
-      {"Nume": "fam. Ciavoi", "Masa": 4},
-      {"Nume": "Hercut", "Masa": 4},
-      {"Nume": "Dana Petrus", "Masa": 4},
-      {"Nume": "Firuta", "Masa": 4},
-      {"Nume": "Florica", "Masa": 4},
-
-      // MASA 5
-      {"Nume": "Dorin", "Masa": 5},
-      {"Nume": "Mariana", "Masa": 5},
-      {"Nume": "Mihai", "Masa": 5},
-      {"Nume": "Mia Anglia", "Masa": 5},
-
-      // MASA 6
-      {"Nume": "Ghita Mirza", "Masa": 6},
-      {"Nume": "Oana", "Masa": 6},
-      {"Nume": "Denisa Mirza", "Masa": 6},
-      {"Nume": "Alin Tati", "Masa": 6},
-      {"Nume": "Ioan Marchis", "Masa": 6},
-      {"Nume": "Parinti Diana", "Masa": 6},
-
-      // MASA 7
-      {"Nume": "Tivadar Ionita", "Masa": 7},
-      {"Nume": "Irina si Viorel", "Masa": 7},
-      {"Nume": "Ileana si Nutu", "Masa": 7},
-      {"Nume": "Lica Tomsa", "Masa": 7},
-      {"Nume": "Andreica Mihai", "Masa": 7},
-      {"Nume": "Craciun Ioan", "Masa": 7},
-
-      // MASA 8
-      {"Nume": "Gartian Tisalita", "Masa": 8},
-      {"Nume": "Maria Sustic", "Masa": 8},
-      {"Nume": "Ileana Rosca", "Masa": 8},
-      {"Nume": "Iustina", "Masa": 8},
-      {"Nume": "Andreea Rosca", "Masa": 8},
-
-      // MASA 9
-      {"Nume": "Familia Stevlik", "Masa": 9},
-      {"Nume": "Fam Taut (Lacrimioara si Florin)", "Masa": 9},
-      {"Nume": "Fam Csaki", "Masa": 9},
-      {"Nume": "Fam Dragan", "Masa": 9},
-      {"Nume": "Mircea Ros", "Masa": 9},
-
-      // MASA 10
-      {"Nume": "Jiurge Mircea", "Masa": 10},
-      {"Nume": "Jiurge Mihai", "Masa": 10},
-      {"Nume": "Jiurge Maria", "Masa": 10},
-      {"Nume": "Simut Nelu", "Masa": 10},
-      {"Nume": "Petrule Mariana", "Masa": 10},
-
-      // MASA 11
-      {"Nume": "Fam Flontas", "Masa": 11},
-      {"Nume": "Fam Filip", "Masa": 11},
-      {"Nume": "Petrar Dorina", "Masa": 11},
-      {"Nume": "Parinti Geo", "Masa": 11}
-    /*END_GUESTS*/ ];
-
-    let guests = defaultGuests.slice();
-
-    // ===== Search UI =====
+    // ===== Global Variables & UI Elements =====
+    let allGuests = [];
     const resultsDiv = document.getElementById('results');
     const countDiv = document.getElementById('count');
     const searchInput = document.getElementById('search');
+    const addressBtn = document.getElementById('addressBtn');
+    const contactBtn = document.getElementById('contactBtn');
+    const addressBox = document.getElementById('addressBox');
+    const contactBox = document.getElementById('contactBox');
+    const adminLoginDiv = document.getElementById('adminLogin');
+    const adminControlsDiv = document.getElementById('adminControls');
+    const adminPasswordInput = document.getElementById('adminPassword');
+    const adminLoginBtn = document.getElementById('adminLoginBtn');
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+    const adminGuestListBody = document.getElementById('adminGuestList');
+    const addGuestBtn = document.getElementById('addGuestBtn');
+    const newGuestNameInput = document.getElementById('newGuestName');
+    const newGuestTableInput = document.getElementById('newGuestTable');
+    const ADMIN_PASS_KEY = 'nuntaDianaGeoAdminPass';
 
+    // ===== Main App Logic =====
+    async function initialize() {
+      try {
+        await signInAnonymously(auth);
+        console.log("Signed in anonymously.");
+        setupListeners();
+      } catch (error) {
+        console.error("Authentication or Firestore error:", error);
+        resultsDiv.innerHTML = `<div class="no-result">Eroare de conectare la baza de date. Vă rugăm reîncărcați pagina.</div>`;
+      }
+    }
+    
+    function setupListeners() {
+      // Real-time data listener
+      onSnapshot(guestsCollection, (snapshot) => {
+        allGuests = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        console.log(`Loaded ${allGuests.length} guests from Firebase.`);
+        if (searchInput.value.trim() !== '') {
+            renderResults(filterList(searchInput.value));
+        }
+        if (adminControlsDiv.style.display !== 'none') {
+          renderAdminList();
+        }
+      }, (error) => {
+          console.error("Firestore snapshot error:", error);
+          resultsDiv.innerHTML = `<div class="no-result">Eroare: ${error.message}. Verificați regulile de securitate din Firebase.</div>`;
+      });
+
+      // Search input listener
+      searchInput.addEventListener('input', () => {
+        const term = searchInput.value;
+        if (term.trim() === '') {
+          resultsDiv.innerHTML = '';
+          countDiv.textContent = '';
+          return;
+        }
+        const filtered = filterList(term);
+        if (filtered.length === 0) {
+          resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>';
+          countDiv.textContent = '';
+          return;
+        }
+        renderResults(filtered);
+      });
+
+      // Admin panel listeners
+      adminLoginBtn.addEventListener('click', () => {
+        const pass = adminPasswordInput.value;
+        if (pass) {
+            localStorage.setItem(ADMIN_PASS_KEY, pass);
+            showAdminControls();
+            adminPasswordInput.value = '';
+        } else {
+            alert('Vă rugăm introduceți o parolă.');
+        }
+      });
+
+      adminLogoutBtn.addEventListener('click', showAdminLogin);
+
+      addGuestBtn.addEventListener('click', async () => {
+        const name = newGuestNameInput.value.trim();
+        const table = parseInt(newGuestTableInput.value, 10);
+        if (name && table > 0) {
+            try {
+                await addDoc(guestsCollection, { Nume: name, Masa: table });
+                newGuestNameInput.value = '';
+                newGuestTableInput.value = '';
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("A apărut o eroare la adăugarea invitatului.");
+            }
+        } else {
+            alert("Vă rugăm completați numele și masa invitatului.");
+        }
+      });
+      
+      adminGuestListBody.addEventListener('click', async (e) => {
+        const target = e.target;
+        const id = target.dataset.id;
+        if (!id) return;
+
+        const guestRef = doc(db, 'guests', id);
+
+        if (target.classList.contains('delete-btn')) {
+            if (confirm(`Sunteți sigur că doriți să ștergeți invitatul "${target.closest('tr').querySelector('.admin-guest-name').value}"?`)) {
+                try {
+                    await deleteDoc(guestRef);
+                } catch (error) {
+                    console.error("Error deleting document: ", error);
+                    alert("A apărut o eroare la ștergerea invitatului.");
+                }
+            }
+        }
+
+        if (target.classList.contains('save-btn')) {
+            const row = target.closest('tr');
+            const name = row.querySelector('.admin-guest-name').value.trim();
+            const table = parseInt(row.querySelector('.admin-guest-table').value, 10);
+            
+            if (name && table > 0) {
+                try {
+                    await updateDoc(guestRef, { Nume: name, Masa: table });
+                    alert('Invitat actualizat cu succes!');
+                } catch (error) {
+                    console.error("Error updating document: ", error);
+                    alert("A apărut o eroare la actualizarea invitatului.");
+                }
+            } else {
+                alert("Numele și masa nu pot fi goale.");
+            }
+        }
+      });
+    }
+
+    // ===== Helper Functions =====
     function renderResults(list) {
       resultsDiv.innerHTML = '';
       countDiv.textContent = '';
       if (!Array.isArray(list) || list.length === 0) return;
-      list.forEach(g => {
+      
+      const sortedList = list.sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+
+      sortedList.forEach(g => {
         const row = document.createElement('div');
         row.className = 'result-row';
         row.innerHTML = `<span class="guest-name">${g.Nume}</span> <span class="guest-table">Masa ${g.Masa}</span>`;
@@ -239,41 +339,64 @@
       countDiv.textContent = list.length + ' invitați afișați';
     }
 
-    function filterList(term) {
-      function toKey(s) {
-        return (s || '')
-          .toLowerCase()
-          .normalize('NFD').replace(/[̀-ͯ]/g, '') // elimină diacriticele combinate
-          .replace(/[șş]/g, 's').replace(/[țţ]/g, 't') // variante cu virguliță/cedilă
-          .replace(/[^a-z0-9 ]+/g, ' ') // non-alfanumerice -> spațiu
-          .replace(/  +/g, ' ') // spații multiple -> unul singur
-          .trim();
-      }
-      const key = toKey(term);
-      if (!key) return [];
-      return guests
-        .filter(g => toKey(g.Nume).includes(key))
-        .sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+    function normalizeString(s) {
+      return (s || '')
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .replace(/[șş]/g, 's').replace(/[țţ]/g, 't')
+        .replace(/[^a-z0-9 ]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
     }
 
-    // Address/contacts toggles
-    const addressBtn = document.getElementById('addressBtn');
-    const contactBtn = document.getElementById('contactBtn');
-    const addressBox = document.getElementById('addressBox');
-    const contactBox = document.getElementById('contactBox');
+    function filterList(term) {
+      const key = normalizeString(term);
+      if (!key) return [];
+      return allGuests.filter(g => normalizeString(g.Nume).includes(key));
+    }
+
+    function showAdminControls() {
+        adminLoginDiv.style.display = 'none';
+        adminControlsDiv.style.display = 'block';
+        renderAdminList();
+    }
+
+    function showAdminLogin() {
+        adminLoginDiv.style.display = 'flex';
+        adminControlsDiv.style.display = 'none';
+        localStorage.removeItem(ADMIN_PASS_KEY);
+    }
+
+    function renderAdminList() {
+        adminGuestListBody.innerHTML = '';
+        const sortedGuests = [...allGuests].sort((a,b) => a.Nume.localeCompare(b.Nume));
+        sortedGuests.forEach(guest => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" class="admin-guest-name" value="${guest.Nume}" data-id="${guest.id}"></td>
+                <td><input type="number" class="admin-guest-table" value="${guest.Masa}" data-id="${guest.id}" style="width: 70px;"></td>
+                <td class="row-actions">
+                    <button class="small-btn save-btn" data-id="${guest.id}">Salvează</button>
+                    <button class="small-btn danger delete-btn" data-id="${guest.id}">Șterge</button>
+                </td>
+            `;
+            adminGuestListBody.appendChild(row);
+        });
+    }
+
+    // ===== Simple UI Listeners & App Start =====
     addressBtn.addEventListener('click', ()=> { addressBox.hidden = !addressBox.hidden; });
     contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
+    
+    if (localStorage.getItem(ADMIN_PASS_KEY)) {
+        showAdminControls();
+    }
 
-    // Init
-    window.onload = () => { searchInput.focus(); resultsDiv.innerHTML = ''; countDiv.textContent = ''; };
-    searchInput.addEventListener('input', () => {
-      const term = searchInput.value;
-      const filtered = filterList(term);
-      if (term.trim() === '') { resultsDiv.innerHTML = ''; countDiv.textContent = ''; return; }
-      if (filtered.length === 0) { resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>'; countDiv.textContent = ''; return; }
-      renderResults(filtered);
-    });
-
-    </script>
+    window.onload = () => {
+      searchInput.focus();
+      initialize();
+    };
+  </script>
 </body>
 </html>
+
