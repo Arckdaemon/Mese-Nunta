@@ -103,7 +103,7 @@
     .reveal-box .time{ color:#d9c9a3; }
     .reveal-box .section-title{ color: var(--gold); margin-bottom:4px; }
   /* Petals animation */
-    #petals{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+    #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
     .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation: fall var(--dur) linear var(--delay) infinite, sway 6s ease-in-out infinite alternate; }
     @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
     @keyframes sway { from { margin-left:-18px; } to { margin-left:18px; } }
