@@ -104,8 +104,13 @@
     .corner-bl { bottom:-10px; left:-10px; transform: scaleY(-1); }
     .corner-br { bottom:-10px; right:-10px; transform: scale(-1, -1); }
   .couple-wrap { margin: 14px 0 18px; }
-    .couple { display:block; width:100%; height:auto; max-height:420px; object-fit:cover; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
+    /* Slideshow container with same styling as .couple image */
+    .slideshow { position: relative; width:100%; aspect-ratio: 3 / 2; max-height:420px; overflow:hidden; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
+    .slide { position:absolute; inset:0; opacity:0; transition: opacity 800ms ease; }
+    .slide.active { opacity:1; }
+    .slide img { width:100%; height:100%; object-fit:cover; display:block; }
     .couple-caption { text-align:center; color:var(--muted); font-size:.9rem; margin-top:6px; }
+    @media (prefers-reduced-motion: reduce){ .slide{ transition:none; } }
   #bg-wrap { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
     #bgImage { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); filter: brightness(0.35) saturate(1.05); }
     #bg-wrap::after { content: ""; position: absolute; inset: 0; background:
@@ -125,6 +130,16 @@
     .mini-btn .ico{ width:18px; height:18px; display:inline-block; vertical-align:-3px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
     .mini-btn.waze:hover{ filter:brightness(1.05); }
     .mini-btn:focus{ outline:2px solid rgba(255,255,255,.25); outline-offset:2px; }
+  /* Slideshow controls */
+    .slideshow .slide-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(15,15,15,.55); border:1px solid rgba(212,175,55,.6); color:var(--gold); width:42px; height:42px; border-radius:9999px; font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.4); z-index:2; }
+    .slideshow .slide-nav.prev{ left:10px; }
+    .slideshow .slide-nav.next{ right:10px; }
+    .slideshow .slide-nav:hover{ filter:brightness(1.1); }
+    .slideshow .slide-nav:focus{ outline:2px solid rgba(212,175,55,.7); outline-offset:2px; }
+    .slideshow .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; justify-content:center; gap:6px; z-index:2; }
+    .slideshow .dot{ width:10px; height:10px; border-radius:9999px; border:2px solid rgba(212,175,55,.7); background:transparent; cursor:pointer; padding:0; }
+    .slideshow .dot.active{ background:var(--gold); }
+
   /* Petals animation */
     #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
     .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation: fall var(--dur) linear var(--delay) infinite, sway 6s ease-in-out infinite alternate; }
@@ -147,7 +162,14 @@
     <div class="subtitle">Vă mulțumim că ați ales să participați la evenimentul nostru!</div>
     
     <figure class="couple-wrap">
-      <img id="couplePhoto" class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" onerror="this.onerror=()=>this.closest('figure').style.display='none'; this.src='couple.png';" />
+      <div class="slideshow" id="slideshow">
+        <button class="slide-nav prev" type="button" aria-label="Fotografia anterioară">‹</button>
+        <button class="slide-nav next" type="button" aria-label="Fotografia următoare">›</button>
+        <div class="dots" id="slideDots" aria-label="Navigare slideshow"></div>
+        <noscript>
+          <img class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" />
+        </noscript>
+      </div>
       <figcaption class="couple-caption">Diana & Geo — la starea civilă</figcaption>
     </figure>
     <div class="note">Formularul de mesaje permite și <strong>încărcarea opțională de fotografii</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
@@ -207,6 +229,104 @@
         wrap.appendChild(p);
       }
     })();
+
+    // ===== Slideshow (couple + couple1..4, random order, fade) =====
+    function setupSlideshow(){
+      const host = document.getElementById('slideshow');
+      if (!host) return;
+      const bases = ['couple','couple1','couple2','couple3','couple4'];
+      // shuffle (Fisher–Yates)
+      for (let i = bases.length-1; i > 0; i--) {
+        const j = Math.floor(Math.random()*(i+1));
+        [bases[i], bases[j]] = [bases[j], bases[i]];
+      }
+      const slides = [];
+      bases.forEach((name)=>{
+        const img = new Image();
+        img.alt = 'Diana & Geo';
+        img.decoding = 'async';
+        img.loading = 'eager';
+        img.src = name + '.jpg';
+        img.onerror = function(){
+          if (img.src.endsWith('.jpg')) img.src = name + '.png'; else { img.dataset.skip = '1'; }
+        };
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.appendChild(img);
+        host.appendChild(slide);
+        slides.push(slide);
+      });
+
+      const dotsWrap = document.getElementById('slideDots');
+      const prevBtn = host.querySelector('.slide-nav.prev');
+      const nextBtn = host.querySelector('.slide-nav.next');
+
+      setTimeout(()=>{
+        const valid = slides.filter(s => !s.querySelector('img').dataset.skip);
+        if (valid.length === 0) {
+          // fallback: single image if exists
+          const img = document.createElement('img');
+          img.src = 'couple.jpg';
+          img.alt = 'Diana & Geo';
+          const s = document.createElement('div');
+          s.className = 'slide active';
+          s.appendChild(img);
+          host.innerHTML = '';
+          host.appendChild(s);
+          return;
+        }
+        if (valid.length === 1) {
+          valid[0].classList.add('active');
+          // hide controls
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
+          dotsWrap.style.display = 'none';
+          return;
+        }
+
+        // build dots
+        dotsWrap.innerHTML = '';
+        valid.forEach((_, i)=>{
+          const d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'dot';
+          d.setAttribute('aria-label', 'Du-te la fotografia ' + (i+1));
+          d.addEventListener('click', ()=>{ stopTimer(); setActive(i); startTimer(); });
+          dotsWrap.appendChild(d);
+        });
+
+        let idx = 0;
+        function setActive(i){
+          valid[idx].classList.remove('active');
+          dotsWrap.children[idx].classList.remove('active');
+          idx = (i + valid.length) % valid.length;
+          valid[idx].classList.add('active');
+          dotsWrap.children[idx].classList.add('active');
+        }
+
+        // init
+        valid[0].classList.add('active');
+        dotsWrap.children[0].classList.add('active');
+
+        // autoplay controls
+        const INTERVAL = 4500;
+        let timer = null;
+        function next(){ setActive(idx+1); }
+        function prev(){ setActive(idx-1); }
+        function startTimer(){ timer = setInterval(()=> next(), INTERVAL); }
+        function stopTimer(){ if (timer){ clearInterval(timer); timer = null; } }
+        startTimer();
+
+        // buttons
+        nextBtn.addEventListener('click', ()=>{ stopTimer(); next(); startTimer(); });
+        prevBtn.addEventListener('click', ()=>{ stopTimer(); prev(); startTimer(); });
+
+        // pause on hover (desktop)
+        host.addEventListener('mouseenter', stopTimer);
+        host.addEventListener('mouseleave', startTimer);
+      }, 300);
+    }
+
     // ===== Config =====
     // PIN-ul admin nu este hardcodat; se stochează local în acest browser (localStorage).
 
@@ -339,7 +459,12 @@
     contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
 
     // Init
-    window.onload = () => { searchInput.focus(); resultsDiv.innerHTML = ''; countDiv.textContent = ''; };
+    window.onload = () => {
+      searchInput.focus();
+      resultsDiv.innerHTML = '';
+      countDiv.textContent = '';
+      setupSlideshow();
+    };
     searchInput.addEventListener('input', () => {
       const term = searchInput.value;
       const filtered = filterList(term);
@@ -351,6 +476,5 @@
     </script>
 </body>
 </html>
-
 
 
