@@ -45,25 +45,45 @@
     .dishlist li span{ margin-left:14px; display:block; }
 
     .hidden{ display:none; }
+
+    /* Subtle food-themed animation (steam curls) */
+    #steam{ position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden; }
+    .steam{ position:absolute; bottom:-30px; width:22px; height:70px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 90"><path d="M15 85c-5-10 5-15 0-25s5-15 0-25" fill="none" stroke="%23d4af37" stroke-width="3" stroke-linecap="round" opacity="0.6"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.25; animation: rise var(--dur,12s) linear var(--delay,0s) infinite; filter: blur(.2px); }
+    @keyframes rise { to { transform: translateY(-120%) translateX(var(--x,0px)); opacity:0; } }
+
+    .center-icon{ width:38px; height:38px; margin:4px auto -6px; background-repeat:no-repeat; background-position:center; background-size:contain; opacity:.95; filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+    .center-icon.food{ background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="16" r="2" fill="%23d4af37"/><path d="M12 36a20 16 0 0 1 40 0z" fill="%23d4af37"/><rect x="16" y="36" width="32" height="10" rx="5" fill="%23d4af37"/></svg>'); }
+    .center-icon.drinks{ background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M20 10h24v8c0 8-6 14-12 14S20 26 20 18z" fill="%23d4af37"/><rect x="30" y="32" width="4" height="16" fill="%23d4af37"/><rect x="24" y="48" width="16" height="2" fill="%23d4af37"/></svg>'); }
+  .flav-note{ margin:-4px 0 8px; color: var(--muted); font-size:.95rem; }
+    @media (prefers-reduced-motion: reduce){ #steam, #petals { display:none; } }
+  /* Petals animation */
+    #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
+    .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation: fall var(--dur,14s) linear var(--delay,0s) infinite, sway 6s ease-in-out infinite alternate; }
+    @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
+    @keyframes sway { from { margin-left:-18px; } to { margin-left:18px; } }
   </style>
 </head>
 <body>
   <div id="bg-wrap"><img id="bgImage" src="background.jpg" alt="" onerror="if(this.src.includes('background.jpg')){this.src='background.png';}else{this.parentNode.style.display='none';}"></div>
+  <div id="petals"></div>
   <div class="container">
     <span class="orn corner-tl"></span>
     <span class="orn corner-tr"></span>
     <span class="orn corner-bl"></span>
     <span class="orn corner-br"></span>
 
+    <div id="steam"></div>
+
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Meniu</div>
+    <div id="menuIcon" class="center-icon food" aria-hidden="true"></div>
     <div class="floral-divider"></div>
     <div class="subtitle">Nunta Dianei și a lui Geo</div>
 
     <div class="actions">
       <a href="index.html" class="action-btn outline">← Înapoi</a>
       <button id="printBtn" class="action-btn">Printează</button>
-      <a href="menu.pdf" target="_blank" class="action-btn outline">Descarcă PDF (opțional)</a>
+      <a href="menu.pdf" target="_blank" class="action-btn outline" download>Descarcă PDF</a>
     </div>
 
     <div class="tabs">
@@ -75,36 +95,46 @@
       <div class="section">
         <h3>Gustare rece (Aperitiv)</h3>
         <ul class="dishlist">
-          <li><span>Coșuleț cu crispy și salată</span></li>
-          <li><span>Fantezie de brânzeturi în napolitană</span></li>
-          <li><span>Vol-au-vent cu cremă de brânză și susan negru</span></li>
-          <li><span>Mousse din ficat de gâscă cu jeleu de vin roșu</span></li>
-          <li><span>Tagliata de vită</span></li>
-          <li><span>Salată de vinete</span></li>
-          <li><span>Bresaola cu cremă de brânză aromatizată</span></li>
-          <li><span>Clătită de pui în pesmet</span></li>
+          <li><span>🍗 Coșuleț cu crispy și salată</span></li>
+          <li><span>🧀 Fantezie de brânzeturi în napolitană</span></li>
+          <li><span>🥐 Vol-au-vent cu cremă de brânză și susan negru</span></li>
+          <li><span>🍮 Mousse din ficat de gâscă cu jeleu de vin roșu</span></li>
+          <li><span>🥩 Tagliata de vită</span></li>
+          <li><span>🍆 Salată de vinete</span></li>
+          <li><span>🥩 Bresaola cu cremă de brânză aromatizată</span></li>
+          <li><span>🍗 Clătită de pui în pesmet</span></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>Fel principal — pasăre</h3>
+        <ul class="dishlist">
+          <li><span>🍗 Pulpă de rață confit cu sos de sfeclă și struguri + varză roșie cu stafide</span></li>
         </ul>
       </div>
 
       <div class="section">
         <h3>Ciorbă</h3>
         <ul class="dishlist">
-                   <li><span>Ciorbă rădăuțeană</span></li>
+          <li><span>🍲 Ciorbă rădăuțeană</span></li>
         </ul>
       </div>
 
       <div class="section">
-        <h3>Felul principal</h3>
+        <h3>Fel principal — porc</h3>
         <ul class="dishlist">
-          <li><span>Pulpă de rață confit cu sos de sfeclă și struguri + varză roșie cu stafide</span></li>
-          <li><span>Ceafă de porc cu sos barbeque și cartofi sicilieni</span></li>
+          <li><span>🍖 Ceafă de porc cu sos barbeque și cartofi sicilieni</span></li>
         </ul>
       </div>
 
       <div class="section">
-        <h3>Sarmale</h3>
+        <h3>ÎNGHEȚATĂ</h3>
+        <p class="flav-note">Disponibilă între <strong>17:00–21:00</strong></p>
         <ul class="dishlist">
-          <li><span>Sărmăluțe cu bacon pe pat de mămăliguță</span></li>
+          <li><span>🍫 Ciocolată</span></li>
+          <li><span>🥜 Fistic</span></li>
+          <li><span>🍦 Vanilie</span></li>
+          <li><span>🍓 Fructe de pădure</span></li>
         </ul>
       </div>
     </section>
@@ -113,12 +143,12 @@
       <div class="section">
         <h3>Băuturi</h3>
         <ul class="dishlist">
-          <li><span>Heineken</span></li>
-          <li><span>Ursus fără alcool</span></li>
-          <li><span>Coca-Cola</span></li>
-          <li><span>Fanta</span></li>
-          <li><span>Apă minerală</span></li>
-          <li><span>Apă plată și cafea</span></li>
+          <li><span>🍺 Heineken</span></li>
+          <li><span>🚫🍺 Ursus fără alcool</span></li>
+          <li><span>🥤 Coca-Cola</span></li>
+          <li><span>🥤 Fanta</span></li>
+          <li><span>💧 Apă minerală</span></li>
+          <li><span>💧 Apă plată și ☕ cafea</span></li>
         </ul>
       </div>
     </section>
@@ -132,21 +162,94 @@
     const foodSection = document.getElementById('foodSection');
     const drinksSection = document.getElementById('drinksSection');
     const printBtn = document.getElementById('printBtn');
+    const menuIcon = document.getElementById('menuIcon');
 
     function activate(tab) {
       if (tab === 'food') {
-        foodTab.classList.add('active'); drinksTab.classList.remove('active');
-        foodSection.classList.remove('hidden'); drinksSection.classList.add('hidden');
+        foodTab.classList.add('active');
+        drinksTab.classList.remove('active');
+        foodSection.classList.remove('hidden');
+        drinksSection.classList.add('hidden');
       } else {
-        drinksTab.classList.add('active'); foodTab.classList.remove('active');
-        drinksSection.classList.remove('hidden'); foodSection.classList.add('hidden');
+        drinksTab.classList.add('active');
+        foodTab.classList.remove('active');
+        drinksSection.classList.remove('hidden');
+        foodSection.classList.add('hidden');
+      }
+      if (menuIcon) {
+        menuIcon.classList.toggle('drinks', tab !== 'food');
+        menuIcon.classList.toggle('food', tab === 'food');
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Listeners
     foodTab.addEventListener('click', () => activate('food'));
     drinksTab.addEventListener('click', () => activate('drinks'));
     printBtn.addEventListener('click', () => window.print());
+
+    // Initial tab based on URL (?tab=drinks) or default to food
+    (function(){
+      const p = new URLSearchParams(location.search);
+      const t = p.get('tab');
+      if (t === 'drinks') activate('drinks'); else activate('food');
+    })();
+
+    // Subtle steam curls
+    (function(){
+      const wrap = document.getElementById('steam');
+      if (!wrap) return;
+      const COUNT = 16;
+      for (let i = 0; i < COUNT; i++) {
+        const s = document.createElement('span');
+        s.className = 'steam';
+        s.style.left = (5 + Math.random()*90).toFixed(2) + '%';
+        s.style.setProperty('--delay', (Math.random()*6).toFixed(2) + 's');
+        s.style.setProperty('--dur', (10 + Math.random()*10).toFixed(2) + 's');
+        s.style.setProperty('--x', (Math.random()*40 - 20).toFixed(1) + 'px');
+        wrap.appendChild(s);
+      }
+    })();
+
+    // Petals generator
+    (function(){
+      const wrap = document.getElementById('petals');
+      if (!wrap) return;
+      const COUNT = 22;
+      for (let i=0;i<COUNT;i++){
+        const p = document.createElement('span');
+        p.className = 'petal';
+        p.style.left = (Math.random()*100).toFixed(2) + 'vw';
+        p.style.setProperty('--delay', (Math.random()*10).toFixed(2)+'s');
+        p.style.setProperty('--dur', (12+Math.random()*10).toFixed(2)+'s');
+        p.style.opacity = (0.6 + Math.random()*0.4).toFixed(2);
+        wrap.appendChild(p);
+      }
+    })();
+
+    // --- Minimal tests (console) ---
+    (function runTests(){
+      try{
+        console.assert(typeof activate === 'function', 'activate() exists');
+        // Should show food
+        activate('food');
+        console.assert(!foodSection.classList.contains('hidden'), 'food visible');
+        console.assert(drinksSection.classList.contains('hidden'), 'drinks hidden');
+        console.assert(menuIcon.classList.contains('food'), 'icon set to food');
+        // Switch to drinks
+        activate('drinks');
+        console.assert(!drinksSection.classList.contains('hidden'), 'drinks visible');
+        console.assert(foodSection.classList.contains('hidden'), 'food hidden');
+        console.assert(menuIcon.classList.contains('drinks'), 'icon set to drinks');
+        // Restore food
+        activate('food');
+        const pdf = document.querySelector('a[href="menu.pdf"]');
+        console.assert(pdf && pdf.hasAttribute('download'), 'PDF link with download present');
+        const petalsWrap = document.getElementById('petals');
+        console.assert(petalsWrap && petalsWrap.children.length > 0, 'petals generated');
+        console.log('[Meniu] tests passed');
+      }catch(e){ console.warn('[Meniu] tests failed', e); }
+    })();
   </script>
 </body>
 </html>
