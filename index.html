@@ -102,11 +102,18 @@
     .reveal-box hr{ border:0; border-top:1px solid rgba(212,175,55,.28); margin:10px 0; }
     .reveal-box .time{ color:#d9c9a3; }
     .reveal-box .section-title{ color: var(--gold); margin-bottom:4px; }
+  /* Petals animation */
+    #petals{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+    .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation: fall var(--dur) linear var(--delay) infinite, sway 6s ease-in-out infinite alternate; }
+    @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
+    @keyframes sway { from { margin-left:-18px; } to { margin-left:18px; } }
+    @media (prefers-reduced-motion: reduce){ #petals{ display:none; } }
   </style>
 </head>
 <body>
   <!-- Background image slot: upload background.jpg (sau background.png) în același folder cu index.html -->
-  <div id="bg-wrap"><img id="bgImage" src="background.jpg" alt="" onerror="if(this.src.includes('background.jpg')){this.src='background.png';}else{this.parentNode.style.display='none';}"></div>
+  $1
+  <div id="petals"></div>
   <div class="container">
     <span class="orn corner-tl"></span>
     <span class="orn corner-tr"></span>
@@ -114,6 +121,7 @@
     <span class="orn corner-br"></span>
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Nunta Dianei și a lui Geo</div>
+    <div class="subtitle">Vă mulțumim că ați ales să participați la evenimentul nostru!</div>
     
     <figure class="couple-wrap">
       <img id="couplePhoto" class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" onerror="this.onerror=()=>this.closest('figure').style.display='none'; this.src='couple.png';" />
@@ -128,13 +136,27 @@
     </div>
     <div id="addressBox" class="reveal-box" hidden>
       <div class="section-title"><strong>Biserica cu Lună</strong> – Catedrala Veche „Adormirea Maicii Domnului”</div>
+      Piața Unirii 2, Oradea<br>
       <a href="https://www.google.com/maps/place/Catedrala+Veche+%E2%80%9EAdormirea+Maicii+Domnului%E2%80%9D/@47.0536688,21.9262691,17z/data=!3m1!4b1!4m6!3m5!1s0x474647e88cf224c3:0x107c4b90413fd607!8m2!3d47.0536652!4d21.9288494!16s%2Fg%2F120_l_yn?hl=ro&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Deschide pe Google Maps</a><br>
       <span class="time"><em>Cununia religioasă la <strong>14:30</strong>.</em></span>
       <hr>
       <div class="section-title"><strong>Emerald, Salon Cristal (sala mică)</strong></div>
+      Strada Ovid Densușeanu 78/A, Oradea 410237<br>
+      <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4746464a64cf0d93:0xb02b6084693f8d5d?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">Deschide pe Google Maps</a><br>
+      <span class="time"><em>Petrecerea începe la <strong>16:00</strong>.</em></span>
+    </div>
+      <a href="https://www.google.com/maps/place/Catedrala+Veche+%E2%80%9EAdormirea+Maicii+Domnului%E2%80%9D/@47.0536688,21.9262691,17z/data=!3m1!4b1!4m6!3m5!1s0x474647e88cf224c3:0x107c4b90413fd607!8m2!3d47.0536652!4d21.9288494!16s%2Fg%2F120_l_yn?hl=ro&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Deschide pe Google Maps</a><br>
+      <span class="time"><em>Cununia religioasă la <strong>14:30</strong>.</em></span>
+      <hr>
+      <div class="section-title"><strong>Emerald, Salon Cristal (sala mică)</strong></div>
+      Strada Ovid Densușeanu 78/A, Oradea 410237<br>
+      <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4746464a64cf0d93:0xb02b6084693f8d5d?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener">Deschide pe Google Maps</a><br>
+      <span class="time"><em>Petrecerea începe la <strong>16:00</strong>.</em></span>
+    </div>
+
     <div id="contactBox" class="reveal-box" hidden>Georgian: 0754706716 &nbsp;&bull;&nbsp; Diana: 0748436309</div>
 
-    <input type="text" id="search" placeholder="Căutați după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
+    <input type="text" id="search" placeholder="Căutați masa după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
 
@@ -143,6 +165,21 @@
   </div>
 
   <script>
+    // Petals generator (lightweight)
+    (function(){
+      const wrap = document.getElementById('petals');
+      if (!wrap) return;
+      const COUNT = 22;
+      for (let i=0;i<COUNT;i++){
+        const p = document.createElement('span');
+        p.className = 'petal';
+        p.style.left = (Math.random()*100).toFixed(2) + 'vw';
+        p.style.setProperty('--delay', (Math.random()*10).toFixed(2)+'s');
+        p.style.setProperty('--dur', (12+Math.random()*10).toFixed(2)+'s');
+        p.style.opacity = (0.6 + Math.random()*0.4).toFixed(2);
+        wrap.appendChild(p);
+      }
+    })();
     // ===== Config =====
     // PIN-ul admin nu este hardcodat; se stochează local în acest browser (localStorage).
 
