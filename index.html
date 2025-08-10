@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nunta Dianei și a lui Geo – Află masa ta</title>
   <!-- Open Graph / Social share -->
-  <!-- TODO: înlocuiește EXAMPLU cu URL-ul tău real de GitHub Pages -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nunta Dianei și a lui Geo">
   <meta property="og:title" content="Nunta Dianei și a lui Geo – Află masa ta">
@@ -21,139 +20,95 @@
   <link rel="canonical" href="https://arckdaemon.github.io/Mese-Nunta/index.html">
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #0b0b0b;
-      --card: #0f0f0f;
-      --gold: #d4af37;
-      --gold-2: #b8860b;
-      --text: #ece7d9;
-      --muted: #c8b892;
-      --line: #2a2210;
-    }
-    * { box-sizing: border-box; }
-    body {
-      background:
-        radial-gradient(1200px 600px at 50% -10%, #1a1a1a 0%, #000 60%),
-        linear-gradient(135deg, #0b0b0b 0%, #000 100%);
-      color: var(--text);
-      font-family: 'Montserrat', Arial, sans-serif;
-      margin: 0; padding: 0; min-height: 100vh;
-    }
-    .container {
-      max-width: 600px; background: var(--card);
-      margin: 48px auto 40px; padding: 32px 28px 36px;
-      border-radius: 2rem;
-      border: 1px solid rgba(212,175,55,.35);
-      box-shadow: inset 0 0 0 1px rgba(212,175,55,.12), 0 12px 50px rgba(0,0,0,.55);
-      position: relative; z-index: 1;
-    }
-    .logo {
-      display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px;
-      box-shadow: 0 0 0 3px rgba(212,175,55,.12), 0 10px 30px rgba(0,0,0,.4);
-    }
-    .festive-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: var(--gold); margin-bottom: .25em; text-align: center; letter-spacing: 2px; text-shadow: 0 0 12px rgba(212,175,55,.15); }
-    .festive-title::after {
-      content: ""; display:block; height:20px; margin:6px auto 0;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 20"><path d="M5 10c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="100" cy="10" r="2" fill="%23d4af37"/></svg>');
-      background-size: 180px 20px; background-repeat:no-repeat; background-position:center; opacity:.95;
-    }
-    .subtitle { font-family: 'Dancing Script', cursive; font-size: 1.35rem; color: var(--muted); text-align: center; margin-bottom: 16px; font-weight: 700; letter-spacing: .2px; }
-    .note { color: #d9c9a3; font-size: .95rem; text-align: center; margin-bottom: 18px; background: #111; border-radius: 8px; padding: 8px 12px; border:1px solid var(--line); }
+    :root { --bg:#0b0b0b; --card:#0f0f0f; --gold:#d4af37; --gold-2:#b8860b; --text:#ece7d9; --muted:#c8b892; --line:#2a2210; }
+    *{box-sizing:border-box}
+    body{ background:radial-gradient(1200px 600px at 50% -10%, #1a1a1a 0%, #000 60%), linear-gradient(135deg, #0b0b0b 0%, #000 100%); color:var(--text); font-family:'Montserrat',Arial,sans-serif; margin:0; padding:0; min-height:100vh; }
+    .container{ max-width:600px; background:var(--card); margin:48px auto 40px; padding:32px 28px 36px; border-radius:2rem; border:1px solid rgba(212,175,55,.35); box-shadow:inset 0 0 0 1px rgba(212,175,55,.12), 0 12px 50px rgba(0,0,0,.55); position:relative; z-index:1 }
+    .logo{ display:block; width:120px; height:auto; margin:0 auto 12px; border-radius:9999px; box-shadow:0 0 0 3px rgba(212,175,55,.12), 0 10px 30px rgba(0,0,0,.4) }
+    .festive-title{ font-family:'Great Vibes',cursive; font-size:2.6rem; color:var(--gold); margin-bottom:.25em; text-align:center; letter-spacing:2px; text-shadow:0 0 12px rgba(212,175,55,.15) }
+    .festive-title::after{ content:""; display:block; height:20px; margin:6px auto 0; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 20"><path d="M5 10c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="100" cy="10" r="2" fill="%23d4af37"/></svg>'); background-size:180px 20px; background-repeat:no-repeat; background-position:center; opacity:.95 }
+    .subtitle{ font-family:'Dancing Script',cursive; font-size:1.35rem; color:var(--muted); text-align:center; margin-bottom:16px; font-weight:700; letter-spacing:.2px }
+    .note{ color:#d9c9a3; font-size:.95rem; text-align:center; margin-bottom:18px; background:#111; border-radius:8px; padding:8px 12px; border:1px solid var(--line) }
 
-    .actions { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 8px 0 18px; }
-    @media (min-width: 560px) { .actions { grid-template-columns: 1fr 1fr; } }
-    .action-btn { display:inline-block; text-align:center; padding:12px 16px; border-radius:14px; background:linear-gradient(90deg, var(--gold) 0%, var(--gold-2) 100%); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); transition:transform .15s, filter .2s; font-family: 'Dancing Script', cursive; letter-spacing: .2px; font-size: 1.2rem; }
-    .action-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
-    .action-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
-    .reveal-box { margin-top:6px; padding:10px 12px; background:#12100a; border:1px solid rgba(212,175,55,.35); color: var(--text); border-radius:12px; font-size:.98rem; }
+    .actions{ display:grid; grid-template-columns:1fr; gap:10px; margin:8px 0 18px }
+    @media (min-width:560px){ .actions{ grid-template-columns:1fr 1fr } }
+    .action-btn{ display:inline-block; text-align:center; padding:12px 16px; border-radius:14px; background:linear-gradient(90deg, var(--gold) 0%, var(--gold-2) 100%); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); transition:transform .15s, filter .2s; font-family:'Dancing Script',cursive; letter-spacing:.2px; font-size:1.2rem }
+    .action-btn:hover{ transform:translateY(-1px); filter:brightness(1.05) }
+    .action-btn.outline{ background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6) }
+    .reveal-box{ margin-top:6px; padding:10px 12px; background:#12100a; border:1px solid rgba(212,175,55,.35); color:var(--text); border-radius:12px; font-size:.98rem }
 
-    input[type="text"] { width:100%; padding:12px; border-radius:1rem; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1.08rem; margin:8px 0 12px; outline:none; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; font-family: 'Montserrat', Arial, sans-serif; }
-    input[type="text"]:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.15); }
-    input[type="text"]::placeholder { color:#9b8a5a; }
+    input[type="text"]{ width:100%; padding:12px; border-radius:1rem; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1.08rem; margin:8px 0 12px; outline:none; box-sizing:border-box; transition:border-color .2s, box-shadow .2s; font-family:'Montserrat',Arial,sans-serif }
+    input[type="text"]:focus{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.15) }
+    input[type="text"]::placeholder{ color:#9b8a5a }
 
-    .results { margin-top:10px; }
-    .result-row { padding:10px 14px; margin:7px 0; background:#101010; border:1px solid rgba(212,175,55,.30); border-radius:12px; box-shadow: 0 2px 8px rgba(0,0,0,.25); display:flex; justify-content:space-between; align-items:center; font-size:1.08rem; }
-    .guest-name { color:#f0ead6; font-weight:700; font-family: 'Dancing Script', cursive; font-size: 1.15rem; letter-spacing: .1px; }
-    .guest-table { color:var(--gold); font-size:1.13rem; font-weight:700; }
-    .no-result { text-align:center; color:var(--gold); background:#15110a; border:1px solid rgba(212,175,55,.30); border-radius:9px; padding:9px; margin-top:14px; }
-    .count { text-align:right; font-size:.9rem; color:#a89260; margin-top:6px; }
+    .results{ margin-top:10px }
+    .result-row{ padding:10px 14px; margin:7px 0; background:#101010; border:1px solid rgba(212,175,55,.30); border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.25); display:flex; justify-content:space-between; align-items:center; gap:8px; font-size:1.08rem }
+    .guest-name{ color:#f0ead6; font-weight:700; font-family:'Dancing Script',cursive; font-size:1.15rem; letter-spacing:.1px; display:flex; align-items:center; gap:8px }
+    .guest-table{ color:var(--gold); font-size:1.13rem; font-weight:700 }
+    .no-result{ text-align:center; color:var(--gold); background:#15110a; border:1px solid rgba(212,175,55,.30); border-radius:9px; padding:9px; margin-top:14px }
+    .count{ text-align:right; font-size:.9rem; color:#a89260; margin-top:6px }
 
-    /* Admin */
-    details.admin { margin-top:18px; background:#0d0d0d; border:1px dashed rgba(212,175,55,.6); border-radius:14px; padding:10px 12px; }
-    details.admin summary { cursor:pointer; font-weight:700; color:var(--gold); }
-    .admin-guard { display:grid; grid-template-columns:1fr auto auto; gap:10px; margin-top:10px; }
-    .admin-guard input[type="password"] { padding:10px; border-radius:10px; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); }
-    .small-btn { padding:10px 12px; border-radius:12px; border:none; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; cursor:pointer; box-shadow:0 6px 16px rgba(0,0,0,.35); }
-    .small-btn.outline { background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
-    .editor { margin-top:14px; }
-    .editor table { width:100%; border-collapse:separate; border-spacing:0 8px; }
-    .editor th { text-align:left; font-size:.9rem; color:var(--muted); }
-    .editor td { background:#0f0d08; padding:8px; border-radius:10px; }
-    .editor input[type="text"], .editor input[type="number"] { width:100%; padding:8px; border:1px solid rgba(212,175,55,.35); border-radius:10px; background:#0b0b0b; color:var(--text); box-sizing:border-box; }
-    .row-actions { display:flex; gap:6px; justify-content:flex-end; }
-    .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
-    .hint { font-size:.85rem; color:#a89260; margin-top:6px; }
-      /* Floral bottom divider */
-    .floral-divider { height:24px; margin:18px auto 0; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 24"><path d="M5 12c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="110" cy="12" r="2" fill="%23d4af37"/></svg>'); background-size: 200px 24px; background-repeat:no-repeat; background-position:center; opacity:.95; }
-    .floral-divider.bottom { margin-top:22px; }
+    /* Badge NAȘ (prezidiu) + nume curcubeu animat */
+    .badge-nas{ display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:9999px; border:1px solid rgba(212,175,55,.55); background:#12100a; color:var(--gold); font:600 .78rem/1 'Montserrat',sans-serif; box-shadow:inset 0 0 0 1px rgba(212,175,55,.10) }
+    .badge-nas .star{ width:12px; height:12px; display:inline-block; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l2.6 6.5L22 9.3l-5 4.3 1.6 6.4L12 16.9 5.4 20l1.6-6.4L2 9.3l7.4-.8L12 2z" fill="%23d4af37"/></svg>'); background-size:contain; background-repeat:no-repeat }
+    .guest-name.godparent{ background:linear-gradient(90deg,#ff8a00,#e52e71,#8e2de2,#4a00e0,#00c6ff,#7ed957,#ff8a00); background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:rainbowMove 6s linear infinite }
+    @keyframes rainbowMove{ 0%{background-position:0% 50%} 100%{background-position:100% 50%} }
+
+    /* Badge PĂRINTE + efect distinct (strălucire caldă) */
+    .badge-parinte{ display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:9999px; border:1px solid rgba(212,175,55,.45); background:#14110a; color:#e8d7a8; font:600 .78rem/1 'Montserrat',sans-serif; box-shadow:inset 0 0 0 1px rgba(212,175,55,.08) }
+    .guest-name.parent{ position:relative; color:#f7edd4; text-shadow:0 0 6px rgba(212,175,55,.18) }
+    .guest-name.parent::after{ content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px; background:linear-gradient(90deg, rgba(212,175,55,.0), rgba(212,175,55,.9), rgba(212,175,55,.0)); filter:blur(.2px); animation:underlineGlow 2.2s ease-in-out infinite }
+    @keyframes underlineGlow{ 0%,100%{opacity:.35} 50%{opacity:1} }
+
+    /* Admin (dacă vei reactiva panelul) */
+    details.admin{ margin-top:18px; background:#0d0d0d; border:1px dashed rgba(212,175,55,.6); border-radius:14px; padding:10px 12px }
+
+    /* Floral bottom divider */
+    .floral-divider{ height:24px; margin:18px auto 0; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 24"><path d="M5 12c30 0 30-8 60-8s30 8 60 8 30-8 60-8" stroke="%23d4af37" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="110" cy="12" r="2" fill="%23d4af37"/></svg>'); background-size:200px 24px; background-repeat:no-repeat; background-position:center; opacity:.95 }
+    .floral-divider.bottom{ margin-top:22px }
 
     /* Corner ornaments */
-    .orn { position:absolute; width:34px; height:34px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 22c6-6 6-12 12-12" stroke="%23d4af37" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M10 10c3 0 4 1 4 4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M6 18c2-2 4-2 6-4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.9; filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
-    .corner-tl { top:-10px; left:-10px; transform: rotate(0deg); }
-    .corner-tr { top:-10px; right:-10px; transform: scaleX(-1); }
-    .corner-bl { bottom:-10px; left:-10px; transform: scaleY(-1); }
-    .corner-br { bottom:-10px; right:-10px; transform: scale(-1, -1); }
-  .couple-wrap { margin: 14px 0 18px; }
-    /* Slideshow container with same styling as .couple image */
-    .slideshow { position: relative; width:100%; aspect-ratio: 3 / 2; max-height:420px; overflow:hidden; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow: 0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12); }
-    .slide { position:absolute; inset:0; opacity:0; transition: opacity 1600ms ease-in-out; background:#0b0b0b; display:flex; align-items:center; justify-content:center; }
-    .slide.active { opacity:1; }
-    .slide img { width:100%; height:100%; object-fit:contain; display:block; }
-    @keyframes kbZoom { from { transform: scale(1.02); } to { transform: scale(1.08); } }
-    .slide.active img { animation: kbZoom 9s ease-in-out forwards; }
-    @media (prefers-reduced-motion: reduce){ .slide.active img{ animation:none !important; } }
-    .couple-caption { text-align:center; color:var(--muted); font-size:1rem; margin-top:6px; font-family: 'Dancing Script', cursive; font-weight:600; }
-    @media (prefers-reduced-motion: reduce){ .slide{ transition:none; } }
-  #bg-wrap { position: fixed; inset: 0; z-index: 0; overflow: hidden; }
-    #bgImage { width: 100%; height: 100%; object-fit: cover; transform: scale(1.02); filter: brightness(0.35) saturate(1.05); }
-    #bg-wrap::after { content: ""; position: absolute; inset: 0; background:
-      radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.15), rgba(0,0,0,.55)),
-      linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0) 40%);
-      pointer-events: none; }
-  .reveal-box a{ color: var(--gold); font-weight:700; text-decoration:none; }
-    .reveal-box a:hover{ text-decoration:underline; }
-    .reveal-box hr{ border:0; border-top:1px solid rgba(212,175,55,.28); margin:10px 0; }
-    .reveal-box .time{ color:#d9c9a3; }
-    .reveal-box .section-title{ color: var(--gold); margin-bottom:4px; font-family: 'Dancing Script', cursive; font-weight:700; letter-spacing:.2px; }
-    .map-buttons{ display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 6px; }
-    .mini-btn{ display:inline-block; padding:8px 12px; border-radius:10px; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; box-shadow:0 6px 16px rgba(0,0,0,.35); font-family: 'Dancing Script', cursive; letter-spacing: .2px; font-size: 1.05rem; }
-    .mini-btn.outline{ background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6); }
-    /* Waze-styled mini button */
-    .mini-btn.waze{ background:#33CCFF; color:#062a3b; border:none; display:inline-flex; align-items:center; gap:6px; }
-    .mini-btn .ico{ width:18px; height:18px; display:inline-block; vertical-align:-3px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); }
-    .mini-btn.waze:hover{ filter:brightness(1.05); }
-    .mini-btn:focus{ outline:2px solid rgba(255,255,255,.25); outline-offset:2px; }
-  /* Slideshow controls */
-    .slideshow .slide-nav{ position:absolute; top:50%; transform:translateY(-50%); background:rgba(15,15,15,.55); border:1px solid rgba(212,175,55,.6); color:var(--gold); width:42px; height:42px; border-radius:9999px; font-size:22px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; box-shadow:0 4px 16px rgba(0,0,0,.4); z-index:2; }
-    .slideshow .slide-nav.prev{ left:10px; }
-    .slideshow .slide-nav.next{ right:10px; }
-    .slideshow .slide-nav:hover{ filter:brightness(1.1); }
-    .slideshow .slide-nav:focus{ outline:2px solid rgba(212,175,55,.7); outline-offset:2px; }
-    .slideshow .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; justify-content:center; gap:6px; z-index:2; }
-    .slideshow .dot{ width:10px; height:10px; border-radius:9999px; border:2px solid rgba(212,175,55,.7); background:transparent; cursor:pointer; padding:0; }
-    .slideshow .dot.active{ background:var(--gold); }
+    .orn{ position:absolute; width:34px; height:34px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M2 22c6-6 6-12 12-12" stroke="%23d4af37" stroke-width="1.4" fill="none" stroke-linecap="round"/><path d="M10 10c3 0 4 1 4 4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/><path d="M6 18c2-2 4-2 6-4" stroke="%23d4af37" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.9; filter:drop-shadow(0 2px 6px rgba(0,0,0,.5)) }
+    .corner-tl{ top:-10px; left:-10px }
+    .corner-tr{ top:-10px; right:-10px; transform:scaleX(-1) }
+    .corner-bl{ bottom:-10px; left:-10px; transform:scaleY(-1) }
+    .corner-br{ bottom:-10px; right:-10px; transform:scale(-1,-1) }
 
-  /* Petals animation */
-    #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden; }
-    .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation: fall var(--dur) linear var(--delay) infinite, sway 6s ease-in-out infinite alternate; }
-    @keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
-    @keyframes sway { from { margin-left:-18px; } to { margin-left:18px; } }
-    @media (prefers-reduced-motion: reduce){ #petals{ display:none; } }
-  .wedding-date{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--gold); text-align:center; margin:2px 0 8px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12); }
+    .couple-wrap{ margin:14px 0 18px }
+    .slideshow{ position:relative; width:100%; aspect-ratio:3 / 2; max-height:420px; overflow:hidden; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12) }
+    .slide{ position:absolute; inset:0; opacity:0; transition:opacity 1600ms ease-in-out; background:#0b0b0b; display:flex; align-items:center; justify-content:center }
+    .slide.active{ opacity:1 }
+    .slide img{ width:100%; height:100%; object-fit:contain; display:block }
+    @keyframes kbZoom{ from{ transform:scale(1.02) } to{ transform:scale(1.08) } }
+    .slide.active img{ animation:kbZoom 9s ease-in-out forwards }
+    @media (prefers-reduced-motion:reduce){ .slide.active img{ animation:none !important } .slide{ transition:none } }
+
+    #bg-wrap{ position:fixed; inset:0; z-index:0; overflow:hidden }
+    #bgImage{ width:100%; height:100%; object-fit:cover; transform:scale(1.02); filter:brightness(.35) saturate(1.05) }
+    #bg-wrap::after{ content:""; position:absolute; inset:0; background:radial-gradient(1200px 600px at 50% -10%, rgba(0,0,0,.15), rgba(0,0,0,.55)), linear-gradient(180deg, rgba(212,175,55,.08), rgba(0,0,0,0) 40%); pointer-events:none }
+
+    .reveal-box a{ color:var(--gold); font-weight:700; text-decoration:none }
+    .reveal-box a:hover{ text-decoration:underline }
+    .reveal-box hr{ border:0; border-top:1px solid rgba(212,175,55,.28); margin:10px 0 }
+    .reveal-box .time{ color:#d9c9a3 }
+    .reveal-box .section-title{ color:var(--gold); margin-bottom:4px; font-family:'Dancing Script',cursive; font-weight:700; letter-spacing:.2px }
+    .map-buttons{ display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 6px }
+    .mini-btn{ display:inline-block; padding:8px 12px; border-radius:10px; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; box-shadow:0 6px 16px rgba(0,0,0,.35); font-family:'Dancing Script',cursive; letter-spacing:.2px; font-size:1.05rem }
+    .mini-btn.outline{ background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6) }
+    .mini-btn.waze{ background:#33CCFF; color:#062a3b; border:none; display:inline-flex; align-items:center; gap:6px }
+    .mini-btn .ico{ width:18px; height:18px; display:inline-block; vertical-align:-3px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)) }
+
+    /* Petals */
+    #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden }
+    .petal{ position:absolute; top:-12vh; width:18px; height:14px; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20"><path d="M12 0c4 2 7 6 7 9 0 4-3 7-7 7s-7-3-7-7c0-3 3-7 7-9z" fill="%23f6c6d8"/></svg>'); background-size:contain; background-repeat:no-repeat; opacity:.85; filter:drop-shadow(0 2px 4px rgba(0,0,0,.25)); animation:fall var(--dur) linear var(--delay) infinite, sway 6s ease-in-out infinite alternate }
+    @keyframes fall{ to{ transform:translateY(115vh) rotate(360deg) } }
+    @keyframes sway{ from{ margin-left:-18px } to{ margin-left:18px } }
+    @media (prefers-reduced-motion:reduce){ #petals{ display:none } }
+
+    .wedding-date{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--gold); text-align:center; margin:2px 0 8px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12) }
   </style>
 </head>
 <body>
-  <!-- Background image slot: upload background.jpg (sau background.png) în același folder cu index.html -->
   <div id="bg-wrap"><img id="bgImage" src="background.jpg" alt="" onerror="if(this.src.includes('background.jpg')){this.src='background.png';}else{this.parentNode.style.display='none';}"></div>
   <div id="petals"></div>
   <div class="container">
@@ -165,34 +120,31 @@
     <div class="festive-title">Diana &amp; Geo</div>
     <div class="wedding-date">17.08.2025</div>
     <div class="subtitle">Vă mulțumim că ați ales să participați la evenimentul nostru!</div>
-    
+
     <figure class="couple-wrap">
       <div class="slideshow" id="slideshow">
         <button class="slide-nav prev" type="button" aria-label="Fotografia anterioară">‹</button>
         <button class="slide-nav next" type="button" aria-label="Fotografia următoare">›</button>
         <div class="dots" id="slideDots" aria-label="Navigare slideshow"></div>
-        <noscript>
-          <img class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" />
-        </noscript>
+        <noscript><img class="couple" src="couple.jpg" alt="Diana & Geo — la starea civilă" /></noscript>
       </div>
-      
     </figure>
+
     <div class="note">Formularul de mesaje permite și <strong>încărcarea de fotografii sau video</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
+
     <div class="actions">
       <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă foto/video</a>
       <a href="meniu.html" class="action-btn">Meniu</a>
       <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa & program</button>
       <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
     </div>
+
     <div id="addressBox" class="reveal-box" hidden>
       <div class="section-title"><strong>Biserica cu Lună</strong> – Catedrala Veche „Adormirea Maicii Domnului”</div>
       Piața Unirii 2, Oradea<br>
       <div class="map-buttons">
         <a href="https://www.google.com/maps/place/Catedrala+Veche+%E2%80%9EAdormirea+Maicii+Domnului%E2%80%9D/@47.0536688,21.9262691,17z/data=!3m1!4b1!4m6!3m5!1s0x474647e88cf224c3:0x107c4b90413fd607!8m2!3d47.0536652!4d21.9288494!16s%2Fg%2F120_l_yn?hl=ro&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="mini-btn outline">Google Maps</a>
-        <a href="https://waze.com/ul?ll=47.0536652,21.9288494&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Biserica cu Lună)">
-          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>
-          Waze
-        </a>
+        <a href="https://waze.com/ul?ll=47.0536652,21.9288494&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Biserica cu Lună)"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>Waze</a>
       </div>
       <span class="time"><em>Cununia religioasă la <strong>14:30</strong>.</em></span>
       <hr>
@@ -200,10 +152,7 @@
       Strada Ovid Densușeanu 78/A, Oradea 410237<br>
       <div class="map-buttons">
         <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4746464a64cf0d93:0xb02b6084693f8d5d?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener" class="mini-btn outline">Google Maps</a>
-        <a href="https://waze.com/ul?q=Strada%20Ovid%20Densu%C8%99eanu%2078%2FA%2C%20Oradea%20410237&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Emerald, Salon Cristal)">
-          <svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>
-          Waze
-        </a>
+        <a href="https://waze.com/ul?q=Strada%20Ovid%20Densu%C8%99eanu%2078%2FA%2C%20Oradea%20410237&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Emerald, Salon Cristal)"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>Waze</a>
       </div>
       <span class="time"><em>Petrecerea începe la <strong>16:00</strong>.</em></span>
     </div>
@@ -214,272 +163,296 @@
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
 
-    
     <div class="floral-divider bottom"></div>
   </div>
 
   <script>
-    // Petals generator (lightweight)
+    // Petals generator
     (function(){
-      const wrap = document.getElementById('petals');
-      if (!wrap) return;
-      const COUNT = 22;
-      for (let i=0;i<COUNT;i++){
-        const p = document.createElement('span');
-        p.className = 'petal';
-        p.style.left = (Math.random()*100).toFixed(2) + 'vw';
-        p.style.setProperty('--delay', (Math.random()*10).toFixed(2)+'s');
-        p.style.setProperty('--dur', (12+Math.random()*10).toFixed(2)+'s');
-        p.style.opacity = (0.6 + Math.random()*0.4).toFixed(2);
-        wrap.appendChild(p);
-      }
-    })();
+      const wrap = document.getElementById('petals'); if (!wrap) return; const COUNT = 22;
+      for (let i=0;i<COUNT;i++){ const p=document.createElement('span'); p.className='petal'; p.style.left=(Math.random()*100).toFixed(2)+'vw'; p.style.setProperty('--delay',(Math.random()*10).toFixed(2)+'s'); p.style.setProperty('--dur',(12+Math.random()*10).toFixed(2)+'s'); p.style.opacity=(0.6+Math.random()*0.4).toFixed(2); wrap.appendChild(p);} })();
 
-    // ===== Slideshow (couple + couple1..4, random order, fade) =====
+    // Slideshow
     function setupSlideshow(){
-      const host = document.getElementById('slideshow');
-      if (!host) return;
-      const bases = ['couple','couple1','couple2','couple3','couple4'];
-      // shuffle (Fisher–Yates)
-      for (let i = bases.length-1; i > 0; i--) {
-        const j = Math.floor(Math.random()*(i+1));
-        [bases[i], bases[j]] = [bases[j], bases[i]];
-      }
-      const slides = [];
-      bases.forEach((name)=>{
-        const img = new Image();
-        img.alt = 'Diana & Geo';
-        img.decoding = 'async';
-        img.loading = 'eager';
-        img.src = name + '.jpg';
-        img.onerror = function(){
-          if (img.src.endsWith('.jpg')) img.src = name + '.png'; else { img.dataset.skip = '1'; }
-        };
-        const slide = document.createElement('div');
-        slide.className = 'slide';
-        slide.appendChild(img);
-        host.appendChild(slide);
-        slides.push(slide);
-      });
-
-      const dotsWrap = document.getElementById('slideDots');
-      const prevBtn = host.querySelector('.slide-nav.prev');
-      const nextBtn = host.querySelector('.slide-nav.next');
-
+      const host=document.getElementById('slideshow'); if(!host) return;
+      const bases=['couple','couple1','couple2','couple3','couple4'];
+      for(let i=bases.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [bases[i],bases[j]]=[bases[j],bases[i]]; }
+      const slides=[]; bases.forEach(name=>{ const img=new Image(); img.alt='Diana & Geo'; img.decoding='async'; img.loading='eager'; img.src=name+'.jpg'; img.onerror=function(){ if(img.src.endsWith('.jpg')) img.src=name+'.png'; else { img.dataset.skip='1'; } }; const slide=document.createElement('div'); slide.className='slide'; slide.appendChild(img); host.appendChild(slide); slides.push(slide); });
+      const dotsWrap=document.getElementById('slideDots'); const prevBtn=host.querySelector('.slide-nav.prev'); const nextBtn=host.querySelector('.slide-nav.next');
       setTimeout(()=>{
-        const valid = slides.filter(s => !s.querySelector('img').dataset.skip);
-        if (valid.length === 0) {
-          // fallback: single image if exists
-          const img = document.createElement('img');
-          img.src = 'couple.jpg';
-          img.alt = 'Diana & Geo';
-          const s = document.createElement('div');
-          s.className = 'slide active';
-          s.appendChild(img);
-          host.innerHTML = '';
-          host.appendChild(s);
-          return;
-        }
-        if (valid.length === 1) {
-          valid[0].classList.add('active');
-          // hide controls
-          prevBtn.style.display = 'none';
-          nextBtn.style.display = 'none';
-          dotsWrap.style.display = 'none';
-          return;
-        }
-
-        // build dots
-        dotsWrap.innerHTML = '';
-        valid.forEach((_, i)=>{
-          const d = document.createElement('button');
-          d.type = 'button';
-          d.className = 'dot';
-          d.setAttribute('aria-label', 'Du-te la fotografia ' + (i+1));
-          d.addEventListener('click', ()=>{ stopTimer(); setActive(i); startTimer(); });
-          dotsWrap.appendChild(d);
-        });
-
-        let idx = 0;
-        function setActive(i){
-          valid[idx].classList.remove('active');
-          dotsWrap.children[idx].classList.remove('active');
-          idx = (i + valid.length) % valid.length;
-          valid[idx].classList.add('active');
-          dotsWrap.children[idx].classList.add('active');
-        }
-
-        // init
-        valid[0].classList.add('active');
-        dotsWrap.children[0].classList.add('active');
-
-        // autoplay controls
-        const INTERVAL = 9000;
-        let timer = null;
-        function next(){ setActive(idx+1); }
-        function prev(){ setActive(idx-1); }
-        function startTimer(){ if (timer){ clearInterval(timer); } timer = setInterval(()=> next(), INTERVAL); }
-        function stopTimer(){ if (timer){ clearInterval(timer); timer = null; } }
-        startTimer();
-
-        // buttons
-        nextBtn.addEventListener('click', ()=>{ stopTimer(); next(); startTimer(); });
-        prevBtn.addEventListener('click', ()=>{ stopTimer(); prev(); startTimer(); });
-
-        // pause on hover (desktop)
-        host.addEventListener('mouseenter', stopTimer);
-        host.addEventListener('mouseleave', startTimer);
-      }, 300);
+        const valid=slides.filter(s=>!s.querySelector('img').dataset.skip);
+        if(valid.length===0){ const img=document.createElement('img'); img.src='couple.jpg'; img.alt='Diana & Geo'; const s=document.createElement('div'); s.className='slide active'; s.appendChild(img); host.innerHTML=''; host.appendChild(s); return; }
+        if(valid.length===1){ valid[0].classList.add('active'); prevBtn.style.display='none'; nextBtn.style.display='none'; dotsWrap.style.display='none'; return; }
+        dotsWrap.innerHTML=''; valid.forEach((_,i)=>{ const d=document.createElement('button'); d.type='button'; d.className='dot'; d.setAttribute('aria-label','Du-te la fotografia '+(i+1)); d.addEventListener('click',()=>{ stopTimer(); setActive(i); startTimer(); }); dotsWrap.appendChild(d); });
+        let idx=0; function setActive(i){ valid[idx].classList.remove('active'); dotsWrap.children[idx].classList.remove('active'); idx=(i+valid.length)%valid.length; valid[idx].classList.add('active'); dotsWrap.children[idx].classList.add('active'); }
+        valid[0].classList.add('active'); dotsWrap.children[0].classList.add('active');
+        const INTERVAL=9000; let timer=null; function next(){ setActive(idx+1); } function prev(){ setActive(idx-1); } function startTimer(){ if(timer){ clearInterval(timer);} timer=setInterval(()=>next(),INTERVAL);} function stopTimer(){ if(timer){ clearInterval(timer); timer=null; } }
+        startTimer(); nextBtn.addEventListener('click',()=>{ stopTimer(); next(); startTimer(); }); prevBtn.addEventListener('click',()=>{ stopTimer(); prev(); startTimer(); }); host.addEventListener('mouseenter', stopTimer); host.addEventListener('mouseleave', startTimer);
+      },300);
     }
 
-    // ===== Config =====
-    // PIN-ul admin nu este hardcodat; se stochează local în acest browser (localStorage).
-
-    // ===== Default guest list (baked-in) =====
+    // ===== Lista invitați (actualizată) =====
     const defaultGuests = [ /*BEGIN_GUESTS*/
-      // MASA 1
-      {"Nume": "Cristi Ioan", "Masa": 1},
-      {"Nume": "Dan", "Masa": 1},
-      {"Nume": "Serban", "Masa": 1},
-      {"Nume": "Iuga", "Masa": 1},
-      {"Nume": "Ilisoi", "Masa": 1},
-      {"Nume": "Adriadna", "Masa": 1},
-      {"Nume": "Rusu Cosmin", "Masa": 1},
+  // PREZIDIU (nași)
+  {"Nume":"Bolojan Sergiu","Masa":null,"Prezidiu":true},
+  {"Nume":"Roxana","Masa":null,"Prezidiu":true},
+  {"Nume":"Andrei","Masa":null,"Prezidiu":true},
+  {"Nume":"Matei","Masa":null,"Prezidiu":true},
+  {"Nume":"Dreana Răzvan","Masa":null,"Prezidiu":true},
+  {"Nume":"Patricia","Masa":null,"Prezidiu":true},
+  {"Nume":"Anastasia","Masa":null,"Prezidiu":true},
+  {"Nume":"Alma","Masa":null,"Prezidiu":true},
+  {"Nume":"Alexandru","Masa":null,"Prezidiu":true},
 
-      // MASA 2
-      {"Nume": "Adi Pasca", "Masa": 2},
-      {"Nume": "Matache", "Masa": 2},
-      {"Nume": "Dragan Patricia", "Masa": 2},
-      {"Nume": "Andrei Negrau", "Masa": 2},
-      {"Nume": "Berche", "Masa": 2},
+  // MASA 1 (13)
+  {"Nume":"Marchiș Ionuț","Masa":1},
+  {"Nume":"Tisăliță Grațian","Masa":1},
+  {"Nume":"Anuța","Masa":1},
+  {"Nume":"Natalia","Masa":1},
+  {"Nume":"Sofia","Masa":1},
+  {"Nume":"Șuștic Maria","Masa":1},
+  {"Nume":"Mîrza Gheorge","Masa":1},
+  {"Nume":"Rozalia","Masa":1},
+  {"Nume":"Mîrza Oana","Masa":1},
+  {"Nume":"Tomoiagă Adrian","Masa":1},
+  {"Nume":"Denisa","Masa":1},
+  {"Nume":"Hotima Alin","Masa":1},
+  {"Nume":"Ioana","Masa":1},
 
-      // MASA 3
-      {"Nume": "Andreea Godja", "Masa": 3},
-      {"Nume": "Crina", "Masa": 3},
-      {"Nume": "Andrei Godja", "Masa": 3},
-      {"Nume": "Ana Opris", "Masa": 3},
-      {"Nume": "Denisa Ulici", "Masa": 3},
-      {"Nume": "Alina Petrovan", "Masa": 3},
+  // MASA 2 (10)
+  {"Nume":"Godja Andreea","Masa":2},
+  {"Nume":"Pintea Crina","Masa":2},
+  {"Nume":"Godja Andrei","Masa":2},
+  {"Nume":"Adela","Masa":2},
+  {"Nume":"Opriș Anamaria","Masa":2},
+  {"Nume":"Laurențiu","Masa":2},
+  {"Nume":"Ulici Denisa","Masa":2},
+  {"Nume":"Marian","Masa":2},
+  {"Nume":"Mariș Alina","Masa":2},
+  {"Nume":"Beniamin","Masa":2},
 
-      // MASA 4
-      {"Nume": "fam. Ciavoi", "Masa": 4},
-      {"Nume": "Hercut", "Masa": 4},
-      {"Nume": "Dana Petrus", "Masa": 4},
-      {"Nume": "Firuta", "Masa": 4},
-      {"Nume": "Florica", "Masa": 4},
+  // MASA 3 (10)
+  {"Nume":"Tivadar Ioniță","Masa":3},
+  {"Nume":"Verdeș Viorel","Masa":3},
+  {"Nume":"Irina","Masa":3},
+  {"Nume":"Dunca Nuțu","Masa":3},
+  {"Nume":"Ileana","Masa":3},
+  {"Nume":"Tomșa Lică","Masa":3},
+  {"Nume":"Andreica Mihai","Masa":3},
+  {"Nume":"Ana","Masa":3},
+  {"Nume":"Crăciun Ioan","Masa":3},
+  {"Nume":"Ileana","Masa":3},
 
-      // MASA 5
-      {"Nume": "Dorin", "Masa": 5},
-      {"Nume": "Mariana", "Masa": 5},
-      {"Nume": "Mihai", "Masa": 5},
-      {"Nume": "Mia Anglia", "Masa": 5},
+  // MASA 4 (9)
+  {"Nume":"Roman Dorin","Masa":4},
+  {"Nume":"Anisie","Masa":4},
+  {"Nume":"Gabriel","Masa":4},
+  {"Nume":"Pop Sorin","Masa":4},
+  {"Nume":"Mariana","Masa":4},
+  {"Nume":"Pop Mihai","Masa":4},
+  {"Nume":"Natalia","Masa":4},
+  {"Nume":"Ivașco Maria","Masa":4},
+  {"Nume":"Gabriel","Masa":4},
 
-      // MASA 6
-      {"Nume": "Ghita Mirza", "Masa": 6},
-      {"Nume": "Oana", "Masa": 6},
-      {"Nume": "Denisa Mirza", "Masa": 6},
-      {"Nume": "Alin Tati", "Masa": 6},
-      {"Nume": "Ioan Marchis", "Masa": 6},
-      {"Nume": "Parinti Diana", "Masa": 6},
+  // MASA 5 (8)
+  {"Nume":"Husti Marcel","Masa":5, "Parinte":true},
+  {"Nume":"Margareta","Masa":5, "Parinte":true},
+  {"Nume":"Filip Crina","Masa":5},
+  {"Nume":"Ionel","Masa":5},
+  {"Nume":"Tudor","Masa":5},
+  {"Nume":"Petrar Dorina","Masa":5},
+  {"Nume":"Flontaș Mirela","Masa":5},
+  {"Nume":"Eva","Masa":5},
 
-      // MASA 7
-      {"Nume": "Tivadar Ionita", "Masa": 7},
-      {"Nume": "Irina si Viorel", "Masa": 7},
-      {"Nume": "Ileana si Nutu", "Masa": 7},
-      {"Nume": "Lica Tomsa", "Masa": 7},
-      {"Nume": "Andreica Mihai", "Masa": 7},
-      {"Nume": "Craciun Ioan", "Masa": 7},
+  // MASA 6 (10)
+  {"Nume":"Dunca Ștefan","Masa":6, "Parinte":true},
+  {"Nume":"Maria","Masa":6, "Parinte":true},
+  {"Nume":"Mândru Adrian","Masa":6},
+  {"Nume":"Iustina","Masa":6},
+  {"Nume":"Claudiu","Masa":6},
+  {"Nume":"Sebastian","Masa":6},
+  {"Nume":"Roșca Ion","Masa":6},
+  {"Nume":"Ileana","Masa":6},
+  {"Nume":"Aurora","Masa":6},
+  {"Nume":"Roșca Andreea","Masa":6},
 
-      // MASA 8
-      {"Nume": "Gartian Tisalita", "Masa": 8},
-      {"Nume": "Maria Sustic", "Masa": 8},
-      {"Nume": "Ileana Rosca", "Masa": 8},
-      {"Nume": "Iustina", "Masa": 8},
-      {"Nume": "Andreea Rosca", "Masa": 8},
+  // MASA 7 (7)
+  {"Nume":"Jiurge Mircea","Masa":7},
+  {"Nume":"Camelia","Masa":7},
+  {"Nume":"Jiurge Mircea și Andreea","Masa":7},
+  {"Nume":"Jiurge Mihai","Masa":7},
+  {"Nume":"Cristina","Masa":7},
+  {"Nume":"Jiurge Maria","Masa":7},
 
-      // MASA 9
-      {"Nume": "Familia Stevlik", "Masa": 9},
-      {"Nume": "Fam Taut (Lacrimioara si Florin)", "Masa": 9},
-      {"Nume": "Fam Csaki", "Masa": 9},
-      {"Nume": "Fam Dragan", "Masa": 9},
-      {"Nume": "Mircea Ros", "Masa": 9},
+  // MASA 8 (9)
+  {"Nume":"Stevlik Sandor","Masa":8},
+  {"Nume":"Letiția","Masa":8},
+  {"Nume":"Tăut Florin","Masa":8},
+  {"Nume":"Lăcrimioara","Masa":8},
+  {"Nume":"Csaki Călin","Masa":8},
+  {"Nume":"Ani","Masa":8},
+  {"Nume":"Drăgan Mihai","Masa":8},
+  {"Nume":"Noemi","Masa":8},
+  {"Nume":"Roș Mircea","Masa":8},
 
-      // MASA 10
-      {"Nume": "Jiurge Mircea", "Masa": 10},
-      {"Nume": "Jiurge Mihai", "Masa": 10},
-      {"Nume": "Jiurge Maria", "Masa": 10},
-      {"Nume": "Simut Nelu", "Masa": 10},
-      {"Nume": "Petrule Mariana", "Masa": 10},
+  // MASA 9 (12)
+  {"Nume":"Ioan Cristian","Masa":9},
+  {"Nume":"Gîțan Dan","Masa":9},
+  {"Nume":"Bratu Șerban","Masa":9},
+  {"Nume":"Iuga Mihai","Masa":9},
+  {"Nume":"Teodora","Masa":9},
+  {"Nume":"Ilișoi Daniel","Masa":9},
+  {"Nume":"Anca","Masa":9},
+  {"Nume":"Filip","Masa":9},
+  {"Nume":"Iuraș Ariadna","Masa":9},
+  {"Nume":"Emilian","Masa":9},
+  {"Nume":"Rusu Cosmin","Masa":9},
+  {"Nume":"Georgiana","Masa":9},
 
-      // MASA 11
-      {"Nume": "Fam Flontas", "Masa": 11},
-      {"Nume": "Fam Filip", "Masa": 11},
-      {"Nume": "Petrar Dorina", "Masa": 11},
-      {"Nume": "Parinti Geo", "Masa": 11}
-    /*END_GUESTS*/ ];
+  // MASA 10 (10)
+  {"Nume":"Pașca Adrian","Masa":10},
+  {"Nume":"Bianca","Masa":10},
+  {"Nume":"Matache Alexandru","Masa":10},
+  {"Nume":"Priscilla","Masa":10},
+  {"Nume":"Drăgan Patricia","Masa":10},
+  {"Nume":"George","Masa":10},
+  {"Nume":"Negrău Andrei","Masa":10},
+  {"Nume":"Lia","Masa":10},
+  {"Nume":"Berche George","Masa":10},
+  {"Nume":"Ioana","Masa":10},
+
+  // MASA 11 (10)
+  {"Nume":"Ciavoi Mylan","Masa":11},
+  {"Nume":"Gabriela","Masa":11},
+  {"Nume":"Hercuț Sergiu","Masa":11},
+  {"Nume":"Adela","Masa":11},
+  {"Nume":"Petruș Dana","Masa":11},
+  {"Nume":"Florin","Masa":11},
+  {"Nume":"Fițigău Firuța","Masa":11},
+  {"Nume":"Ovidiu","Masa":11},
+  {"Nume":"Bizău Florica","Masa":11},
+  {"Nume":"Sorin","Masa":11}
+/*END_GUESTS*/ ];
 
     let guests = defaultGuests.slice();
 
-    // ===== Search UI =====
-    const resultsDiv = document.getElementById('results');
-    const countDiv = document.getElementById('count');
-    const searchInput = document.getElementById('search');
+    // ==== Grupare insoțitori pe o singură linie ====
+    function isSingleTokenName(name){
+      const t = (name || '').trim().split(' ').filter(Boolean);
+      return t.length === 1;
+    }
+    function buildGroups(list){
+      const byTable = new Map();
+      list.forEach(g=>{
+        const key = (g.Masa==null? 'PREZ' : String(g.Masa));
+        if(!byTable.has(key)) byTable.set(key, []);
+        byTable.get(key).push(g);
+      });
+      const groups = [];
+      for(const [key, arr] of byTable.entries()){
+        let current = null;
+        for(let i=0;i<arr.length;i++){
+          const person = arr[i];
+          const single = isSingleTokenName(person.Nume);
+          if(!current){
+            current = { Masa: person.Masa, Prezidiu: !!person.Prezidiu, Parinte: !!person.Parinte, members:[person] };
+            groups.push(current);
+          } else if(single){
+            current.members.push(person);
+            current.Prezidiu = current.Prezidiu || !!person.Prezidiu;
+            current.Parinte = current.Parinte || !!person.Parinte;
+          } else {
+            current = { Masa: person.Masa, Prezidiu: !!person.Prezidiu, Parinte: !!person.Parinte, members:[person] };
+            groups.push(current);
+          }
+        }
+      }
+      groups.sort((a,b)=> ((a.Masa==null?99:a.Masa) - (b.Masa==null?99:b.Masa)) || a.members[0].Nume.localeCompare(b.members[0].Nume));
+      return groups;
+    }
+    let grouped = buildGroups(guests);
+    function groupsFromIndividuals(individuals){
+      const set = new Set(individuals.map(p=>p.Nume));
+      const out = [];
+      const added = new Set();
+      grouped.forEach(gr=>{
+        if(gr.members.some(m=> set.has(m.Nume))){
+          const key = (gr.Masa==null? 'PREZ' : String(gr.Masa)) + '|' + gr.members.map(m=>m.Nume).join('|');
+          if(!added.has(key)){ added.add(key); out.push(gr); }
+        }
+      });
+      return out;
+    }
 
-    function renderResults(list) {
+    // UI search
+    const resultsDiv=document.getElementById('results');
+    const countDiv=document.getElementById('count');
+    const searchInput=document.getElementById('search');
+
+    function renderResults(groups){
       resultsDiv.innerHTML = '';
       countDiv.textContent = '';
-      if (!Array.isArray(list) || list.length === 0) return;
-      list.forEach(g => {
+      if(!Array.isArray(groups) || groups.length===0) return;
+      groups.forEach(gr=>{
         const row = document.createElement('div');
         row.className = 'result-row';
-        row.innerHTML = `<span class="guest-name">${g.Nume}</span> <span class="guest-table">Masa ${g.Masa}</span>`;
+        const label = gr.Prezidiu ? 'Prezidiu' : 'Masa ' + gr.Masa;
+        const nameCombined = gr.members.map(m => m.Nume).join(' și ');
+        row.innerHTML = `
+          <span class="guest-name${gr.Prezidiu ? ' godparent' : ''}${gr.Parinte ? ' parent' : ''}">
+            ${gr.Prezidiu ? '<span class="badge-nas"><span class="star"></span>NAȘ</span>' : ''}
+            ${gr.Parinte ? '<span class="badge-parinte">PĂRINTE</span>' : ''}
+            ${nameCombined}
+          </span>
+          <span class="guest-table">${label}</span>`;
         resultsDiv.appendChild(row);
       });
-      countDiv.textContent = list.length + ' invitați afișați';
+      countDiv.textContent = groups.length + ' grupuri afișate';
     }
 
-    function filterList(term) {
-      function toKey(s) {
-        return (s || '')
-          .toLowerCase()
-          .normalize('NFD').replace(/[̀-ͯ]/g, '') // elimină diacriticele combinate
-          .replace(/[șş]/g, 's').replace(/[țţ]/g, 't') // variante cu virguliță/cedilă
-          .replace(/[^a-z0-9 ]+/g, ' ') // non-alfanumerice -> spațiu
-          .replace(/  +/g, ' ') // spații multiple -> unul singur
-          .trim();
-      }
-      const key = toKey(term);
-      if (!key) return [];
-      return guests
-        .filter(g => toKey(g.Nume).includes(key))
-        .sort((a,b)=> (a.Masa-b.Masa) || a.Nume.localeCompare(b.Nume));
+    function filterList(term){
+      function toKey(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[șş]/g,'s').replace(/[țţ]/g,'t').replace(/[^a-z0-9 ]+/g,' ').replace(/  +/g,' ').trim(); }
+      const key=toKey(term); if(!key) return [];
+      return guests.filter(g=>toKey(g.Nume).includes(key)).sort((a,b)=> ((a.Masa||99)-(b.Masa||99)) || a.Nume.localeCompare(b.Nume));
     }
 
-    // Address/contacts toggles
-    const addressBtn = document.getElementById('addressBtn');
-    const contactBtn = document.getElementById('contactBtn');
-    const addressBox = document.getElementById('addressBox');
-    const contactBox = document.getElementById('contactBox');
-    addressBtn.addEventListener('click', ()=> { addressBox.hidden = !addressBox.hidden; });
-    contactBtn.addEventListener('click', ()=> { contactBox.hidden = !contactBox.hidden; });
+    // Toggles
+    const addressBtn=document.getElementById('addressBtn');
+    const contactBtn=document.getElementById('contactBtn');
+    const addressBox=document.getElementById('addressBox');
+    const contactBox=document.getElementById('contactBox');
+    addressBtn.addEventListener('click',()=>{ addressBox.hidden=!addressBox.hidden; });
+    contactBtn.addEventListener('click',()=>{ contactBox.hidden=!contactBox.hidden; });
 
     // Init
-    window.onload = () => {
-      searchInput.focus();
-      resultsDiv.innerHTML = '';
-      countDiv.textContent = '';
+    window.onload = ()=>{
+      document.getElementById('search').focus();
       setupSlideshow();
+      grouped = buildGroups(guests);
     };
-    searchInput.addEventListener('input', () => {
+    searchInput.addEventListener('input', ()=>{
       const term = searchInput.value;
-      const filtered = filterList(term);
-      if (term.trim() === '') { resultsDiv.innerHTML = ''; countDiv.textContent = ''; return; }
-      if (filtered.length === 0) { resultsDiv.innerHTML = '<div class="no-result">Nu există invitat cu acest nume.</div>'; countDiv.textContent = ''; return; }
-      renderResults(filtered);
+      if(term.trim() === ''){ resultsDiv.innerHTML=''; countDiv.textContent=''; return; }
+      const individuals = filterList(term);
+      const filteredGroups = groupsFromIndividuals(individuals);
+      if(filteredGroups.length === 0){ resultsDiv.innerHTML='<div class="no-result">Nu există invitat cu acest nume.</div>'; countDiv.textContent=''; return; }
+      renderResults(filteredGroups);
     });
 
-    </script>
+    // ===== Mini self-tests (in consolă) =====
+    (function selfTests(){
+      try{
+        // 1) Diacritice tolerant: "Iuras" găsește "Iuraș Ariadna"
+        const ariadna = filterList('Iuras').some(p=>/Iuraș Ariadna/i.test(p.Nume));
+        console.assert(ariadna, 'Test: diacritice tolerant pentru Iuraș');
+        // 2) Grupare: Ariadna apare în același grup cu Emilian
+        const grA = groupsFromIndividuals(filterList('Ariadna'))[0];
+        console.assert(grA && grA.members.some(m=>m.Nume==='Emilian'), 'Test: grupare Ariadna + Emilian');
+        // 3) Badge părinți: la masa 5 trebuie să existe Parinte=true
+        const g5 = buildGroups(guests).find(g=>g.Masa===5);
+        console.assert(g5 && g5.Parinte===true, 'Test: badge părinți masa 5');
+      }catch(e){ console.warn('Self-tests skipped:', e); }
+    })();
+  </script>
 </body>
 </html>
-
-
