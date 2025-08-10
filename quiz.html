@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QUIZ GAME – Cât de bine cunoști mirii?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg:#0b0b0b; --card:#0f0f0f; --gold:#d4af37; --gold-2:#b8860b; --text:#ece7d9; --muted:#c8b892; --line:#2a2210; }
+    *{ box-sizing:border-box }
+    body{ margin:0; min-height:100vh; background:radial-gradient(1200px 600px at 50% -10%, #1a1a1a 0%, #000 60%), linear-gradient(135deg,#0b0b0b 0%, #000 100%); color:var(--text); font-family:'Montserrat',Arial,sans-serif }
+    .container{ max-width:780px; margin:28px auto 40px; padding:22px; background:var(--card); border-radius:20px; border:1px solid rgba(212,175,55,.35); box-shadow:inset 0 0 0 1px rgba(212,175,55,.12), 0 12px 40px rgba(0,0,0,.55) }
+    h1{ margin:0 0 6px; font-family:'Dancing Script',cursive; color:var(--gold) }
+    .field{ margin:10px 0 16px }
+    .field label{ display:block; margin-bottom:6px; color:var(--muted); font-weight:600 }
+    .field input[type="text"]{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(212,175,55,.35); background:#0b0b0b; color:var(--text); font-size:1rem }
+    .q-card{ margin:14px 0; padding:14px; background:#111009; border:1px solid rgba(212,175,55,.35); border-radius:14px }
+    .q-title{ margin:0 0 10px; font-weight:700; color:#e9dfc8 }
+    .opt{ display:block; margin:8px 0; padding:8px 10px; border:1px solid rgba(212,175,55,.22); border-radius:10px; cursor:pointer }
+    .opt input{ margin-right:8px; accent-color:#d4af37 }
+    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px }
+    .btn{ appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:700; box-shadow:0 6px 18px rgba(0,0,0,.35); text-decoration:none; display:inline-flex; align-items:center; justify-content:center }
+    .btn.primary{ background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b }
+    .btn.ghost{ background:transparent; border:2px solid rgba(212,175,55,.6); color:var(--gold) }
+    .hidden{ display:none !important }
+    .progress{ color:#a89260; font-size:.9rem; margin:6px 0 0 }
+
+    /* Modal rezultat (vizibil doar la final) */
+    .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; z-index:50 }
+    .modal{ width:min(560px, 92vw); background:var(--card); border:1px solid rgba(212,175,55,.35); border-radius:16px; box-shadow:0 18px 60px rgba(0,0,0,.6); padding:18px }
+    .modal h2{ margin:0 0 6px; font-family:'Dancing Script',cursive; color:var(--gold) }
+    .modal .body{ color:#e9dfc8; margin:8px 0 14px; line-height:1.5 }
+    .modal .actions{ display:flex; gap:10px; justify-content:flex-end }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>QUIZ GAME - Cât de bine cunoști mirii?</h1>
+
+    <form id="quizForm">
+      <div class="field">
+        <label for="name">Nume complet (obligatoriu)</label>
+        <input id="name" name="name" type="text" placeholder="Ex: Popescu Andrei" required>
+      </div>
+
+      <div id="qWrap" class="q-card"></div>
+      <div class="progress" id="progress"></div>
+
+      <div class="actions" id="nav">
+        <button type="button" class="btn ghost" id="btnPrev">Înapoi</button>
+        <button type="button" class="btn primary" id="btnNext">Următoarea</button>
+        <button type="submit" class="btn primary hidden" id="btnSubmit">Trimite</button>
+        <a href="index.html" class="btn ghost">Pagina principală</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Modal pop-up scor (singurul feedback vizibil pentru invitați) -->
+  <div id="scoreModal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="scoreTitle">
+    <div class="modal">
+      <h2 id="scoreTitle">Rezultatul tău</h2>
+      <div id="scoreText" class="body"></div>
+      <div class="actions">
+        <a href="index.html" class="btn ghost">Înapoi la pagina principală</a>
+        <button type="button" id="modalOk" class="btn primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== ÎNTREBĂRI =====
+    const QUESTIONS = [
+      { id:'who',      text:'Cine se căsătorește?',                        opts:['Diana și Gheorghe','George și Maria','Georgian și Diana','Yoko Ono și John Lennon'], correct:'C' },
+      { id:'animal',   text:'Ce animal au Diana & Geo?',                   opts:['Porc vietnamez','Pisică','Carpen japonez','Câine'],                                                  correct:'B' },
+      { id:'geoJob',   text:'Ce ocupație are Geo?',                         opts:['Femeie de serviciu','Avocat','Ispită la insula iubirii','Procuror'],                                  correct:'D' },
+      { id:'dianaPrev',text:'Care este numele purtat anterior de Diana?',   opts:['Hubert‑Blain‑Wolfeschlegelsteinhausenbergerdorff','Pop','Roman','Salomeea Guinea'],                   correct:'C' },
+      { id:'dianaJob', text:'Ce ocupație are Diana?',                       opts:['Clovn la înmormântări','Notar','Cititor și sculptor de blesteme','Avocat'],                           correct:'D' },
+      { id:'univ',     text:'Ce universitate au absolvit mirii?',          opts:['Academia Singles','Babeș‑Bolyai (Cluj‑Napoca)','Hogwarts','Universitatea din București'],            correct:'B' },
+      { id:'vehicle',  text:'Ce vehicul au mirii?',                         opts:['Ștraf','Roabă','Toyota Corolla','Nu au'],                                                            correct:'C' },
+      { id:'honeymoon',text:'Unde vor să meargă în luna de miere?',         opts:['Însurăței (Brăila)','Udați‑Mânzu (Buzău)','Laponia','Băile Felix'],                                   correct:'C' },
+      { id:'met',      text:'Unde s-au cunoscut pentru prima dată?',       opts:['La insula iubirii','La facultate','La un concurs de călcat rufe în condiții extreme','În stația de biciclete de la Polus'], correct:'B' },
+      { id:'important',text:'Cele mai importante persoane de la nuntă',     opts:['Eu','Caprele de la Husasău','Mirele și mireasa','Sergiu Nica'],                                     correct:'C' }
+    ];
+
+    // ===== CONFIG =====
+    const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwhkpKqSDdoK6liBRY7YIsrPhoPJAf9TTSiI3H_8DxMM-QAXc58DuhrUz-2wSQ4o8JG/exec';
+
+    // ===== STATE =====
+    const answers = {}; // { id: 'A'|'B'|'C'|'D' }
+    let idx = 0; // 0..N-1
+
+    // ===== DOM =====
+    const qWrap = document.getElementById('qWrap');
+    const progress = document.getElementById('progress');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const form = document.getElementById('quizForm');
+
+    const scoreModal = document.getElementById('scoreModal');
+    const scoreText = document.getElementById('scoreText');
+    const modalOk = document.getElementById('modalOk');
+
+    function renderQuestion(){
+      const q = QUESTIONS[idx];
+      qWrap.innerHTML = `
+        <legend class=\"q-title\">${idx+1}. ${q.text}</legend>
+        ${q.opts.map((opt,i)=>{
+          const letter = String.fromCharCode(65+i);
+          const checked = answers[q.id] === letter ? 'checked' : '';
+          return `<label class=\"opt\"><input type=\"radio\" name=\"q_${q.id}\" value=\"${letter}\" ${checked}> ${letter.toLowerCase()}) ${opt}</label>`;
+        }).join('')}
+      `;
+      progress.textContent = `Întrebarea ${idx+1} din ${QUESTIONS.length}`;
+      btnPrev.classList.toggle('hidden', idx===0);
+      btnNext.classList.toggle('hidden', idx===QUESTIONS.length-1);
+      btnSubmit.classList.toggle('hidden', idx!==QUESTIONS.length-1);
+    }
+
+    function getCurrentSelection(){
+      const q = QUESTIONS[idx];
+      const el = qWrap.querySelector(`input[name=\"q_${q.id}\"]:checked`);
+      return el ? el.value : '';
+    }
+
+    btnPrev.addEventListener('click', ()=>{
+      const curr = getCurrentSelection();
+      if(curr) answers[QUESTIONS[idx].id] = curr;
+      if(idx>0){ idx--; renderQuestion(); }
+    });
+
+    btnNext.addEventListener('click', ()=>{
+      const sel = getCurrentSelection();
+      if(!sel){ alert('Te rog selectează un răspuns.'); return; }
+      answers[QUESTIONS[idx].id] = sel;
+      if(idx < QUESTIONS.length-1){ idx++; renderQuestion(); }
+    });
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const name = String(document.getElementById('name').value||'').trim();
+      if(!name){ alert('Te rog scrie numele.'); return; }
+      const lastSel = getCurrentSelection();
+      if(lastSel) answers[QUESTIONS[idx].id] = lastSel;
+
+      // scor
+      let score = 0;
+      QUESTIONS.forEach(q=>{ if((answers[q.id]||'').toUpperCase() === q.correct) score++; });
+
+      // POPUP cu mesajul final (singurul feedback pentru invitat)
+      scoreText.innerHTML = scoreMessage(score);
+      scoreModal.classList.remove('hidden');
+      modalOk.onclick = () => scoreModal.classList.add('hidden');
+
+      // trimite SILENȚIOS în Google Sheets (fără niciun mesaj în UI)
+      const payload = { timestamp: new Date().toISOString(), name, score, answers };
+      silentSend(payload);
+    });
+
+    function scoreMessage(score){
+      if(score === 10) return '10 răspunsuri – <strong>Felicitări!</strong> Ești un prieten adevărat! Ai răspuns corect la toate întrebările!';
+      if(score >= 7)  return score + ' răspunsuri - <strong>Felicitări!</strong> Ești un prieten adevărat!';
+      if(score >= 5)  return score + ' răspunsuri – <strong>Ceva - ceva</strong> știi tu despre miri.';
+      return score + ' răspunsuri – <strong>Ești sigur</strong> că nu ai greșit nunta?';
+    }
+
+    // ===== Trimitere SILENȚIOASĂ =====
+    async function silentSend(payload){
+      try{
+        const out = await robustSendToSheet(payload);
+        if(!(out && (out.ok || out.probably))){
+          queuePayload(payload);
+        }
+      }catch(_){ queuePayload(payload); }
+    }
+
+    async function robustSendToSheet(payload){
+      if(!SHEET_ENDPOINT){ return { ok:false, message:'Endpoint lipsă' }; }
+      // 1) Încercare normală cu JSON + timeout
+      try{
+        const res = await postJSON(SHEET_ENDPOINT, payload, 8000);
+        if(res && res.ok) return { ok:true };
+      }catch(_){ /* ignore */ }
+      // 2) Fallback no-cors + FormData (neconfirmabil)
+      try{
+        const fd = new FormData();
+        fd.append('payload', JSON.stringify(payload));
+        await fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', body: fd });
+        return { ok:false, probably:true };
+      }catch(err){ return { ok:false, message:String(err) }; }
+    }
+
+    async function postJSON(url, data, timeoutMs){
+      const ctrl = new AbortController();
+      const id = setTimeout(()=>ctrl.abort(), timeoutMs||8000);
+      try{
+        const res = await fetch(url, {
+          method:'POST', mode:'cors', credentials:'omit',
+          headers:{ 'Content-Type':'application/json' },
+          body: JSON.stringify(data), signal: ctrl.signal, referrerPolicy:'no-referrer'
+        });
+        let body = null; try{ body = await res.clone().json(); }catch(_){ }
+        return { ok: res.ok, status: res.status, body };
+      } finally { clearTimeout(id); }
+    }
+
+    // ===== Coada locală (invizibilă) =====
+    const LS_KEY = 'quiz_queue_v1';
+    function queuePayload(p){
+      try{
+        const q = JSON.parse(localStorage.getItem(LS_KEY)||'[]');
+        q.push(p);
+        localStorage.setItem(LS_KEY, JSON.stringify(q));
+      }catch(_){ }
+    }
+    function getQueue(){ try{ return JSON.parse(localStorage.getItem(LS_KEY)||'[]'); }catch(_){ return []; } }
+    function setQueue(q){ try{ localStorage.setItem(LS_KEY, JSON.stringify(q)); }catch(_){ } }
+    async function flushQueue(){
+      const q = getQueue(); if(!q.length) return;
+      const rest = [];
+      for(const item of q){
+        const out = await robustSendToSheet(item).catch(()=>({ok:false}));
+        if(!(out && (out.ok || out.probably))) rest.push(item);
+      }
+      setQueue(rest);
+    }
+
+    window.addEventListener('online', flushQueue);
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) flushQueue(); });
+
+    // ===== Preselectare din index.html (?qid=animal&a=B) – opțional =====
+    (function preselectFromQuery(){
+      const params = new URLSearchParams(location.search);
+      const qid = params.get('qid');
+      const a = params.get('a');
+      if(qid){
+        const pos = QUESTIONS.findIndex(q=> q.id === qid);
+        if(pos >= 0) idx = pos;
+        if(a) answers[qid] = a.toUpperCase();
+      }
+    })();
+
+    // ===== Start =====
+    renderQuestion();
+    flushQueue();
+
+    // ===== Mini self-tests (console) =====
+    (function selfTests(){
+      try{
+        console.assert(Array.isArray(QUESTIONS) && QUESTIONS.length === 10, 'Trebuie 10 întrebări.');
+        const letters = [0,1,2,3].map(i=>String.fromCharCode(65+i)).join('');
+        console.assert(letters === 'ABCD', 'Mapping litere A-D');
+        const fakeAns = { who:'C', animal:'B', geoJob:'D', dianaPrev:'C', dianaJob:'D', univ:'B', vehicle:'C', honeymoon:'C', met:'B', important:'C' };
+        let s = 0; QUESTIONS.forEach(q=>{ if(fakeAns[q.id]===q.correct) s++; });
+        console.assert(s === 10, 'Calcul scor 10/10');
+      }catch(e){ console.warn('Self-tests skipped:', e); }
+    })();
+  </script>
+</body>
+</html>
