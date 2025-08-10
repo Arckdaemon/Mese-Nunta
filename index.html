@@ -107,6 +107,8 @@
 
     .wedding-date{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--gold); text-align:center; margin:2px 0 8px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12) }
 
+    .countdown{ font-family:'Great Vibes',cursive; font-size:1.7rem; color:var(--gold); text-align:center; margin-bottom:12px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12) }
+
     /* QUIZ preview box */
     .quiz-box{ margin-top:14px; padding:14px 12px; background:#111009; border:1px solid rgba(212,175,55,.35); border-radius:12px }
     .quiz-title{ margin:0 0 8px; font-family:'Dancing Script',cursive; font-weight:700; font-size:1.3rem; color:var(--gold) }
@@ -138,6 +140,7 @@
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Diana &amp; Geo</div>
     <div class="wedding-date">17.08.2025</div>
+    <div id="countdown" class="countdown"></div>
     <div class="subtitle">Vă mulțumim că ați ales să participați la evenimentul nostru!</div>
 
     <figure class="couple-wrap">
@@ -450,6 +453,29 @@
       return guests.filter(g=>toKey(g.Nume).includes(key)).sort((a,b)=> ((a.Masa||99)-(b.Masa||99)) || a.Nume.localeCompare(b.Nume));
     }
 
+    function startCountdown(){
+      const el=document.getElementById('countdown');
+      if(!el) return;
+      const target=new Date('2025-08-17T16:00:00');
+      let timer;
+      function update(){
+        const now=new Date();
+        const diff=target-now;
+        if(diff<=0){
+          el.textContent='A început!';
+          clearInterval(timer);
+          return;
+        }
+        const d=Math.floor(diff/86400000);
+        const h=Math.floor(diff/3600000)%24;
+        const m=Math.floor(diff/60000)%60;
+        const s=Math.floor(diff/1000)%60;
+        el.textContent=`${d} zile ${h} ore ${m} min ${s} sec`;
+      }
+      update();
+      timer=setInterval(update,1000);
+    }
+
     // Toggles
     const addressBtn=document.getElementById('addressBtn');
     const contactBtn=document.getElementById('contactBtn');
@@ -463,6 +489,7 @@
       document.getElementById('search').focus();
       setupSlideshow();
       grouped = buildGroups(guests);
+      startCountdown();
     };
     searchInput.addEventListener('input', ()=>{
       const term = searchInput.value;
