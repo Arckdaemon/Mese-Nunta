@@ -106,6 +106,14 @@
     @media (prefers-reduced-motion:reduce){ #petals{ display:none } }
 
     .wedding-date{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--gold); text-align:center; margin:2px 0 8px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12) }
+
+    /* QUIZ preview box */
+    .quiz-box{ margin-top:14px; padding:14px 12px; background:#111009; border:1px solid rgba(212,175,55,.35); border-radius:12px }
+    .quiz-title{ margin:0 0 8px; font-family:'Dancing Script',cursive; font-weight:700; font-size:1.3rem; color:var(--gold) }
+    .quiz-q{ margin:4px 0 10px; color:#e9dfc8 }
+    .quiz-opt{ display:block; margin:6px 0; padding:8px 10px; border:1px solid rgba(212,175,55,.25); border-radius:10px }
+    .quiz-opt input{ margin-right:6px; accent-color:#d4af37 }
+    .quiz-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
   </style>
 </head>
 <body>
@@ -162,6 +170,22 @@
     <input type="text" id="search" placeholder="Căutați masa după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
+
+    <!-- QUIZ PREVIEW - sub lista cu căutarea -->
+    <div id="quiz-box" class="quiz-box" role="region" aria-label="Quiz preview">
+      <h3 class="quiz-title">QUIZ GAME - Cât de bine cunoști mirii?</h3>
+      <p class="quiz-q">Ce animal au Diana&Geo?</p>
+      <form id="quizForm">
+        <label class="quiz-opt"><input type="radio" name="qAnimal" value="a"> a) Porc vietnamez</label>
+        <label class="quiz-opt"><input type="radio" name="qAnimal" value="b"> b) Pisică</label>
+        <label class="quiz-opt"><input type="radio" name="qAnimal" value="c"> c) Carpen japonez</label>
+        <label class="quiz-opt"><input type="radio" name="qAnimal" value="d"> d) Câine</label>
+      </form>
+      <div class="quiz-actions">
+        <a id="quizContinue" class="mini-btn" href="quiz.html">Răspunde & continuă</a>
+        <a class="mini-btn outline" href="quiz.html">Vezi quizul complet</a>
+      </div>
+    </div>
 
     <div class="floral-divider bottom"></div>
   </div>
@@ -442,16 +466,29 @@
     // ===== Mini self-tests (in consolă) =====
     (function selfTests(){
       try{
-        // 1) Diacritice tolerant: "Iuras" găsește "Iuraș Ariadna"
         const ariadna = filterList('Iuras').some(p=>/Iuraș Ariadna/i.test(p.Nume));
         console.assert(ariadna, 'Test: diacritice tolerant pentru Iuraș');
-        // 2) Grupare: Ariadna apare în același grup cu Emilian
         const grA = groupsFromIndividuals(filterList('Ariadna'))[0];
         console.assert(grA && grA.members.some(m=>m.Nume==='Emilian'), 'Test: grupare Ariadna + Emilian');
-        // 3) Badge părinți: la masa 5 trebuie să existe Parinte=true
         const g5 = buildGroups(guests).find(g=>g.Masa===5);
         console.assert(g5 && g5.Parinte===true, 'Test: badge părinți masa 5');
       }catch(e){ console.warn('Self-tests skipped:', e); }
+    })();
+
+    // ===== Quiz preview behavior =====
+    (function(){
+      const ctn = document.getElementById('quizContinue');
+      if(!ctn) return;
+      ctn.addEventListener('click', function(e){
+        const chosen = document.querySelector('input[name="qAnimal"]:checked');
+        if(!chosen){
+          e.preventDefault();
+          alert('Te rog alege un răspuns.');
+          return;
+        }
+        const url = 'quiz.html?qid=animal&a=' + encodeURIComponent(chosen.value);
+        this.setAttribute('href', url);
+      });
     })();
   </script>
 </body>
