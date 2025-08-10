@@ -423,6 +423,13 @@
     const countDiv=document.getElementById('count');
     const searchInput=document.getElementById('search');
 
+    function formatNames(arr){
+      if(!arr || arr.length===0) return '';
+      if(arr.length===1) return arr[0];
+      if(arr.length===2) return arr.join(' și ');
+      return arr.slice(0,-1).join(', ') + ' și ' + arr[arr.length-1];
+    }
+
     function renderResults(groups){
       resultsDiv.innerHTML = '';
       countDiv.textContent = '';
@@ -431,7 +438,7 @@
         const row = document.createElement('div');
         row.className = 'result-row';
         const label = gr.Prezidiu ? 'Prezidiu' : 'Masa ' + gr.Masa;
-        const nameCombined = gr.members.map(m => m.Nume).join(' și ');
+        const nameCombined = formatNames(gr.members.map(m => m.Nume));
         row.innerHTML = `
           <span class="guest-name${gr.Prezidiu ? ' godparent' : ''}${gr.Parinte ? ' parent' : ''}">
             ${gr.Prezidiu ? '<span class="badge-nas"><span class="star"></span>NAȘ</span>' : ''}
