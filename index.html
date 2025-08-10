@@ -107,6 +107,14 @@
 
     .wedding-date{ font-family:'Great Vibes',cursive; font-size:1.9rem; color:var(--gold); text-align:center; margin:2px 0 8px; letter-spacing:.5px; text-shadow:0 0 10px rgba(212,175,55,.12) }
 
+    /* === COUNTDOWN === */
+    .countdown{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:6px 0 14px; }
+    .cd-seg{ text-align:center; padding:10px 8px; border-radius:14px; background:#111009; border:1px solid rgba(212,175,55,.35); box-shadow:inset 0 0 0 1px rgba(212,175,55,.08) }
+    .cd-num{ font-size:1.6rem; font-weight:700; color:var(--gold); letter-spacing:.5px }
+    .cd-lbl{ font-size:.85rem; color:#cdbf9a; margin-top:2px }
+    .cd-banner{ text-align:center; color:var(--gold); font-weight:700; margin:6px 0 10px }
+    @media (max-width:420px){ .cd-num{ font-size:1.35rem } }
+
     /* QUIZ preview box */
     .quiz-box{ margin-top:14px; padding:14px 12px; background:#111009; border:1px solid rgba(212,175,55,.35); border-radius:12px }
     .quiz-title{ margin:0 0 8px; font-family:'Dancing Script',cursive; font-weight:700; font-size:1.3rem; color:var(--gold) }
@@ -115,7 +123,7 @@
     .quiz-opt input{ margin-right:6px; accent-color:#d4af37 }
     .quiz-actions{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px }
 
-    /* Slideshow controls & dots (fix: keep arrows visible above slides) */
+    /* Slideshow controls & dots */
     .slideshow .slide{ z-index:1; }
     .slideshow .slide-nav{ position:absolute; top:50%; transform:translateY(-50%); padding:0; width:38px; height:46px; border-radius:12px; border:1px solid rgba(212,175,55,.45); background:rgba(0,0,0,.45); color:var(--gold); font-size:28px; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:2; backdrop-filter:blur(2px); box-shadow:0 4px 14px rgba(0,0,0,.35); }
     .slideshow .slide-nav:hover{ background:rgba(0,0,0,.6); }
@@ -124,7 +132,6 @@
     .slideshow .dots{ position:absolute; left:50%; transform:translateX(-50%); bottom:10px; display:flex; gap:6px; z-index:2; }
     .slideshow .dot{ width:9px; height:9px; border-radius:9999px; border:1px solid rgba(212,175,55,.5); background:rgba(0,0,0,.35); cursor:pointer; }
     .slideshow .dot.active{ background:var(--gold); border-color:var(--gold); }
-
   </style>
 </head>
 <body>
@@ -138,6 +145,17 @@
     <img id="logo" class="logo" src="logo.png" alt="Nunta Diana & Geo" onerror="this.style.display='none'" />
     <div class="festive-title">Diana &amp; Geo</div>
     <div class="wedding-date">17.08.2025</div>
+
+    <!-- === COUNTDOWN UI === -->
+    <div id="countdownBanner" class="cd-banner" aria-live="polite"></div>
+    <div id="countdown" class="countdown" role="timer" aria-live="polite" aria-label="Numărătoare inversă până la cununie">
+      <div class="cd-seg"><div id="cdDays" class="cd-num">--</div><div class="cd-lbl">Zile</div></div>
+      <div class="cd-seg"><div id="cdHours" class="cd-num">--</div><div class="cd-lbl">Ore</div></div>
+      <div class="cd-seg"><div id="cdMinutes" class="cd-num">--</div><div class="cd-lbl">Minute</div></div>
+      <div class="cd-seg"><div id="cdSeconds" class="cd-num">--</div><div class="cd-lbl">Secunde</div></div>
+    </div>
+    <!-- === /COUNTDOWN UI === -->
+
     <div class="subtitle">Vă mulțumim că ați ales să participați la evenimentul nostru!</div>
 
     <figure class="couple-wrap">
@@ -210,7 +228,7 @@
     function setupSlideshow(){
       const host=document.getElementById('slideshow'); if(!host) return;
       const bases=['couple','couple1','couple2','couple3','couple4'];
-      for(let i=bases.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [bases[i],bases[j]]=[bases[j],bases[i]]; }
+      for(let i=bases.length-1;i>0;i++){ const j=Math.floor(Math.random()*(i+1)); [bases[i],bases[j]]=[bases[j],bases[i]]; }
       const slides=[]; bases.forEach(name=>{ const img=new Image(); img.alt='Diana & Geo'; img.decoding='async'; img.loading='eager'; img.src=name+'.jpg'; img.onerror=function(){ if(img.src.endsWith('.jpg')) img.src=name+'.png'; else { img.dataset.skip='1'; } }; const slide=document.createElement('div'); slide.className='slide'; slide.appendChild(img); host.appendChild(slide); slides.push(slide); });
       const dotsWrap=document.getElementById('slideDots'); const prevBtn=host.querySelector('.slide-nav.prev'); const nextBtn=host.querySelector('.slide-nav.next');
       setTimeout(()=>{
@@ -458,6 +476,51 @@
     addressBtn.addEventListener('click',()=>{ addressBox.hidden=!addressBox.hidden; });
     contactBtn.addEventListener('click',()=>{ contactBox.hidden=!contactBox.hidden; });
 
+    // === COUNTDOWN LOGIC ===
+    (function(){
+      // Cununia religioasă: 17 aug 2025, 14:30 (ora României)
+      const target = new Date('2025-08-17T14:30:00+03:00');
+      const $d = document.getElementById('cdDays');
+      const $h = document.getElementById('cdHours');
+      const $m = document.getElementById('cdMinutes');
+      const $s = document.getElementById('cdSeconds');
+      const $banner = document.getElementById('countdownBanner');
+      const $wrap = document.getElementById('countdown');
+
+      function pad(n){ return n.toString().padStart(2,'0'); }
+      function sameDay(a,b){ return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
+
+      function tick(){
+        const now = new Date();
+        let diff = target - now;
+
+        if (sameDay(now, target) && diff > 0) {
+          $banner.textContent = 'Astăzi e ziua! Ne vedem la 14:30 🎉';
+        } else if (diff <= 0) {
+          // Dacă a trecut ora 14:30
+          $banner.textContent = 'Vă mulțumim! ❤️';
+          $wrap.style.display = 'none';
+          return;
+        } else {
+          $banner.textContent = '';
+        }
+
+        const sec = Math.floor(diff/1000);
+        const days = Math.floor(sec / 86400);
+        const hrs  = Math.floor((sec % 86400) / 3600);
+        const mins = Math.floor((sec % 3600) / 60);
+        const secs = sec % 60;
+
+        $d.textContent = days;
+        $h.textContent = pad(hrs);
+        $m.textContent = pad(mins);
+        $s.textContent = pad(secs);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+
     // Init
     window.onload = ()=>{
       document.getElementById('search').focus();
@@ -485,7 +548,7 @@
       }catch(e){ console.warn('Self-tests skipped:', e); }
     })();
 
-    // ===== Quiz preview behavior =====
+    // ===== Quiz preview behavior (lăsat cum era) =====
     (function(){
       const ctn = document.getElementById('quizContinue');
       if(!ctn) return;
