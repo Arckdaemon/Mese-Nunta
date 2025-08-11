@@ -537,6 +537,7 @@
         e.preventDefault();
         status.textContent = 'Se trimite...';
         const payload = {
+          apiKey: API_KEY,
           name: document.getElementById('gbName').value.trim(),
           message: document.getElementById('gbMessage').value.trim()
         };
@@ -544,8 +545,7 @@
           const res = await fetch(API_URL, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'X-Guestbook-Key': API_KEY
+              'Content-Type': 'text/plain'
             },
             body: JSON.stringify(payload)
           });
