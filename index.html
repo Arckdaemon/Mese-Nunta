@@ -531,26 +531,24 @@
       const form = document.getElementById('guestbookForm');
       if(!form) return;
       const status = document.getElementById('guestbookStatus');
-      const API_URL = 'https://script.google.com/macros/s/AKfycbxVtoWHvFhKGDCgkBeVd8l2s4YwrQzP_XfnWwpG_G6EXDL3SZYsqK7h7K9IOFBDNJTh/exec';
-      const API_KEY = '1897897123ahuiuasd987';
+      const API_URL = 'https://script.google.com/macros/s/AKfycbzMiobXxlEXdPwa7wUtJvq8R6gVouCpASOZgHpDZLJkP7ojK8epzeTpjOj3IZU4vueP/exec';
       form.addEventListener('submit', async e => {
         e.preventDefault();
         status.textContent = 'Se trimite...';
-        const payload = {
-          apiKey: API_KEY,
+        const params = new URLSearchParams({
           name: document.getElementById('gbName').value.trim(),
           message: document.getElementById('gbMessage').value.trim()
-        };
+        });
         try {
           const res = await fetch(API_URL, {
             method: 'POST',
             headers: {
-              'Content-Type': 'text/plain'
+              'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify(payload)
+            body: params.toString()
           });
-          const data = await res.json();
-          if(data && data.ok){
+          const text = await res.text();
+          if(text.trim() === 'OK'){
             status.textContent = 'Mulțumim pentru mesaj!';
             form.reset();
           } else {
