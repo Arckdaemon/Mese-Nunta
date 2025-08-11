@@ -533,7 +533,6 @@
       if(!form) return;
       const status = document.getElementById('guestbookStatus');
       const API_URL = 'https://script.google.com/macros/s/AKfycbxVtoWHvFhKGDCgkBeVd8l2s4YwrQzP_XfnWwpG_G6EXDL3SZYsqK7h7K9IOFBDNJTh/exec';
-      const API_KEY = 'REPLACE_WITH_KEY';
       form.addEventListener('submit', async e => {
         e.preventDefault();
         status.textContent = 'Se trimite...';
@@ -546,8 +545,7 @@
           const res = await fetch(API_URL, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json',
-              'X-Guestbook-Key': API_KEY
+              'Content-Type': 'application/json'
             },
             body: JSON.stringify(payload)
           });
