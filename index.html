@@ -127,6 +127,15 @@
     .slideshow .dot{ width:9px; height:9px; border-radius:9999px; border:1px solid rgba(212,175,55,.5); background:rgba(0,0,0,.35); cursor:pointer; }
     .slideshow .dot.active{ background:var(--gold); border-color:var(--gold); }
 
+    /* Guestbook */
+    .guestbook{ margin-top:24px; padding:16px 14px 22px; background:#111009; border:1px solid rgba(212,175,55,.35); border-radius:12px; }
+    .guest-title{ font-family:'Great Vibes',cursive; font-size:2rem; text-align:center; color:var(--gold); margin:0 0 12px; }
+    #guestbookForm{ display:flex; flex-direction:column; gap:10px; }
+    #guestbookForm input,#guestbookForm textarea{ font-family:'Dancing Script',cursive; font-size:1.1rem; background:#0b0b0b; color:var(--text); border:1px solid rgba(212,175,55,.35); border-radius:1rem; padding:10px 12px; }
+    #guestbookForm textarea{ min-height:120px; resize:vertical; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><g fill="%23b8860b" fill-opacity="0.25"><circle cx="20" cy="5" r="4"/><circle cx="20" cy="35" r="4"/><circle cx="5" cy="20" r="4"/><circle cx="35" cy="20" r="4"/><circle cx="10" cy="10" r="4"/><circle cx="30" cy="10" r="4"/><circle cx="10" cy="30" r="4"/><circle cx="30" cy="30" r="4"/><circle cx="20" cy="20" r="5"/></g></svg>'); background-size:40px 40px; background-repeat:repeat; }
+    #guestbookForm button{ align-self:center; margin-top:6px; }
+    .gb-status{ margin-top:8px; text-align:center; font-size:.95rem; color:var(--muted); }
+
   </style>
 </head>
 <body>
@@ -152,10 +161,10 @@
       </div>
     </figure>
 
-    <div class="note">Formularul de mesaje permite și <strong>încărcarea de fotografii sau video</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
+    <div class="note">Formularul permite <strong>încărcarea de fotografii sau video</strong>. Numărul mesei va fi disponibil și fizic, la locație.</div>
 
     <div class="actions">
-      <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Lasă mesaj / Încarcă foto/video</a>
+      <a href="https://forms.gle/Ji3SCJTNThM8GApL7" target="_blank" class="action-btn">Încarcă foto/video</a>
       <a href="meniu.html" class="action-btn">Meniu</a>
       <button id="addressBtn" class="action-btn outline" type="button">Vezi adresa & program</button>
       <button id="contactBtn" class="action-btn outline" type="button">Contactează-ne</button>
@@ -184,6 +193,17 @@
     <input type="text" id="search" placeholder="Căutați masa după orice parte din nume (cu sau fără diacritice)..." autofocus autocomplete="off" />
     <div class="count" id="count"></div>
     <div class="results" id="results"></div>
+
+    <div id="guestbook" class="guestbook">
+      <h3 class="guest-title">Lasă un mesaj!</h3>
+      <form id="guestbookForm">
+        <input type="text" id="gbName" placeholder="Numele tău" required>
+        <input type="email" id="gbEmail" placeholder="Email (opțional)">
+        <textarea id="gbMessage" placeholder="Mesajul tău" required></textarea>
+        <button type="submit" class="action-btn">Trimite</button>
+      </form>
+      <div id="guestbookStatus" class="gb-status" aria-live="polite"></div>
+    </div>
 
     <!-- QUIZ PREVIEW - sub lista cu căutarea -->
     <div id="quiz-box" class="quiz-box" role="region" aria-label="Quiz preview">
@@ -506,6 +526,43 @@
       if(filteredGroups.length === 0){ resultsDiv.innerHTML='<div class="no-result">Nu există invitat cu acest nume.</div>'; countDiv.textContent=''; return; }
       renderResults(filteredGroups);
     });
+
+    // ===== Guestbook submission =====
+    (function(){
+      const form = document.getElementById('guestbookForm');
+      if(!form) return;
+      const status = document.getElementById('guestbookStatus');
+      const API_URL = 'https://script.google.com/macros/s/AKfycbxVtoWHvFhKGDCgkBeVd8l2s4YwrQzP_XfnWwpG_G6EXDL3SZYsqK7h7K9IOFBDNJTh/exec';
+      const API_KEY = 'REPLACE_WITH_KEY';
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        status.textContent = 'Se trimite...';
+        const payload = {
+          name: document.getElementById('gbName').value.trim(),
+          email: document.getElementById('gbEmail').value.trim(),
+          message: document.getElementById('gbMessage').value.trim()
+        };
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Guestbook-Key': API_KEY
+            },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if(data && data.ok){
+            status.textContent = 'Mulțumim pentru mesaj!';
+            form.reset();
+          } else {
+            status.textContent = 'Eroare la trimitere.';
+          }
+        } catch(err){
+          status.textContent = 'Eroare la trimitere.';
+        }
+      });
+    })();
 
     // ===== Mini self-tests (in consolă) =====
     (function selfTests(){
