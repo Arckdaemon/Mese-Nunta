@@ -44,6 +44,11 @@
     .dishlist li::before{ content:""; position:absolute; left:10px; top:50%; transform:translateY(-50%); width:6px; height:6px; border-radius:50%; background:var(--gold); box-shadow:0 0 6px rgba(212,175,55,.7); }
     .dishlist li span{ margin-left:14px; display:block; }
 
+    .emoji{ display:inline-block; margin-right:6px; animation:float 3s ease-in-out infinite; }
+    @keyframes float{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-4px); } }
+    .emoji.drink{ animation:shake .6s ease-in-out infinite alternate; }
+    @keyframes shake{ from{ transform:rotate(-8deg); } to{ transform:rotate(8deg); } }
+
     .hidden{ display:none; }
 
     /* Subtle food-themed animation (steam curls) */
@@ -187,6 +192,19 @@
     const printBtn = document.getElementById('printBtn');
     const menuIcon = document.getElementById('menuIcon');
 
+    (function animateMenuEmojis(){
+      const emojiRange = /^[\u{1F300}-\u{1FAFF}]/u;
+      document.querySelectorAll('.dishlist li span').forEach(span => {
+        const txt = span.textContent.trim();
+        const first = txt.charAt(0);
+        if (emojiRange.test(first)) {
+          span.innerHTML = '<span class="emoji">'+ first +'</span>' + txt.slice(1);
+        } else if (span.closest('#drinksSection')) {
+          span.innerHTML = '<span class="emoji drink">🍹</span>' + txt;
+        }
+      });
+    })();
+
     function activate(tab) {
       if (tab === 'food') {
         foodTab.classList.add('active');
@@ -270,6 +288,10 @@
         console.assert(pdf && pdf.hasAttribute('download'), 'PDF link with download present');
         const petalsWrap = document.getElementById('petals');
         console.assert(petalsWrap && petalsWrap.children.length > 0, 'petals generated');
+        const foodEmoji = document.querySelector('#foodSection .dishlist .emoji');
+        const drinkEmoji = document.querySelector('#drinksSection .dishlist .emoji.drink');
+        console.assert(foodEmoji, 'food emoji animated');
+        console.assert(drinkEmoji, 'drink emoji added');
         console.log('[Meniu] tests passed');
       }catch(e){ console.warn('[Meniu] tests failed', e); }
     })();
