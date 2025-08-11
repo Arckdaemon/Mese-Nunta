@@ -195,10 +195,9 @@
     <div class="results" id="results"></div>
 
     <div id="guestbook" class="guestbook">
-      <h3 class="guest-title">Lasă un mesaj!</h3>
+      <h3 class="guest-title">Lasă un mesaj mirilor!</h3>
       <form id="guestbookForm">
         <input type="text" id="gbName" placeholder="Numele tău" required>
-        <input type="email" id="gbEmail" placeholder="Email (opțional)">
         <textarea id="gbMessage" placeholder="Mesajul tău" required></textarea>
         <button type="submit" class="action-btn">Trimite</button>
       </form>
@@ -533,19 +532,20 @@
       if(!form) return;
       const status = document.getElementById('guestbookStatus');
       const API_URL = 'https://script.google.com/macros/s/AKfycbxVtoWHvFhKGDCgkBeVd8l2s4YwrQzP_XfnWwpG_G6EXDL3SZYsqK7h7K9IOFBDNJTh/exec';
+      const API_KEY = '1897897123ahuiuasd987';
       form.addEventListener('submit', async e => {
         e.preventDefault();
         status.textContent = 'Se trimite...';
         const payload = {
           name: document.getElementById('gbName').value.trim(),
-          email: document.getElementById('gbEmail').value.trim(),
           message: document.getElementById('gbMessage').value.trim()
         };
         try {
           const res = await fetch(API_URL, {
             method: 'POST',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'X-Guestbook-Key': API_KEY
             },
             body: JSON.stringify(payload)
           });
