@@ -82,8 +82,6 @@
 
     <div class="actions">
       <a href="index.html" class="action-btn outline">← Înapoi</a>
-      <button id="printBtn" class="action-btn">Printează</button>
-      <a href="menu.pdf" target="_blank" class="action-btn outline" download>Descarcă PDF</a>
     </div>
 
     <div class="tabs">
@@ -95,36 +93,42 @@
       <div class="section">
         <h3>Gustare rece (Aperitiv)</h3>
         <ul class="dishlist">
-          <li><span>🍗 Coșuleț cu crispy și salată</span></li>
-          <li><span>🧀 Fantezie de brânzeturi în napolitană</span></li>
-          <li><span>🥐 Vol-au-vent cu cremă de brânză și susan negru</span></li>
-          <li><span>🍮 Mousse din ficat de gâscă cu jeleu de vin roșu</span></li>
-          <li><span>🥩 Tagliata de vită</span></li>
-          <li><span>🍆 Salată de vinete</span></li>
-          <li><span>🥩 Bresaola cu cremă de brânză aromatizată</span></li>
-          <li><span>🍗 Clătită de pui în pesmet</span></li>
+          <li><span>Coșuleț cu crispy și salată</span></li>
+          <li><span>Fantezie de brânzeturi în napolitană</span></li>
+          <li><span>Vol-au-vent cu cremă de brânză și susan negru</span></li>
+          <li><span>Mousse din ficat de gâscă cu jeleu de vin roșu</span></li>
+          <li><span>Tagliata de vită</span></li>
+          <li><span>Salată de vinete</span></li>
+          <li><span>Bresaola cu cremă de brânză aromatizată</span></li>
+          <li><span>Clătită de pui în pesmet</span></li>
         </ul>
       </div>
 
       <div class="section">
         <h3>Fel principal — pasăre</h3>
         <ul class="dishlist">
-          <li><span>🍗 Pulpă de rață confit cu sos de sfeclă și struguri + varză roșie cu stafide</span></li>
+          <li><span>Pulpă de rață confit cu sos de sfeclă și struguri + varză roșie cu stafide</span></li>
         </ul>
       </div>
 
       <div class="section">
         <h3>Ciorbă</h3>
         <ul class="dishlist">
-          <li><span>🍲 Ciorbă rădăuțeană</span></li>
+          <li><span>Ciorbă rădăuțeană</span></li>
         </ul>
       </div>
 
       <div class="section">
         <h3>Fel principal — porc</h3>
         <ul class="dishlist">
-          <li><span>🍖 Ceafă de porc cu sos barbeque și cartofi sicilieni</span></li>
-          <li><span>🥘 Sarmale cu bacon pe porție de mămăligă</span></li>
+          <li><span>Ceafă de porc cu sos barbeque și cartofi sicilieni</span></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3>SARMALE</h3>
+        <ul class="dishlist">
+          <li><span>Sarmale cu bacon pe porție de mămăligă</span></li>
         </ul>
       </div>
 
@@ -132,26 +136,30 @@
         <h3>ÎNGHEȚATĂ</h3>
         <p class="flav-note">Disponibilă între <strong>17:00–21:00</strong></p>
         <ul class="dishlist">
-          <li><span>🍫 Ciocolată</span></li>
-          <li><span>🥜 Fistic</span></li>
-          <li><span>🍦 Vanilie</span></li>
-          <li><span>🍓 Fructe de pădure</span></li>
+          <li><span>Ciocolată</span></li>
+          <li><span>Fistic</span></li>
+          <li><span>Vanilie</span></li>
+          <li><span>Fructe de pădure</span></li>
         </ul>
       </div>
     </section>
 
     <section id="drinksSection" class="hidden">
       <div class="section">
-        <h3>BAUTURI ALCOOLICE, VIN &amp; PROSECCO</h3>
+        <h3>BĂUTURI</h3>
         <ul class="dishlist">
           <li><span>Jack Daniel’s Whiskey</span></li>
           <li><span>Jidvei VSOP Vinars</span></li>
-          <li><span>Sherydans Lichior</span></li>
+          <li><span>Baileys/Sherydans Lichior</span></li>
           <li><span>Bols Vodka</span></li>
-          <li><span>Alb de Petro Vaselo</span></li>
-          <li><span>Rosu de Petro Vaselo</span></li>
-          <li><span>Rose de Petro Vaselo</span></li>
-          <li><span>Palinca</span></li>
+          <li><span>Jägermeister</span></li>
+          <li><span>Vin Alb</span></li>
+          <li><span>Vin Roșu</span></li>
+          <li><span>Rose</span></li>
+          <li><span>Pălincă</span></li>
+          <li><span>Apă plată</span></li>
+          <li><span>Apă minerală</span></li>
+          <li><span>Cafea</span></li>
         </ul>
       </div>
 
@@ -184,7 +192,6 @@
     const drinksTab = document.getElementById('drinksTab');
     const foodSection = document.getElementById('foodSection');
     const drinksSection = document.getElementById('drinksSection');
-    const printBtn = document.getElementById('printBtn');
     const menuIcon = document.getElementById('menuIcon');
 
     function activate(tab) {
@@ -209,7 +216,6 @@
     // Listeners
     foodTab.addEventListener('click', () => activate('food'));
     drinksTab.addEventListener('click', () => activate('drinks'));
-    printBtn.addEventListener('click', () => window.print());
 
     // Initial tab based on URL (?tab=drinks) or default to food
     (function(){
@@ -266,8 +272,6 @@
         console.assert(menuIcon.classList.contains('drinks'), 'icon set to drinks');
         // Restore food
         activate('food');
-        const pdf = document.querySelector('a[href="menu.pdf"]');
-        console.assert(pdf && pdf.hasAttribute('download'), 'PDF link with download present');
         const petalsWrap = document.getElementById('petals');
         console.assert(petalsWrap && petalsWrap.children.length > 0, 'petals generated');
         console.log('[Meniu] tests passed');
