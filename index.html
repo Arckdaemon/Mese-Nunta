@@ -78,7 +78,7 @@
     .slideshow{ position:relative; width:100%; aspect-ratio:3 / 2; max-height:420px; overflow:hidden; border-radius:16px; border:1px solid rgba(212,175,55,.55); box-shadow:0 10px 30px rgba(0,0,0,.45), inset 0 0 0 1px rgba(212,175,55,.12) }
     .slide{ position:absolute; inset:0; opacity:0; transition:opacity 1600ms ease-in-out; background:#0b0b0b; display:flex; align-items:center; justify-content:center }
     .slide.active{ opacity:1 }
-    .slide img{ width:100%; height:100%; object-fit:contain; display:block }
+    .slide img{ width:100%; height:100%; object-fit:contain; display:block; transform:scale(1.08) }
     @keyframes kbZoom{ from{ transform:scale(1.02) } to{ transform:scale(1.08) } }
     .slide.active img{ animation:kbZoom 9s ease-in-out forwards }
     @media (prefers-reduced-motion:reduce){ .slide.active img{ animation:none !important } .slide{ transition:none } }
