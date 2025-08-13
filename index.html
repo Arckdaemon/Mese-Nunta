@@ -94,9 +94,9 @@
     .reveal-box .section-title{ color:var(--gold); margin-bottom:4px; font-family:'Dancing Script',cursive; font-weight:700; letter-spacing:.2px }
     .map-buttons{ display:flex; gap:8px; flex-wrap:wrap; margin:6px 0 6px }
     .mini-btn{ display:inline-block; padding:8px 12px; border-radius:10px; background:linear-gradient(90deg, var(--gold), var(--gold-2)); color:#0b0b0b; font-weight:700; text-decoration:none; border:none; box-shadow:0 6px 16px rgba(0,0,0,.35); font-family:'Dancing Script',cursive; letter-spacing:.2px; font-size:1.05rem }
-    .mini-btn.outline{ background:transparent; color:var(--gold); border:2px solid rgba(212,175,55,.6) }
-    .mini-btn.waze{ background:#33CCFF; color:#062a3b; border:none; display:inline-flex; align-items:center; gap:6px }
-    .mini-btn .ico{ width:18px; height:18px; display:inline-block; vertical-align:-3px; filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)) }
+    .map-logo{ display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:10px; background:#fff; box-shadow:0 4px 10px rgba(0,0,0,.35) }
+    .map-logo img{ width:28px; height:28px; display:block }
+    .parking-note{ font-size:.9rem; color:#d9c9a3; margin-top:4px }
 
     /* Petals */
     #petals{ position:fixed; inset:0; z-index:3; pointer-events:none; overflow:hidden }
@@ -172,16 +172,22 @@
       <div class="section-title"><strong>Biserica cu Lună</strong> – Catedrala Veche „Adormirea Maicii Domnului”</div>
       Piața Unirii 2, Oradea<br>
       <div class="map-buttons">
-        <a href="https://www.google.com/maps/place/Catedrala+Veche+%E2%80%9EAdormirea+Maicii+Domnului%E2%80%9D/@47.0536688,21.9262691,17z/data=!3m1!4b1!4m6!3m5!1s0x474647e88cf224c3:0x107c4b90413fd607!8m2!3d47.0536652!4d21.9288494!16s%2Fg%2F120_l_yn?hl=ro&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="mini-btn outline">Google Maps</a>
-        <a href="https://waze.com/ul?ll=47.0536652,21.9288494&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Biserica cu Lună)"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>Waze</a>
+        <a href="https://www.google.com/maps/place/Catedrala+Veche+%E2%80%9EAdormirea+Maicii+Domnului%E2%80%9D/@47.0536688,21.9262691,17z/data=!3m1!4b1!4m6!3m5!1s0x474647e88cf224c3:0x107c4b90413fd607!8m2!3d47.0536652!4d21.9288494!16s%2Fg%2F120_l_yn?hl=ro&entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide locația în Google Maps"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Maps_Logo_2020.svg" alt="Google Maps"></a>
+        <a href="https://waze.com/ul?ll=47.0536652,21.9288494&navigate=yes" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide ruta în Waze (Biserica cu Lună)"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Waze_Logo.svg" alt="Waze"></a>
       </div>
       <span class="time"><em>Cununia religioasă la <strong>14:30</strong>.</em></span>
+      <div class="section-title"><strong>PARKING – Parcare supraetajată</strong></div>
+      <div class="map-buttons">
+        <a href="https://maps.app.goo.gl/BruHjmEJmsquX2Yw8?g_st=aw" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide parcarea în Google Maps"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Maps_Logo_2020.svg" alt="Google Maps"></a>
+        <a href="https://waze.com/ul?q=Parcare%20Supraetajată%20Oradea&navigate=yes" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide parcarea în Waze"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Waze_Logo.svg" alt="Waze"></a>
+      </div>
+      <div class="parking-note">Parcările publice stradale din Oradea sunt gratuite duminica.</div>
       <hr>
       <div class="section-title"><strong>Emerald, Salon Cristal (sala mică)</strong></div>
       Strada Ovid Densușeanu 78/A, Oradea 410237<br>
       <div class="map-buttons">
-        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4746464a64cf0d93:0xb02b6084693f8d5d?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener" class="mini-btn outline">Google Maps</a>
-        <a href="https://waze.com/ul?q=Strada%20Ovid%20Densu%C8%99eanu%2078%2FA%2C%20Oradea%20410237&navigate=yes" target="_blank" rel="noopener" class="mini-btn waze" aria-label="Deschide ruta în Waze (Emerald, Salon Cristal)"><svg class="ico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" aria-hidden="true"><path d="M44 6c8 0 14 6 14 14s-6 14-14 14H24c-3 5-8 8-14 8 5-3 8-7 9-12C13 26 8 22 8 16 8 9 14 6 20 6h24z" fill="currentColor"/><circle cx="26" cy="38" r="4" fill="currentColor"/><circle cx="38" cy="38" r="4" fill="currentColor"/></svg>Waze</a>
+        <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x4746464a64cf0d93:0xb02b6084693f8d5d?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide locația în Google Maps"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Maps_Logo_2020.svg" alt="Google Maps"></a>
+        <a href="https://waze.com/ul?q=Strada%20Ovid%20Densu%C8%99eanu%2078%2FA%2C%20Oradea%20410237&navigate=yes" target="_blank" rel="noopener" class="map-logo" aria-label="Deschide ruta în Waze (Emerald, Salon Cristal)"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Waze_Logo.svg" alt="Waze"></a>
       </div>
       <span class="time"><em>Petrecerea începe la <strong>16:00</strong>.</em></span>
     </div>
